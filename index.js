@@ -1080,7 +1080,7 @@ function americanCallBackwardInduction (){
 
     while (count < bbranches){
       var cIntVal = callIntrinsicSecondToLastBranchNodesBackward_Slice[count];
-      var cEuroVal = (p * callFinalBranchPayOutList[count]) + ( (1-p) * callFinalBranchPayOutList[count+1] ) ;
+      var cEuroVal = pvFactor * ( (p * callFinalBranchPayOutList[count]) + ( (1-p) * callFinalBranchPayOutList[count+1] ) ) ;
 
 
       if(cIntVal > cEuroVal){
@@ -1109,7 +1109,7 @@ function americanCallBackwardInduction (){
 
       var callIntVal = callIntrinsic_After_SecondToLastBranchNodesBackward_Slice[iter];
 
-      var callEuroVal = (p * callValueAtNode[parentList[iter]]) + ( (1-p) * callValueAtNode[parentList[iter]+1] );
+      var callEuroVal = pvFactor * ( (p * callValueAtNode[parentList[iter]]) + ( (1-p) * callValueAtNode[parentList[iter]+1] ) );
 
 
       if(callIntVal > callEuroVal){
@@ -1720,7 +1720,7 @@ function americanPutBackwardInduction (){
 
     while (count < bbranches){
       var pIntVal = putIntrinsicSecondToLastBranchNodesBackward_Slice[count];
-      var pEuroVal = (p * putFinalBranchPayOutList[count]) + ( (1-p) * putFinalBranchPayOutList[count+1] ) ;
+      var pEuroVal = pvFactor * ( (p * putFinalBranchPayOutList[count]) + ( (1-p) * putFinalBranchPayOutList[count+1] ) ) ;
 
 
       if(pIntVal > pEuroVal){
@@ -1749,7 +1749,7 @@ function americanPutBackwardInduction (){
 
       var putIntVal = putIntrinsic_After_SecondToLastBranchNodesBackward_Slice[iter];
 
-      var putEuroVal = (p * putValueAtNode[parentList[iter]]) + ( (1-p) * putValueAtNode[parentList[iter]+1] );
+      var putEuroVal = pvFactor * ( (p * putValueAtNode[parentList[iter]]) + ( (1-p) * putValueAtNode[parentList[iter]+1] ) );
 
 
       if(putIntVal > putEuroVal){
