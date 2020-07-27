@@ -927,7 +927,7 @@ function callValueNonTerminalNodes3 (){
     var callValueAtNode = []
 
     while (count < bbranches){
-      var cVal = pvFactor * (p * callFinalBranchPayOutList[count]) + ( (1-p) * callFinalBranchPayOutList[count+1] ) ;
+      var cVal = pvFactor * ( (p * callFinalBranchPayOutList[count]) + ( (1-p) * callFinalBranchPayOutList[count+1] ) ) ;
       var cleanCVal = ( cVal.toFixed(2) * 1 ) ;
 
       callValueAtNode.push( cleanCVal ) ;
@@ -938,7 +938,7 @@ function callValueNonTerminalNodes3 (){
 
     while (iter < totalNodesThirdToLastBranch){
 
-      var callVal = pvFactor * (p * callValueAtNode[parentList[iter]]) + ( (1-p) * callValueAtNode[parentList[iter]+1] );
+      var callVal = pvFactor * ( (p * callValueAtNode[parentList[iter]]) + ( (1-p) * callValueAtNode[parentList[iter]+1] ) );
       var cleanCallVal = ( callVal.toFixed(2) * 1 ) ;
 
       callValueAtNode.push( cleanCallVal ) ;
@@ -1563,7 +1563,7 @@ function putValueNonTerminalNodes3 (){
     var putValueAtNode = []
 
     while (count < bbranches){
-      var pVal = pvFactor * (p * putFinalBranchPayOutList[count]) + ( (1-p) * putFinalBranchPayOutList[count+1] ) ;
+      var pVal = pvFactor * ( (p * putFinalBranchPayOutList[count]) + ( (1-p) * putFinalBranchPayOutList[count+1] ) ) ;
       var cleanPVal = ( pVal.toFixed(2) * 1 ) ;
 
       putValueAtNode.push( cleanPVal ) ;
@@ -1574,7 +1574,7 @@ function putValueNonTerminalNodes3 (){
 
     while (iter < totalNodesThirdToLastBranch){
 
-      var putVal = pvFactor * (p * putValueAtNode[parentList[iter]]) + ( (1-p) * putValueAtNode[parentList[iter]+1] );
+      var putVal = pvFactor * ( (p * putValueAtNode[parentList[iter]]) + ( (1-p) * putValueAtNode[parentList[iter]+1] ) );
       var cleanPutVal = ( putVal.toFixed(2) * 1 ) ;
 
       putValueAtNode.push( cleanPutVal ) ;
