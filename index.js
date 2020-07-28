@@ -74,22 +74,22 @@ var daysToDiv4Ex = wExDiv4Date * 1;
 var divBranch4 = daysToDiv4Ex / daysPerBranch;
 var cleanDivBranch4 = Math.floor(divBranch4);
 
-var div5 = 0.75;
+var div5 = 0;
 var daysToDiv5Ex = 300;
 var divBranch5 = daysToDiv5Ex / daysPerBranch;
 var cleanDivBranch5 = Math.floor(divBranch5);
 
-var div6 = 0.75;
+var div6 = 0;
 var daysToDiv6Ex = 300;
 var divBranch6 = daysToDiv6Ex / daysPerBranch;
 var cleanDivBranch6 = Math.floor(divBranch6);
 
-var div7 = 0.75;
+var div7 = 0;
 var daysToDiv7Ex = 542;
 var divBranch7 = daysToDiv7Ex / daysPerBranch;
 var cleanDivBranch7 = Math.floor(divBranch7);
 
-var div8 = 0.75;
+var div8 = 0;
 var daysToDiv8Ex = 632;
 var divBranch8 = daysToDiv8Ex / daysPerBranch;
 var cleanDivBranch8 = Math.floor(divBranch8);
