@@ -641,7 +641,7 @@ function clean_raw_all_stock_pxs (){
   var clean_count = (raw_all_stock_pxs.length - 1);
 
   while (count <= clean_count){
-    var scrub = ((raw_all_stock_pxs[count]).toFixed(2)) * 1 ;
+    var scrub = ((raw_all_stock_pxs[count]).toFixed(8)) * 1 ;
     clean_all_stock_pxs.push(scrub);
     count = count + 1;
 
@@ -767,7 +767,7 @@ function callIntrinsicValueAtEachNode () {
 
     while (count < super_list.length){
         var callIntrinsicValue = ( super_list[count][2] - strike );
-        var cleanCallIntrinsicValue = callIntrinsicValue.toFixed(2) * 1;
+        var cleanCallIntrinsicValue = callIntrinsicValue.toFixed(8) * 1;
         if (cleanCallIntrinsicValue > 0){
             callIntrinsic.push( cleanCallIntrinsicValue );
             count = count + 1;
@@ -859,7 +859,7 @@ function callFinalNodePayOuts () {
 
     while (count <= bbranches){
         var callPayOut = super_list[iter][2] - strike ;
-        var cleanCallPayOut = callPayOut.toFixed(2) * 1;
+        var cleanCallPayOut = callPayOut.toFixed(8) * 1;
         if (cleanCallPayOut > 0){
             callFinalPayOutList.push(cleanCallPayOut);
             iter = iter + 1;
@@ -928,7 +928,7 @@ function callValueNonTerminalNodes3 (){
 
     while (count < bbranches){
       var cVal = pvFactor * ( (p * callFinalBranchPayOutList[count]) + ( (1-p) * callFinalBranchPayOutList[count+1] ) ) ;
-      var cleanCVal = ( cVal.toFixed(2) * 1 ) ;
+      var cleanCVal = ( cVal.toFixed(8) * 1 ) ;
 
       callValueAtNode.push( cleanCVal ) ;
 
@@ -939,7 +939,7 @@ function callValueNonTerminalNodes3 (){
     while (iter < totalNodesThirdToLastBranch){
 
       var callVal = pvFactor * ( (p * callValueAtNode[parentList[iter]]) + ( (1-p) * callValueAtNode[parentList[iter]+1] ) );
-      var cleanCallVal = ( callVal.toFixed(2) * 1 ) ;
+      var cleanCallVal = ( callVal.toFixed(8) * 1 ) ;
 
       callValueAtNode.push( cleanCallVal ) ;
 
@@ -1093,7 +1093,7 @@ function americanCallBackwardInduction (){
       }
 
 
-      var cleanCVal = ( cVal.toFixed(2) * 1 ) ;
+      var cleanCVal = ( cVal.toFixed(8) * 1 ) ;
 
       callValueAtNode.push( cleanCVal ) ;
 
@@ -1120,7 +1120,7 @@ function americanCallBackwardInduction (){
       }
 
 
-      var cleanCallVal = ( callVal.toFixed(2) * 1 ) ;
+      var cleanCallVal = ( callVal.toFixed(8) * 1 ) ;
 
       callValueAtNode.push( cleanCallVal ) ;
 
@@ -1257,7 +1257,7 @@ function callIntrinsicGreaterThanEuro (){
       }
 
 
-      var cleanCVal = ( cVal.toFixed(2) * 1 ) ;
+      var cleanCVal = ( cVal.toFixed(8) * 1 ) ;
 
       callValueAtNode.push( cleanCVal ) ;
 
@@ -1286,7 +1286,7 @@ function callIntrinsicGreaterThanEuro (){
       }
 
 
-      var cleanCallVal = ( callVal.toFixed(2) * 1 ) ;
+      var cleanCallVal = ( callVal.toFixed(8) * 1 ) ;
 
       callValueAtNode.push( cleanCallVal ) ;
 
@@ -1375,7 +1375,7 @@ function putIntrinsicValueAtEachNode () {
 
     while (count < super_list.length){
         var putIntrinsicValue = ( strike - super_list[count][2] );
-        var cleanPutIntrinsicValue = putIntrinsicValue.toFixed(2) * 1;
+        var cleanPutIntrinsicValue = putIntrinsicValue.toFixed(8) * 1;
         if (cleanPutIntrinsicValue > 0){
             putIntrinsic.push( cleanPutIntrinsicValue );
             count = count + 1;
@@ -1477,7 +1477,7 @@ function putFinalNodePayOuts () {
 
     while (count <= bbranches){
         var putPayOut = strike - super_list[iter][2] ;
-        var cleanPutPayOut = putPayOut.toFixed(2) * 1;
+        var cleanPutPayOut = putPayOut.toFixed(8) * 1;
         if (cleanPutPayOut > 0){
             putFinalPayOutList.push(cleanPutPayOut);
             iter = iter + 1;
@@ -1564,7 +1564,7 @@ function putValueNonTerminalNodes3 (){
 
     while (count < bbranches){
       var pVal = pvFactor * ( (p * putFinalBranchPayOutList[count]) + ( (1-p) * putFinalBranchPayOutList[count+1] ) ) ;
-      var cleanPVal = ( pVal.toFixed(2) * 1 ) ;
+      var cleanPVal = ( pVal.toFixed(8) * 1 ) ;
 
       putValueAtNode.push( cleanPVal ) ;
 
@@ -1575,7 +1575,7 @@ function putValueNonTerminalNodes3 (){
     while (iter < totalNodesThirdToLastBranch){
 
       var putVal = pvFactor * ( (p * putValueAtNode[parentList[iter]]) + ( (1-p) * putValueAtNode[parentList[iter]+1] ) );
-      var cleanPutVal = ( putVal.toFixed(2) * 1 ) ;
+      var cleanPutVal = ( putVal.toFixed(8) * 1 ) ;
 
       putValueAtNode.push( cleanPutVal ) ;
 
@@ -1733,7 +1733,7 @@ function americanPutBackwardInduction (){
       }
 
 
-      var cleanPVal = ( pVal.toFixed(2) * 1 ) ;
+      var cleanPVal = ( pVal.toFixed(8) * 1 ) ;
 
       putValueAtNode.push( cleanPVal ) ;
 
@@ -1760,7 +1760,7 @@ function americanPutBackwardInduction (){
       }
 
 
-      var cleanPutVal = ( putVal.toFixed(2) * 1 ) ;
+      var cleanPutVal = ( putVal.toFixed(8) * 1 ) ;
 
       putValueAtNode.push( cleanPutVal ) ;
 
@@ -1903,7 +1903,7 @@ function putIntrinsicGreaterThanEuro (){
       }
 
 
-      var cleanPVal = ( pVal.toFixed(2) * 1 ) ;
+      var cleanPVal = ( pVal.toFixed(8) * 1 ) ;
 
       putValueAtNode.push( cleanPVal ) ;
 
@@ -1932,7 +1932,7 @@ function putIntrinsicGreaterThanEuro (){
       }
 
 
-      var cleanPutVal = ( putVal.toFixed(2) * 1 ) ;
+      var cleanPutVal = ( putVal.toFixed(8) * 1 ) ;
 
       putValueAtNode.push( cleanPutVal ) ;
 
