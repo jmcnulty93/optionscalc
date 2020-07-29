@@ -2069,10 +2069,10 @@ var americanPutValueOutPut = uber_list[0][7];
 var euroCallValueOutPut = uber_list[0][3];
 var euroPutValueOutPut = uber_list[0][6];
 
-document.getElementById("americanCall").value = americanCallValueOutPut;
-document.getElementById("americanPut").value = americanPutValueOutPut;
-document.getElementById("euroCallBinomial").value = euroCallValueOutPut;
-document.getElementById("euroPutBinomial").value = euroPutValueOutPut;
+document.getElementById("americanCall").value = americanCallValueOutPut.toFixed(2);
+document.getElementById("americanPut").value = americanPutValueOutPut.toFixed(2);
+document.getElementById("euroCallBinomial").value = euroCallValueOutPut.toFixed(2);
+document.getElementById("euroPutBinomial").value = euroPutValueOutPut.toFixed(2);
 
 
 }
