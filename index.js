@@ -1,4 +1,3 @@
-
 function goCalc () {
 
 var wTicker = document.getElementById("ticker").value;
@@ -1574,7 +1573,7 @@ function putValueNonTerminalNodes3 (){
 
     while (iter < totalNodesThirdToLastBranch){
 
-      var putVal = pvFactor * ( (p * putValueAtNode[parentList[iter]]) + ( (1-p) * putValueAtNode[parentList[iter]+1] ) );
+      var putVal = pvFactor * ( (p * putValueAtNode[parentList[iter]]) + ( (1-p) * putValueAtNode[parentList[iter]+1] ) ) ;
       var cleanPutVal = ( putVal.toFixed(8) * 1 ) ;
 
       putValueAtNode.push( cleanPutVal ) ;
@@ -2063,21 +2062,91 @@ var uber_list = zip_up5(bL,nL,pxs, euroCall, americanCall, cIntGrtEuro, euroPut,
 uber_list;
 
 
-
+//option values
 var americanCallValueOutPut = uber_list[0][4];
 var americanPutValueOutPut = uber_list[0][7];
 var euroCallValueOutPut = uber_list[0][3];
 var euroPutValueOutPut = uber_list[0][6];
 
+//option deltas
+var cDelta =  ( (uber_list[1][4] - uber_list[2][4]) / (uber_list[1][2] - uber_list[2][2]) ).toFixed(2) *1 ;
+cDelta ;
+
+var pDelta =  ( (uber_list[1][7] - uber_list[2][7]) / (uber_list[1][2] - uber_list[2][2]) ).toFixed(2) *1 ;
+pDelta ;
+
+//option gammas
+//calls
+
+var cgd1 = ( (uber_list[3][4] - uber_list[4][4]) / (uber_list[3][2]  - uber_list[4][2] ) ).toFixed(8) * 1 ;
+cgd1;
+
+var cgd2 = ( (uber_list[4][4] - uber_list[5][4]) / (uber_list[4][2]  - uber_list[5][2] ) ).toFixed(8) * 1 ;
+cgd2;
+
+var cgd3 = ( (uber_list[3][2] - uber_list[5][2]  ) / 2).toFixed(8) * 1 ;
+cgd3;
+
+var cGamma = ( (cgd1 - cgd2) / cgd3 ).toFixed(2) * 1;
+cGamma;
+
+////
+//puts
+
+var pgd1 = ( (uber_list[3][7] - uber_list[4][7]) / (uber_list[3][2]  - uber_list[4][2] ) ).toFixed(8) * 1 ;
+pgd1;
+
+var pgd2 = ( (uber_list[4][7] - uber_list[5][7]) / (uber_list[4][2]  - uber_list[5][2] ) ).toFixed(8) * 1 ;
+pgd2;
+
+var pgd3 = ( (uber_list[3][2] - uber_list[5][2]  ) / 2).toFixed(8) * 1 ;
+pgd3;
+
+var pGamma = ( (pgd1 - pgd2) / pgd3 ).toFixed(2) * 1;
+pGamma;
+
+
+//Out Put to the website
+//option values
 document.getElementById("americanCall").value = americanCallValueOutPut.toFixed(2);
 document.getElementById("americanPut").value = americanPutValueOutPut.toFixed(2);
-document.getElementById("euroCallBinomial").value = euroCallValueOutPut.toFixed(2);
-document.getElementById("euroPutBinomial").value = euroPutValueOutPut.toFixed(2);
 
-  
-  
-  
-  ////////////THETA/////////////////////
+// option deltas
+document.getElementById("americanCallDelta").value = cDelta;
+document.getElementById("americanPutDelta").value = pDelta;
+
+//option gammas
+document.getElementById("americanCallGamma").value = cGamma;
+document.getElementById("americanPutGamma").value = pGamma;
+
+
+//document.getElementById("euroCallBinomial").value = euroCallValueOutPut.toFixed(2);
+//document.getElementById("euroPutBinomial").value = euroPutValueOutPut.toFixed(2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////THETA/////////////////////
 
 //START BINOMIAL
 
@@ -6206,6 +6275,9 @@ var putVegaAmerican =  americanPutValueVega - americanPutValueOutPut;
 //option vegas
 document.getElementById("americanCallVega").value = callVegaAmerican.toFixed(3);
 document.getElementById("americanPutVega").value = putVegaAmerican.toFixed(3);
+
+
+
 
 
 
