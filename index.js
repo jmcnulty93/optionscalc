@@ -56,42 +56,42 @@ var pvFactor = e**( r * timePerBranch * (-1) ) ;
 var div1 = wDiv1 * 1;
 var daysToDiv1Ex = wExDiv1Date * 1;
 var divBranch1 = daysToDiv1Ex / daysPerBranch;
-var cleanDivBranch1 = Math.floor(divBranch1);
+var cleanDivBranch1 = Math.ceil(divBranch1);
 
 var div2 = wDiv2 * 1;
 var daysToDiv2Ex = wExDiv2Date * 1;
 var divBranch2 = daysToDiv2Ex / daysPerBranch;
-var cleanDivBranch2 = Math.floor(divBranch2);
+var cleanDivBranch2 = Math.ceil(divBranch2);
 
 var div3 = wDiv3 * 1;
 var daysToDiv3Ex = wExDiv3Date * 1;
 var divBranch3 = daysToDiv3Ex / daysPerBranch;
-var cleanDivBranch3 = Math.floor(divBranch3);
+var cleanDivBranch3 = Math.ceil(divBranch3);
 
 var div4 = wDiv4 * 1;
 var daysToDiv4Ex = wExDiv4Date * 1;
 var divBranch4 = daysToDiv4Ex / daysPerBranch;
-var cleanDivBranch4 = Math.floor(divBranch4);
+var cleanDivBranch4 = Math.ceil(divBranch4);
 
 var div5 = 0;
 var daysToDiv5Ex = 300;
 var divBranch5 = daysToDiv5Ex / daysPerBranch;
-var cleanDivBranch5 = Math.floor(divBranch5);
+var cleanDivBranch5 = Math.ceil(divBranch5);
 
 var div6 = 0;
 var daysToDiv6Ex = 300;
 var divBranch6 = daysToDiv6Ex / daysPerBranch;
-var cleanDivBranch6 = Math.floor(divBranch6);
+var cleanDivBranch6 = Math.ceil(divBranch6);
 
 var div7 = 0;
 var daysToDiv7Ex = 542;
 var divBranch7 = daysToDiv7Ex / daysPerBranch;
-var cleanDivBranch7 = Math.floor(divBranch7);
+var cleanDivBranch7 = Math.ceil(divBranch7);
 
 var div8 = 0;
 var daysToDiv8Ex = 632;
 var divBranch8 = daysToDiv8Ex / daysPerBranch;
-var cleanDivBranch8 = Math.floor(divBranch8);
+var cleanDivBranch8 = Math.ceil(divBranch8);
 
 
 var divInfo = [[1, cleanDivBranch1, div1],[2, cleanDivBranch2, div2],[3, cleanDivBranch3, div3],[4, cleanDivBranch4, div4],[5, cleanDivBranch5, div5],[6, cleanDivBranch6, div6],[7, cleanDivBranch7, div7],[8, cleanDivBranch8, div8]];
@@ -130,7 +130,7 @@ siteDataForDaysFromNowForEachBranchStartList;
 // this can be zipped to super_list or uber_list
 
 
-function daysFromNowForEachBranchStart (){
+function daysFromNowForEachBranchEnd (){
 
   var count = 0;
   var iter = 0;
@@ -157,8 +157,8 @@ function daysFromNowForEachBranchStart (){
 
 }
 
-var dayBranchStartsOn = daysFromNowForEachBranchStart ();
-dayBranchStartsOn;
+var dayBranchEndsOn = daysFromNowForEachBranchEnd ();
+dayBranchEndsOn;
 
 
 /////////////////////////////////////////////////////////////////////////cleans zero branch div to 1
@@ -2054,10 +2054,10 @@ var divPerBranchOnEachNode = divBranchInfoForNode;      //// line 425 to 452 ///
 
 var exDivStockPxPerBranchOnEachNode = exDivStockPxPerBranchForNode;    ///// line 462 to 486 ////
 
-var branchStartDay = dayBranchStartsOn;      // line 79 to 104 //
+var branchEndDay = dayBranchEndsOn;      // line 79 to 104 //
 
 
-var uber_list = zip_up5(bL,nL,pxs, euroCall, americanCall, cIntGrtEuro, euroPut, americanPut, pIntGrtEuro, divPerBranchOnEachNode, exDivStockPxPerBranchOnEachNode, branchStartDay );
+var uber_list = zip_up5(bL,nL,pxs, euroCall, americanCall, cIntGrtEuro, euroPut, americanPut, pIntGrtEuro, divPerBranchOnEachNode, exDivStockPxPerBranchOnEachNode, branchEndDay );
 
 uber_list;
 
@@ -2183,42 +2183,42 @@ var pvFactor = e**( r * timePerBranch * (-1) ) ;
 var div1 = wDiv1 * 1;
 var daysToDiv1Ex = wExDiv1Date * 1;
 var divBranch1 = daysToDiv1Ex / daysPerBranch;
-var cleanDivBranch1 = Math.floor(divBranch1);
+var cleanDivBranch1 = Math.ceil(divBranch1);
 
 var div2 = wDiv2 * 1;
 var daysToDiv2Ex = wExDiv2Date * 1;
 var divBranch2 = daysToDiv2Ex / daysPerBranch;
-var cleanDivBranch2 = Math.floor(divBranch2);
+var cleanDivBranch2 = Math.ceil(divBranch2);
 
 var div3 = wDiv3 * 1;
 var daysToDiv3Ex = wExDiv3Date * 1;
 var divBranch3 = daysToDiv3Ex / daysPerBranch;
-var cleanDivBranch3 = Math.floor(divBranch3);
+var cleanDivBranch3 = Math.ceil(divBranch3);
 
 var div4 = wDiv4 * 1;
 var daysToDiv4Ex = wExDiv4Date * 1;
 var divBranch4 = daysToDiv4Ex / daysPerBranch;
-var cleanDivBranch4 = Math.floor(divBranch4);
+var cleanDivBranch4 = Math.ceil(divBranch4);
 
 var div5 = 0;
 var daysToDiv5Ex = 300;
 var divBranch5 = daysToDiv5Ex / daysPerBranch;
-var cleanDivBranch5 = Math.floor(divBranch5);
+var cleanDivBranch5 = Math.ceil(divBranch5);
 
 var div6 = 0;
 var daysToDiv6Ex = 300;
 var divBranch6 = daysToDiv6Ex / daysPerBranch;
-var cleanDivBranch6 = Math.floor(divBranch6);
+var cleanDivBranch6 = Math.ceil(divBranch6);
 
 var div7 = 0;
 var daysToDiv7Ex = 542;
 var divBranch7 = daysToDiv7Ex / daysPerBranch;
-var cleanDivBranch7 = Math.floor(divBranch7);
+var cleanDivBranch7 = Math.ceil(divBranch7);
 
 var div8 = 0;
 var daysToDiv8Ex = 632;
 var divBranch8 = daysToDiv8Ex / daysPerBranch;
-var cleanDivBranch8 = Math.floor(divBranch8);
+var cleanDivBranch8 = Math.ceil(divBranch8);
 
 
 var divInfo = [[1, cleanDivBranch1, div1],[2, cleanDivBranch2, div2],[3, cleanDivBranch3, div3],[4, cleanDivBranch4, div4],[5, cleanDivBranch5, div5],[6, cleanDivBranch6, div6],[7, cleanDivBranch7, div7],[8, cleanDivBranch8, div8]];
@@ -2257,7 +2257,7 @@ siteDataForDaysFromNowForEachBranchStartList;
 // this can be zipped to super_list or uber_list
 
 
-function daysFromNowForEachBranchStart (){
+function daysFromNowForEachBranchEnd (){
 
   var count = 0;
   var iter = 0;
@@ -2284,8 +2284,8 @@ function daysFromNowForEachBranchStart (){
 
 }
 
-var dayBranchStartsOn = daysFromNowForEachBranchStart ();
-dayBranchStartsOn;
+var dayBranchEndsOn = daysFromNowForEachBranchEnd ();
+dayBranchEndsOn;
 
 
 /////////////////////////////////////////////////////////////////////////cleans zero branch div to 1
@@ -4181,10 +4181,10 @@ var divPerBranchOnEachNode = divBranchInfoForNode;      //// line 425 to 452 ///
 
 var exDivStockPxPerBranchOnEachNode = exDivStockPxPerBranchForNode;    ///// line 462 to 486 ////
 
-var branchStartDay = dayBranchStartsOn;      // line 79 to 104 //
+var branchEndDay = dayBranchEndsOn;      // line 79 to 104 //
 
 
-var uber_list = zip_up5(bL,nL,pxs, euroCall, americanCall, cIntGrtEuro, euroPut, americanPut, pIntGrtEuro, divPerBranchOnEachNode, exDivStockPxPerBranchOnEachNode, branchStartDay );
+var uber_list = zip_up5(bL,nL,pxs, euroCall, americanCall, cIntGrtEuro, euroPut, americanPut, pIntGrtEuro, divPerBranchOnEachNode, exDivStockPxPerBranchOnEachNode, branchEndDay );
 
 uber_list;
 
@@ -4256,42 +4256,42 @@ var pvFactor = e**( r * timePerBranch * (-1) ) ;
 var div1 = wDiv1 * 1;
 var daysToDiv1Ex = wExDiv1Date * 1;
 var divBranch1 = daysToDiv1Ex / daysPerBranch;
-var cleanDivBranch1 = Math.floor(divBranch1);
+var cleanDivBranch1 = Math.ceil(divBranch1);
 
 var div2 = wDiv2 * 1;
 var daysToDiv2Ex = wExDiv2Date * 1;
 var divBranch2 = daysToDiv2Ex / daysPerBranch;
-var cleanDivBranch2 = Math.floor(divBranch2);
+var cleanDivBranch2 = Math.ceil(divBranch2);
 
 var div3 = wDiv3 * 1;
 var daysToDiv3Ex = wExDiv3Date * 1;
 var divBranch3 = daysToDiv3Ex / daysPerBranch;
-var cleanDivBranch3 = Math.floor(divBranch3);
+var cleanDivBranch3 = Math.ceil(divBranch3);
 
 var div4 = wDiv4 * 1;
 var daysToDiv4Ex = wExDiv4Date * 1;
 var divBranch4 = daysToDiv4Ex / daysPerBranch;
-var cleanDivBranch4 = Math.floor(divBranch4);
+var cleanDivBranch4 = Math.ceil(divBranch4);
 
 var div5 = 0;
 var daysToDiv5Ex = 300;
 var divBranch5 = daysToDiv5Ex / daysPerBranch;
-var cleanDivBranch5 = Math.floor(divBranch5);
+var cleanDivBranch5 = Math.ceil(divBranch5);
 
 var div6 = 0;
 var daysToDiv6Ex = 300;
 var divBranch6 = daysToDiv6Ex / daysPerBranch;
-var cleanDivBranch6 = Math.floor(divBranch6);
+var cleanDivBranch6 = Math.ceil(divBranch6);
 
 var div7 = 0;
 var daysToDiv7Ex = 542;
 var divBranch7 = daysToDiv7Ex / daysPerBranch;
-var cleanDivBranch7 = Math.floor(divBranch7);
+var cleanDivBranch7 = Math.ceil(divBranch7);
 
 var div8 = 0;
 var daysToDiv8Ex = 632;
 var divBranch8 = daysToDiv8Ex / daysPerBranch;
-var cleanDivBranch8 = Math.floor(divBranch8);
+var cleanDivBranch8 = Math.ceil(divBranch8);
 
 
 var divInfo = [[1, cleanDivBranch1, div1],[2, cleanDivBranch2, div2],[3, cleanDivBranch3, div3],[4, cleanDivBranch4, div4],[5, cleanDivBranch5, div5],[6, cleanDivBranch6, div6],[7, cleanDivBranch7, div7],[8, cleanDivBranch8, div8]];
@@ -4330,7 +4330,7 @@ siteDataForDaysFromNowForEachBranchStartList;
 // this can be zipped to super_list or uber_list
 
 
-function daysFromNowForEachBranchStart (){
+function daysFromNowForEachBranchEnd (){
 
   var count = 0;
   var iter = 0;
@@ -4357,8 +4357,8 @@ function daysFromNowForEachBranchStart (){
 
 }
 
-var dayBranchStartsOn = daysFromNowForEachBranchStart ();
-dayBranchStartsOn;
+var dayBranchEndsOn = daysFromNowForEachBranchEnd ();
+dayBranchEndsOn;
 
 
 /////////////////////////////////////////////////////////////////////////cleans zero branch div to 1
@@ -6254,10 +6254,10 @@ var divPerBranchOnEachNode = divBranchInfoForNode;      //// line 425 to 452 ///
 
 var exDivStockPxPerBranchOnEachNode = exDivStockPxPerBranchForNode;    ///// line 462 to 486 ////
 
-var branchStartDay = dayBranchStartsOn;      // line 79 to 104 //
+var branchEndDay = dayBranchEndsOn;      // line 79 to 104 //
 
 
-var uber_list = zip_up5(bL,nL,pxs, euroCall, americanCall, cIntGrtEuro, euroPut, americanPut, pIntGrtEuro, divPerBranchOnEachNode, exDivStockPxPerBranchOnEachNode, branchStartDay );
+var uber_list = zip_up5(bL,nL,pxs, euroCall, americanCall, cIntGrtEuro, euroPut, americanPut, pIntGrtEuro, divPerBranchOnEachNode, exDivStockPxPerBranchOnEachNode, branchEndDay );
 
 uber_list;
 
