@@ -2063,46 +2063,213 @@ uber_list;
 
 
 //option values
-var americanCallValueOutPut = uber_list[0][4];
-var americanPutValueOutPut = uber_list[0][7];
-var euroCallValueOutPut = uber_list[0][3];
-var euroPutValueOutPut = uber_list[0][6];
+
+//american call
+function aCVOP () {
+  if (daysToExpir <= 0){
+    if ( (currStockPx - strike) > 0 ){
+      var aCall = currStockPx - strike ;
+    }
+    else{
+      var aCall = 0;
+    }
+  }
+  else{
+    var aCall = uber_list[0][4];
+  }
+
+  return aCall
+}
+
+var americanCallValueOutPut = aCVOP() ;
+americanCallValueOutPut;
+
+//american put
+function aPVOP () {
+  if (daysToExpir <= 0){
+    if ( (strike - currStockPx) > 0 ){
+      var aPut =  strike - currStockPx;
+    }
+    else{
+      var aPut = 0;
+    }
+  }
+  else{
+    var aPut = uber_list[0][7];
+  }
+
+  return aPut
+}
+
+var americanPutValueOutPut = aPVOP() ;
+americanPutValueOutPut;
+
+
+//euro call
+function eCVOP () {
+  if (daysToExpir <= 0){
+    if ( (currStockPx - strike) > 0 ){
+      var eCall = currStockPx - strike ;
+    }
+    else{
+      var eCall = 0;
+    }
+  }
+  else{
+    var eCall = uber_list[0][3];
+  }
+
+  return eCall
+}
+
+var euroCallValueOutPut = eCVOP() ;
+euroCallValueOutPut;
+
+
+//euro put
+function ePVOP () {
+  if (daysToExpir <= 0){
+    if ( (strike - currStockPx) > 0 ){
+      var ePut =  strike - currStockPx;
+    }
+    else{
+      var ePut = 0;
+    }
+  }
+  else{
+    var ePut = uber_list[0][6];
+  }
+
+  return ePut
+}
+
+var euroPutValueOutPut = ePVOP() ;
+euroPutValueOutPut;
+
+
+
+
+//var americanCallValueOutPut = uber_list[0][4];
+//var americanPutValueOutPut = uber_list[0][7];
+//var euroCallValueOutPut = uber_list[0][3];
+//var euroPutValueOutPut = uber_list[0][6];
+
+
 
 //option deltas
-var cDelta =  ( (uber_list[1][4] - uber_list[2][4]) / (uber_list[1][2] - uber_list[2][2]) ).toFixed(2) *1 ;
+
+// call delta
+if (daysToExpir <= 0){
+  if  ((currStockPx - strike) > 0 ) {
+    var cDelta = 1
+  }
+  else{
+    var cDelta = 0
+  }
+}
+else{
+  var cDelta =  ( (uber_list[1][4] - uber_list[2][4]) / (uber_list[1][2] - uber_list[2][2]) ).toFixed(2) *1 ;
+}
 cDelta ;
 
-var pDelta =  ( (uber_list[1][7] - uber_list[2][7]) / (uber_list[1][2] - uber_list[2][2]) ).toFixed(2) *1 ;
+
+//put delta
+if (daysToExpir <= 0){
+  if  ((strike - currStockPx) > 0 ) {
+    var pDelta = 1
+  }
+  else{
+    var pDelta = 0
+  }
+}
+else{
+  var pDelta =  ( (uber_list[1][7] - uber_list[2][7]) / (uber_list[1][2] - uber_list[2][2]) ).toFixed(2) *1 ;
+}
 pDelta ;
 
 //option gammas
 //calls
 
-var cgd1 = ( (uber_list[3][4] - uber_list[4][4]) / (uber_list[3][2]  - uber_list[4][2] ) ).toFixed(8) * 1 ;
-cgd1;
+//var cgd1 = ( (uber_list[3][4] - uber_list[4][4]) / (uber_list[3][2]  - uber_list[4][2] ) ).toFixed(8) * 1 ;
+//cgd1;
 
-var cgd2 = ( (uber_list[4][4] - uber_list[5][4]) / (uber_list[4][2]  - uber_list[5][2] ) ).toFixed(8) * 1 ;
-cgd2;
+//var cgd2 = ( (uber_list[4][4] - uber_list[5][4]) / (uber_list[4][2]  - uber_list[5][2] ) ).toFixed(8) * 1 ;
+//cgd2;
 
-var cgd3 = ( (uber_list[3][2] - uber_list[5][2]  ) / 2).toFixed(8) * 1 ;
-cgd3;
+//var cgd3 = ( (uber_list[3][2] - uber_list[5][2]  ) / 2).toFixed(8) * 1 ;
+//cgd3;
 
-var cGamma = ( (cgd1 - cgd2) / cgd3 ).toFixed(2) * 1;
-cGamma;
+//var cGamma = ( (cgd1 - cgd2) / cgd3 ).toFixed(2) * 1;
+//cGamma;
 
 ////
 //puts
 
-var pgd1 = ( (uber_list[3][7] - uber_list[4][7]) / (uber_list[3][2]  - uber_list[4][2] ) ).toFixed(8) * 1 ;
-pgd1;
+//var pgd1 = ( (uber_list[3][7] - uber_list[4][7]) / (uber_list[3][2]  - uber_list[4][2] ) ).toFixed(8) * 1 ;
+//pgd1;
 
-var pgd2 = ( (uber_list[4][7] - uber_list[5][7]) / (uber_list[4][2]  - uber_list[5][2] ) ).toFixed(8) * 1 ;
-pgd2;
+//var pgd2 = ( (uber_list[4][7] - uber_list[5][7]) / (uber_list[4][2]  - uber_list[5][2] ) ).toFixed(8) * 1 ;
+//pgd2;
 
-var pgd3 = ( (uber_list[3][2] - uber_list[5][2]  ) / 2).toFixed(8) * 1 ;
-pgd3;
+//var pgd3 = ( (uber_list[3][2] - uber_list[5][2]  ) / 2).toFixed(8) * 1 ;
+//pgd3;
 
-var pGamma = ( (pgd1 - pgd2) / pgd3 ).toFixed(2) * 1;
+//var pGamma = ( (pgd1 - pgd2) / pgd3 ).toFixed(2) * 1;
+//pGamma;
+
+
+//calls
+
+function callGamma () {
+
+  if ( daysToExpir <= 0 ){
+    var cGammaF = 0 ;
+  }
+  else if (bbranches <= 1){
+    var cGammaF = ("N/A for 1 Branch or less");
+  }
+  else{
+    var cgd1 = ( (uber_list[3][4] - uber_list[4][4]) / (uber_list[3][2]  - uber_list[4][2] ) ).toFixed(2) * 1 ;
+    var cgd2 = ( (uber_list[4][4] - uber_list[5][4]) / (uber_list[4][2]  - uber_list[5][2] ) ).toFixed(2) * 1 ;
+    var cgd3 = ( (uber_list[3][2] - uber_list[5][2]  ) / 2).toFixed(2) * 1 ;
+    var cGammaF = ( (cgd1 - cgd2) / cgd3 ).toFixed(2) * 1;
+  }
+
+  return cGammaF
+
+}
+
+var cGamma = callGamma () ;
+cGamma;
+
+
+
+
+
+////
+//puts
+
+function putGamma () {
+
+  if ( daysToExpir <= 0 ){
+    var pGammaF = 0 ;
+  }
+  else if (bbranches <= 1){
+    var pGammaF = ("N/A for 1 Branch or less");
+  }
+  else{
+    var pgd1 = ( (uber_list[3][7] - uber_list[4][7]) / (uber_list[3][2]  - uber_list[4][2] ) ).toFixed(2) * 1 ;
+    var pgd2 = ( (uber_list[4][7] - uber_list[5][7]) / (uber_list[4][2]  - uber_list[5][2] ) ).toFixed(2) * 1 ;
+    var pgd3 = ( (uber_list[3][2] - uber_list[5][2]  ) / 2).toFixed(2) * 1 ;
+    var pGammaF = ( (pgd1 - pgd2) / pgd3 ).toFixed(2) * 1;
+  }
+
+  return pGammaF
+
+
+}
+
+var pGamma = putGamma () ;
 pGamma;
 
 
@@ -4190,10 +4357,93 @@ uber_list;
 
 
 //option values
-var americanCallValueTheta = uber_list[0][4];
-var americanPutValueTheta = uber_list[0][7];
-var euroCallValueTheta = uber_list[0][3];
-var euroPutValueOutTheta = uber_list[0][6];
+
+//american call
+function aCVOP () {
+  if (daysToExpir <= 0){
+    if ( (currStockPx - strike) > 0 ){
+      var aCall = currStockPx - strike ;
+    }
+    else{
+      var aCall = 0;
+    }
+  }
+  else{
+    var aCall = uber_list[0][4];
+  }
+
+  return aCall
+}
+
+var americanCallValueTheta = aCVOP() ;
+americanCallValueTheta;
+
+//american put
+function aPVOP () {
+  if (daysToExpir <= 0){
+    if ( (strike - currStockPx) > 0 ){
+      var aPut =  strike - currStockPx;
+    }
+    else{
+      var aPut = 0;
+    }
+  }
+  else{
+    var aPut = uber_list[0][7];
+  }
+
+  return aPut
+}
+
+var americanPutValueTheta = aPVOP() ;
+americanPutValueTheta;
+
+
+//euro call
+function eCVOP () {
+  if (daysToExpir <= 0){
+    if ( (currStockPx - strike) > 0 ){
+      var eCall = currStockPx - strike ;
+    }
+    else{
+      var eCall = 0;
+    }
+  }
+  else{
+    var eCall = uber_list[0][3];
+  }
+
+  return eCall
+}
+
+var euroCallValueTheta = eCVOP() ;
+euroCallValueTheta;
+
+
+//euro put
+function ePVOP () {
+  if (daysToExpir <= 0){
+    if ( (strike - currStockPx) > 0 ){
+      var ePut =  strike - currStockPx;
+    }
+    else{
+      var ePut = 0;
+    }
+  }
+  else{
+    var ePut = uber_list[0][6];
+  }
+
+  return ePut
+}
+
+var euroPutValueTheta = ePVOP() ;
+euroPutValueTheta;
+
+//var americanCallValueTheta = uber_list[0][4];
+//var americanPutValueTheta = uber_list[0][7];
+//var euroCallValueTheta = uber_list[0][3];
+//var euroPutValueOutTheta = uber_list[0][6];
 
 var callThetaAmerican = americanCallValueTheta - americanCallValueOutPut;
 var putThetaAmerican =  americanPutValueTheta - americanPutValueOutPut;
@@ -6263,10 +6513,94 @@ uber_list;
 
 
 //option values
-var americanCallValueVega = uber_list[0][4];
-var americanPutValueVega = uber_list[0][7];
-var euroCallValueVega = uber_list[0][3];
-var euroPutValueOutVega = uber_list[0][6];
+
+//american call
+function aCVOP () {
+  if (daysToExpir <= 0){
+    if ( (currStockPx - strike) > 0 ){
+      var aCall = currStockPx - strike ;
+    }
+    else{
+      var aCall = 0;
+    }
+  }
+  else{
+    var aCall = uber_list[0][4];
+  }
+
+  return aCall
+}
+
+var americanCallValueVega = aCVOP() ;
+americanCallValueVega;
+
+//american put
+function aPVOP () {
+  if (daysToExpir <= 0){
+    if ( (strike - currStockPx) > 0 ){
+      var aPut =  strike - currStockPx;
+    }
+    else{
+      var aPut = 0;
+    }
+  }
+  else{
+    var aPut = uber_list[0][7];
+  }
+
+  return aPut
+}
+
+var americanPutValueVega = aPVOP() ;
+americanPutValueVega;
+
+
+//euro call
+function eCVOP () {
+  if (daysToExpir <= 0){
+    if ( (currStockPx - strike) > 0 ){
+      var eCall = currStockPx - strike ;
+    }
+    else{
+      var eCall = 0;
+    }
+  }
+  else{
+    var eCall = uber_list[0][3];
+  }
+
+  return eCall
+}
+
+var euroCallValueVega = eCVOP() ;
+euroCallValueVega;
+
+
+//euro put
+function ePVOP () {
+  if (daysToExpir <= 0){
+    if ( (strike - currStockPx) > 0 ){
+      var ePut =  strike - currStockPx;
+    }
+    else{
+      var ePut = 0;
+    }
+  }
+  else{
+    var ePut = uber_list[0][6];
+  }
+
+  return ePut
+}
+
+var euroPutValueVega = ePVOP() ;
+euroPutValueVega;
+
+
+//var americanCallValueVega = uber_list[0][4];
+//var americanPutValueVega = uber_list[0][7];
+//var euroCallValueVega = uber_list[0][3];
+//var euroPutValueOutVega = uber_list[0][6];
 
 var callVegaAmerican = americanCallValueVega - americanCallValueOutPut;
 var putVegaAmerican =  americanPutValueVega - americanPutValueOutPut;
@@ -8333,16 +8667,101 @@ uber_list;
 
 
 //option values
-var americanCallValueRho = uber_list[0][4];
-var americanPutValueRho = uber_list[0][7];
-var euroCallValueRho = uber_list[0][3];
-var euroPutValueOutRho = uber_list[0][6];
+
+//american call
+function aCVOP () {
+  if (daysToExpir <= 0){
+    if ( (currStockPx - strike) > 0 ){
+      var aCall = currStockPx - strike ;
+    }
+    else{
+      var aCall = 0;
+    }
+  }
+  else{
+    var aCall = uber_list[0][4];
+  }
+
+  return aCall
+}
+
+var americanCallValueRho = aCVOP() ;
+americanCallValueRho;
+
+//american put
+function aPVOP () {
+  if (daysToExpir <= 0){
+    if ( (strike - currStockPx) > 0 ){
+      var aPut =  strike - currStockPx;
+    }
+    else{
+      var aPut = 0;
+    }
+  }
+  else{
+    var aPut = uber_list[0][7];
+  }
+
+  return aPut
+}
+
+var americanPutValueRho = aPVOP() ;
+americanPutValueRho;
+
+
+//euro call
+function eCVOP () {
+  if (daysToExpir <= 0){
+    if ( (currStockPx - strike) > 0 ){
+      var eCall = currStockPx - strike ;
+    }
+    else{
+      var eCall = 0;
+    }
+  }
+  else{
+    var eCall = uber_list[0][3];
+  }
+
+  return eCall
+}
+
+var euroCallValueRho = eCVOP() ;
+euroCallValueRho;
+
+
+//euro put
+function ePVOP () {
+  if (daysToExpir <= 0){
+    if ( (strike - currStockPx) > 0 ){
+      var ePut =  strike - currStockPx;
+    }
+    else{
+      var ePut = 0;
+    }
+  }
+  else{
+    var ePut = uber_list[0][6];
+  }
+
+  return ePut
+}
+
+var euroPutValueRho = ePVOP() ;
+euroPutValueRho;
+
+
+
+//var americanCallValueRho = uber_list[0][4];
+//var americanPutValueRho = uber_list[0][7];
+//var euroCallValueRho = uber_list[0][3];
+//var euroPutValueOutRho = uber_list[0][6];
 
 var callRhoAmerican = americanCallValueRho - americanCallValueOutPut;
 var putRhoAmerican =  americanPutValueRho - americanPutValueOutPut;
 
 
-//option vegas
+//option rho
 document.getElementById("americanCallRho").value = callRhoAmerican.toFixed(3);
 document.getElementById("americanPutRho").value = putRhoAmerican.toFixed(3);
 
