@@ -2,12 +2,12 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>FirstOp</title>
+    <title>time</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <!-- My CSS Styles -->
-    <link rel="stylesheet" href="firstoptionstyles.css">
+    <link rel="stylesheet" href="css/timestyles.css">
 
 
     <!--js and jquery for drop down menus-->
@@ -37,8 +37,20 @@
           <input id="vol" id="vol" type="text" value = "40">
           <br />
 
-          <label>Days To Expir</label>
-          <input id="daysToExpir" type="text" value="30">
+          <label>Now</label>
+          <input id="nowDate" type="date" >
+          <label>Expir Date</label>
+          <input id="expirationDate" type="date" onchange="pushDaysToExpirCalc()">
+          <!--<label>Enter Days</label>
+          <input id="hardCodeDaysToExpir" type="text" onchange="hardCodeDaysToExpir1 (), pushDaysToExpirCalc()">-->
+
+          <!--<label>Days To Expir</label>
+          <input id="daysToExpir" type="text" value="30">-->
+          <label>Days To Exp</label>
+          <input id="dte" type="text" value="10" >
+
+
+
           <br />
           <label>Interest Rate</label>
           <input id="rate" type="text" value = "1.25">
@@ -48,22 +60,32 @@
 
           <br />
           <label>Div 1</label>
-          <input id="div1" type="text" value = "0.55">
+          <input id="div1" type="text" value = "0">
+          <label>Ex-Div1 Date</label>
+          <input id="exDiv1Date" type="date" onchange="pushDaysToExDiv1Calc()">
           <label>Days to Ex-Div 1</label>
-          <input id="exDiv1Date" type="text" value = "11">
+          <input id="daysToExDiv1" type="text" value = "0">
+          <br />
           <label>Div 2</label>
           <input id="div2" type="text" value = "0">
+          <label>Ex-Div2 Date</label>
+          <input id="exDiv2Date" type="date" onchange="pushDaysToExDiv2Calc()">
           <label>Days to Ex-Div 2</label>
-          <input id="exDiv2Date" type="text" value = "0">
+          <input id="daysToExDiv2" type="text" value = "0">
           <br />
           <label>Div 3</label>
           <input id="div3" type="text" value = "0">
+          <label>Ex-Div3 Date</label>
+          <input id="exDiv3Date" type="date" onchange="pushDaysToExDiv3Calc()">
           <label>Days to Ex-Div 3</label>
-          <input id="exDiv3Date" type="text" value = "0">
+          <input id="daysToExDiv3" type="text" value = "0">
+          <br />
           <label>Div 4</label>
           <input id="div4" type="text" value = "0">
+          <label>Ex-Div4 Date</label>
+          <input id="exDiv4Date" type="date" onchange="pushDaysToExDiv4Calc()">
           <label>Days to Ex-Div 4</label>
-          <input id="exDiv4Date" type="text" value = "0">
+          <input id="daysToExDiv4" type="text" value = "0">
 
           <br />
           <label>American Call</label>
@@ -96,6 +118,9 @@
           <label>Put Rho</label>
           <input id="americanPutRho" type="text" value = "0">
           <br />
+
+          <br />
+
           <!--<label>Euro Call Binomial</label>
           <input id="euroCallBinomial" type="text" value = "0">
           <label>Euro Put Binomail</label>
@@ -106,6 +131,253 @@
 
     </div>
 
+<!-------------------------------------------------------------------------------------------->
+<!-- upper node chart with stockPx -->
+
+    <div class="container-fluid" id="tree">
+
+      <div class="row row-center zero_branchT">
+        <div class="node_zeroT">
+          <input class="nodeStockPx" id="zero-zero" type="text"  />
+        </div>
+      </div>
+      <!---------------------------------------------------------->
+      <div class="row row-center one_branchT">
+        <div class="node_firstT">
+          <input class="nodeStockPx" id="one-zero" type="text"  />
+        </div>
+        <div class="node_lastT">
+          <input class="nodeStockPx" id="one-one" type="text"  />
+        </div>
+      </div>
+      <!---------------------------------------------------------->
+      <div class="row row-center two_branchT">
+        <div class="node_firstT">
+          <input class="nodeStockPx" id="two-zero" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="two-one" type="text"  />
+        </div>
+        <div class="node_lastT">
+          <input class="nodeStockPx" id="two-two" type="text"  />
+        </div>
+      </div>
+      <!---------------------------------------------------------->
+      <div class="row row-center three_branchT">
+        <div class="node_firstT">
+          <input class="nodeStockPx" id="three-zero" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="three-one" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="three-two" type="text"  />
+        </div>
+        <div class="node_lastT">
+          <input class="nodeStockPx" id="three-three" type="text"  />
+        </div>
+      </div>
+      <!---------------------------------------------------------->
+      <div class="row row-center four_branchT">
+        <div class="node_firstT">
+          <input class="nodeStockPx" id="four-zero" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="four-one" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="four-two" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="four-three" type="text"  />
+        </div>
+        <div class="node_lastT">
+          <input class="nodeStockPx" id="four-four" type="text"  />
+        </div>
+      </div>
+      <!---------------------------------------------------------->
+      <div class="row row-center five_branchT">
+        <div class="node_firstT">
+          <input class="nodeStockPx" id="five-zero" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="five-one" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="five-two" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="five-three" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="five-four" type="text"  />
+        </div>
+        <div class="node_lastT">
+          <input class="nodeStockPx" id="five-five" type="text"  />
+        </div>
+      </div>
+      <!---------------------------------------------------------->
+      <div class="row row-center six_branchT">
+        <div class="node_firstT">
+          <input class="nodeStockPx" id="six-zero" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="six-one" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="six-two" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="six-three" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="six-four" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="six-five" type="text"  />
+        </div>
+        <div class="node_lastT">
+          <input class="nodeStockPx" id="six-six" type="text"  />
+        </div>
+      </div>
+      <!---------------------------------------------------------->
+      <div class="row row-center seven_branchT">
+        <div class="node_firstT">
+          <input class="nodeStockPx" id="seven-zero" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="seven-one" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="seven-two" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="seven-three" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="seven-four" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="seven-five" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="seven-six" type="text"  />
+        </div>
+        <div class="node_lastT">
+          <input class="nodeStockPx" id="seven-seven" type="text"  />
+        </div>
+      </div>
+      <!---------------------------------------------------------->
+      <div class="row row-center eight_branchT">
+        <div class="node_firstT">
+          <input class="nodeStockPx" id="eight-zero" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="eight-one" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="eight-two" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="eight-three" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="eight-four" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="eight-five" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="eight-six" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="eight-seven" type="text"  />
+        </div>
+        <div class="node_lastT">
+          <input class="nodeStockPx" id="eight-eight" type="text"  />
+        </div>
+      </div>
+      <!---------------------------------------------------------->
+      <div class="row row-center nine_branchT">
+        <div class="node_firstT">
+          <input class="nodeStockPx" id="nine-zero" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="nine-one" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="nine-two" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="nine-three" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="nine-four" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="nine-five" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="nine-six" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="nine-seven" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="nine-eight" type="text"  />
+        </div>
+        <div class="node_lastT">
+          <input class="nodeStockPx" id="nine-nine" type="text"  />
+        </div>
+      </div>
+      <!---------------------------------------------------------->
+      <div class="row row-center ten_branchT">
+        <div class="node_firstT">
+          <input class="nodeStockPx" class="tenBranchNode" id="ten-zero" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" class="tenBranchNode" id="ten-one" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" class="tenBranchNode" id="ten-two" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="ten-three" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="ten-four" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="ten-five" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="ten-six" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="ten-seven" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="ten-eight" type="text"  />
+        </div>
+        <div class="node_middleT">
+          <input class="nodeStockPx" id="ten-nine" type="text"  />
+        </div>
+        <div class="node_lastT">
+          <input class="nodeStockPx" id="ten-ten" type="text"  />
+        </div>
+      </div>
+
+
+
+
+
+
+    </div>
+
+
+
+<!------------------------------------------------------------------------------------------------------>
+<!-- lower node chart with node and branch labels -->
 
     <div class="container-fluid">
 
