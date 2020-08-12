@@ -9,7 +9,188 @@ body {
   height: 600px
 }
 
+/*************************************************************************/
 
+#tree {
+
+  height: 700px;
+  width: 700px;
+  background-color: black;
+  text-align: center;
+  margin-top: 50px;
+  transform: rotate(-90deg);
+
+}
+
+/****************************/
+
+.zero_branchT {
+  background-color: green;
+  text-align: center;
+  font-size: 0.2rem;
+}
+
+.one_branchT {
+  background-color: orange;
+  text-align: center;
+  font-size: 0.2rem;
+}
+.two_branchT {
+  background-color: blue;
+  text-align: center;
+  font-size: 0.2rem;
+}
+.three_branchT {
+  background-color: red;
+  text-align: center;
+}
+
+.four_branchT {
+  background-color: grey;
+  text-align: center;
+}
+
+.five_branchT {
+  background-color: yellow;
+  text-align: center;
+}
+
+.six_branchT {
+  background-color: indigo;
+  text-align: center;
+}
+
+.seven_branchT {
+  background-color: violet;
+  text-align: center;
+}
+
+.eight_branchT {
+  background-color: brown;
+  text-align: center;
+}
+
+.nine_branchT {
+  background-color: gold;
+  text-align: center;
+}
+
+.ten_branchT {
+  background-color: green;
+  text-align: center;
+}
+
+
+
+/****************************/
+
+.node_zeroT {
+  height: 30px;
+  width: 30px;
+  background-color: green;
+  text-align: center;
+  font-size: .15rem;
+  border-radius: 100%;
+  /*border: 1px solid;*/
+  margin: 0 auto;
+  transform: rotate(90deg);
+}
+
+.node_firstT {
+  height: 30px;
+  width: 30px;
+  background-color: orange;
+  text-align: center;
+  font-size: .15rem;
+  border-radius: 100%;
+  /*border: 1px solid;*/
+  /* margin: 0 0 0 auto; */
+  margin-right: 0;
+  margin-left: auto;
+  transform: rotate(90deg);
+}
+
+.node_middleT {
+  height: 30px;
+  width: 30px;
+  background-color: orange;
+  text-align: center;
+  font-size: .15rem;
+  border-radius: 100%;
+  /*border: 1px solid;*/
+  /* margin: 0 0 0 auto; */
+  margin-right: 0;
+  margin-left: 0;
+  transform: rotate(90deg);
+}
+
+.node_lastT {
+  height: 30px;
+  width: 30px;
+  background-color: orange;
+  text-align: center;
+  font-size: .15rem;
+  border-radius: 100%;
+  /*border: 1px solid;*/
+  /* margin: 0 0 0 auto; */
+  margin-right: auto;
+  margin-left: 0;
+  transform: rotate(90deg);
+}
+
+
+/***************************************************************/
+/*
+#zero-zero {
+  height: 30px;
+  width: 30px;
+  background-color: pink;
+  text-align: center;
+  font-size: .15rem;
+  border-radius: 100%;
+  border: 1px solid;
+  margin: 0 auto;
+  /*transform: rotate(90deg);
+}*/
+
+/*
+#one-zero {
+  height: 30px;
+  width: 30px;
+  background-color: pink;
+  text-align: center;
+  font-size: .15rem;
+  border-radius: 100%;
+  border: 1px solid;
+  margin: 0 auto;
+  /*transform: rotate(90deg);
+}
+/*#one-one {
+  height: 30px;
+  width: 30px;
+  background-color: pink;
+  text-align: center;
+  font-size: .15rem;
+  border-radius: 100%;
+  border: 1px solid;
+  margin: 0 auto;
+  /*transform: rotate(90deg);
+}*/
+.nodeStockPx {
+  height: 30px;
+  width: 30px;
+  background-color: pink;
+  text-align: center;
+  font-size: .15rem;
+  border-radius: 100%;
+  border: 1px solid;
+  margin: 0 auto;
+  /*transform: rotate(90deg);*/
+}
+
+
+
+/*****************************************************************************/
 
 .container-fluid {
   height: 700px;
@@ -77,8 +258,8 @@ body {
 }
 
 .node_zero {
-  height: 25px;
-  width: 25px;
+  height: 30px;
+  width: 30px;
   background-color: pink;
   text-align: center;
   font-size: .15rem;
@@ -103,8 +284,8 @@ body {
 
 
 .node_first {
-  height: 25px;
-  width: 25px;
+  height: 30px;
+  width: 30px;
   background-color: pink;
   text-align: center;
   font-size: .15rem;
@@ -117,8 +298,8 @@ body {
 }
 
 .node_middle {
-  height: 25px;
-  width: 25px;
+  height: 30px;
+  width: 30px;
   background-color: pink;
   text-align: center;
   font-size: .15rem;
@@ -132,8 +313,8 @@ body {
 
 
 .node_last {
-  height: 25px;
-  width: 25px;
+  height: 30px;
+  width: 30px;
   background-color: pink;
   text-align: center;
   font-size: .15rem;
