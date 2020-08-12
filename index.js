@@ -1,14 +1,413 @@
+////////// Now : Date in website ///////////////
+
+var now = new Date ();
+var gfy = now.getFullYear();
+var gm = now.getMonth() + 1;
+var gd = now.getDate();
+var nowDefault = gfy+"-"+gm+"-"+gd ;
+typeof nowDefault;
+
+
+function dayTimeFix () {
+
+  var check = gd-10;
+
+  if (check < 0){
+    return "0"+gd
+  }
+  else{
+    return gd
+  }
+}
+
+
+var gdFix = dayTimeFix();
+gdFix;
+
+function monthTimeFix () {
+
+  var check = gm-10;
+
+  if (check < 0){
+    return "0"+gm
+  }
+  else{
+    return gm
+  }
+}
+
+var gmFix = monthTimeFix();
+gmFix;
+
+var nowDefaultFix = gfy+"-"+gmFix+"-"+gdFix ;
+nowDefaultFix;
+
+var pushCurrentTime = document.getElementById("nowDate").defaultValue = nowDefaultFix ;
+//var pushCurrentTimeForExpirDate = document.getElementById("expirationDate").defaultValue = nowDefaultFix ;
+
+var getCurentTime = document.getElementById("nowDate").value;
+
+
+var currentTimeMili = now.getTime();
+
+////////////////////////////////////////////////////////////////////////////////////
+
+// put in Expir date with Date picker, need 7 digit new Date (2020,8,4,15,0,0,0) = "09/04/2020" on date picker at 3pm chicago....
+// right now it date picker "09/04/2020" is GMT -5 hours so you get sep 3, 2020 at 7pm chicago time (date picker in new Date () gives you GMT midnight in chicago which is still the prevous day)
+
+
+// var expirDate1 = document.getElementById("expirationDate").value;
+// expirDate1Time = new Date (expirDate1);
+// expirDate1Time;
+//
+// var expirDate1TimeMili = expirDate1Time.getTime();
+//
+// var daysToExpirMili = expirDate1TimeMili - currentTimeMili;
+// daysToExpirMili;
+//
+// var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+//
+// var daysToExpirCurrent = daysToExpirMili / millisecondsPerDay ;
+// daysToExpirCurrent;
+
+
+////////////////////////////
+//fix to the GMT problem detailed above
+
+// var expir1GFY = expirDate1Time.getFullYear();
+// expir1GFY;
+// var expir1GM = expirDate1Time.getMonth();
+// expir1GM;
+// var expir1GD = expirDate1Time.getDate() + 1;
+// expir1GD;
+// var expirDate1Fix = new Date (expir1GFY, expir1GM, expir1GD, 15, 0, 0, 0 )
+// expirDate1Fix;
+// var expirDate1FixTimeMili = expirDate1Fix.getTime();
+// expirDate1FixTimeMili;
+// var daysToExpirMiliFix = expirDate1FixTimeMili - currentTimeMili;
+// daysToExpirMiliFix;
+//
+// var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+//
+// var daysToExpir1CurrentFix = daysToExpirMiliFix / millisecondsPerDay ;
+// daysToExpir1CurrentFix;
+//
+// var pushDaysToExpir1 = document.getElementById("dte").value = daysToExpir1CurrentFix.toFixed(2);
+// pushDaysToExpir1;
+
+
+//function pushDaysToExpirCalc() {
+//  pushDaysToExpir1;
+//}
+
+function pushDaysToExpirCalc () {
+
+  var expirDate1 = document.getElementById("expirationDate").value;
+  expirDate1Time = new Date (expirDate1);
+  expirDate1Time;
+
+  var expirDate1TimeMili = expirDate1Time.getTime();
+
+  var daysToExpirMili = expirDate1TimeMili - currentTimeMili;
+  daysToExpirMili;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpirCurrent = daysToExpirMili / millisecondsPerDay ;
+  daysToExpirCurrent;
+
+  //////
+
+  var expir1GFY = expirDate1Time.getFullYear();
+  expir1GFY;
+  var expir1GM = expirDate1Time.getMonth();
+  expir1GM;
+  var expir1GD = expirDate1Time.getDate() + 1;
+  expir1GD;
+  var expirDate1Fix = new Date (expir1GFY, expir1GM, expir1GD, 15, 0, 0, 0 )
+  expirDate1Fix;
+  var expirDate1FixTimeMili = expirDate1Fix.getTime();
+  expirDate1FixTimeMili;
+  var daysToExpirMiliFix = expirDate1FixTimeMili - currentTimeMili;
+  daysToExpirMiliFix;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpir1CurrentFix = daysToExpirMiliFix / millisecondsPerDay ;
+  daysToExpir1CurrentFix;
+
+  var pushDaysToExpir1 = document.getElementById("dte").value = daysToExpir1CurrentFix.toFixed(2) * 1;
+  pushDaysToExpir1;
+
+}
+
+/////////////////////////////////////////////////////////////////////////////////////
+// this function changes the days to expiration with a hard input on days (not a date pick..but changes the date picker day)
+// there might be a prob with gmHard...uses +1...might be right before 3pm Chicago and wrong after...pushing date 1 day to far...
+
+
+// function hardCodeDaysToExpir1 () {
+//
+//   //var expirDate1 = document.getElementById("expirationDate").value;
+//   //expirDate1Time = new Date (expirDate1);
+//   //expirDate1Time;
+//
+//   //var expirDate1TimeMili = expirDate1Time.getTime();
+//
+//   var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+//
+//
+//   var tAdd = document.getElementById("hardCodeDaysToExpir").value;
+//   var hardCodeDate = tAdd * millisecondsPerDay ;
+//   hardCodeDate;
+//
+//   //expirDate1Time;
+//   //expirDate1TimeMili;
+//   currentTimeMili;
+//   hardCodeDate;
+//   var nDTE = currentTimeMili + hardCodeDate;
+//   nDTE;
+//   var nDTEFix = new Date (nDTE);
+//   nDTEFix;
+//
+//   //
+//
+//   var gfyHard = nDTEFix.getFullYear();
+//   var gmHard = nDTEFix.getMonth() + 1;
+//   var gdHard = nDTEFix.getDate() ;
+//
+//   function dayTimeFixHard () {
+//
+//     var check = gdHard-10;
+//
+//     if (check < 0){
+//       return "0"+gdHard
+//     }
+//     else{
+//       return gdHard
+//     }
+//   }
+//
+//
+//   var gdFixHard = dayTimeFixHard();
+//   gdFixHard;
+//
+//
+//   function monthTimeFixHard () {
+//
+//     var check = gmHard-10;
+//
+//     if (check < 0){
+//       return "0"+gmHard
+//     }
+//     else{
+//       return gmHard
+//     }
+//   }
+//
+//   var gmFixHard = monthTimeFixHard();
+//   gmFixHard;
+//
+//   var nowDefaultFixHard = gfyHard+"-"+gmFixHard+"-"+gdFixHard ;
+//   nowDefaultFixHard;
+//
+//   var pushCurrentTimeHard = document.getElementById("expirationDate").value = nowDefaultFixHard ;
+//   pushCurrentTimeHard;
+//
+// }
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+function pushDaysToExDiv1Calc () {
+
+  var expirDate1 = document.getElementById("exDiv1Date").value;
+  expirDate1Time = new Date (expirDate1);
+  expirDate1Time;
+
+  var expirDate1TimeMili = expirDate1Time.getTime();
+
+  var daysToExpirMili = expirDate1TimeMili - currentTimeMili;
+  daysToExpirMili;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpirCurrent = daysToExpirMili / millisecondsPerDay ;
+  daysToExpirCurrent;
+
+  //////
+
+  var expir1GFY = expirDate1Time.getFullYear();
+  expir1GFY;
+  var expir1GM = expirDate1Time.getMonth();
+  expir1GM;
+  var expir1GD = expirDate1Time.getDate() + 1;
+  expir1GD;
+  var expirDate1Fix = new Date (expir1GFY, expir1GM, expir1GD, 15, 0, 0, 0 )
+  expirDate1Fix;
+  var expirDate1FixTimeMili = expirDate1Fix.getTime();
+  expirDate1FixTimeMili;
+  var daysToExpirMiliFix = expirDate1FixTimeMili - currentTimeMili;
+  daysToExpirMiliFix;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpir1CurrentFix = daysToExpirMiliFix / millisecondsPerDay ;
+  daysToExpir1CurrentFix;
+
+  var pushDaysToExpir1 = document.getElementById("daysToExDiv1").value = daysToExpir1CurrentFix.toFixed(2) * 1;
+  pushDaysToExpir1;
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+function pushDaysToExDiv2Calc () {
+
+  var expirDate1 = document.getElementById("exDiv2Date").value;
+  expirDate1Time = new Date (expirDate1);
+  expirDate1Time;
+
+  var expirDate1TimeMili = expirDate1Time.getTime();
+
+  var daysToExpirMili = expirDate1TimeMili - currentTimeMili;
+  daysToExpirMili;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpirCurrent = daysToExpirMili / millisecondsPerDay ;
+  daysToExpirCurrent;
+
+  //////
+
+  var expir1GFY = expirDate1Time.getFullYear();
+  expir1GFY;
+  var expir1GM = expirDate1Time.getMonth();
+  expir1GM;
+  var expir1GD = expirDate1Time.getDate() + 1;
+  expir1GD;
+  var expirDate1Fix = new Date (expir1GFY, expir1GM, expir1GD, 15, 0, 0, 0 )
+  expirDate1Fix;
+  var expirDate1FixTimeMili = expirDate1Fix.getTime();
+  expirDate1FixTimeMili;
+  var daysToExpirMiliFix = expirDate1FixTimeMili - currentTimeMili;
+  daysToExpirMiliFix;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpir1CurrentFix = daysToExpirMiliFix / millisecondsPerDay ;
+  daysToExpir1CurrentFix;
+
+  var pushDaysToExpir1 = document.getElementById("daysToExDiv2").value = daysToExpir1CurrentFix.toFixed(2) * 1;
+  pushDaysToExpir1;
+
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+function pushDaysToExDiv3Calc () {
+
+  var expirDate1 = document.getElementById("exDiv3Date").value;
+  expirDate1Time = new Date (expirDate1);
+  expirDate1Time;
+
+  var expirDate1TimeMili = expirDate1Time.getTime();
+
+  var daysToExpirMili = expirDate1TimeMili - currentTimeMili;
+  daysToExpirMili;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpirCurrent = daysToExpirMili / millisecondsPerDay ;
+  daysToExpirCurrent;
+
+  //////
+
+  var expir1GFY = expirDate1Time.getFullYear();
+  expir1GFY;
+  var expir1GM = expirDate1Time.getMonth();
+  expir1GM;
+  var expir1GD = expirDate1Time.getDate() + 1;
+  expir1GD;
+  var expirDate1Fix = new Date (expir1GFY, expir1GM, expir1GD, 15, 0, 0, 0 )
+  expirDate1Fix;
+  var expirDate1FixTimeMili = expirDate1Fix.getTime();
+  expirDate1FixTimeMili;
+  var daysToExpirMiliFix = expirDate1FixTimeMili - currentTimeMili;
+  daysToExpirMiliFix;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpir1CurrentFix = daysToExpirMiliFix / millisecondsPerDay ;
+  daysToExpir1CurrentFix;
+
+  var pushDaysToExpir1 = document.getElementById("daysToExDiv3").value = daysToExpir1CurrentFix.toFixed(2) * 1;
+  pushDaysToExpir1;
+
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+function pushDaysToExDiv4Calc () {
+
+  var expirDate1 = document.getElementById("exDiv4Date").value;
+  expirDate1Time = new Date (expirDate1);
+  expirDate1Time;
+
+  var expirDate1TimeMili = expirDate1Time.getTime();
+
+  var daysToExpirMili = expirDate1TimeMili - currentTimeMili;
+  daysToExpirMili;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpirCurrent = daysToExpirMili / millisecondsPerDay ;
+  daysToExpirCurrent;
+
+  //////
+
+  var expir1GFY = expirDate1Time.getFullYear();
+  expir1GFY;
+  var expir1GM = expirDate1Time.getMonth();
+  expir1GM;
+  var expir1GD = expirDate1Time.getDate() + 1;
+  expir1GD;
+  var expirDate1Fix = new Date (expir1GFY, expir1GM, expir1GD, 15, 0, 0, 0 )
+  expirDate1Fix;
+  var expirDate1FixTimeMili = expirDate1Fix.getTime();
+  expirDate1FixTimeMili;
+  var daysToExpirMiliFix = expirDate1FixTimeMili - currentTimeMili;
+  daysToExpirMiliFix;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpir1CurrentFix = daysToExpirMiliFix / millisecondsPerDay ;
+  daysToExpir1CurrentFix;
+
+  var pushDaysToExpir1 = document.getElementById("daysToExDiv4").value = daysToExpir1CurrentFix.toFixed(2) * 1;
+  pushDaysToExpir1;
+
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+
+
 function goCalc () {
 
 var wTicker = document.getElementById("ticker").value;
 var wStockPx = document.getElementById("stockPx").value;
 var wStrikePx = document.getElementById("strikePx").value;
 var wVol = document.getElementById("vol").value;
-var wDaysToExpir = document.getElementById("daysToExpir").value;
+//var wDaysToExpir = document.getElementById("daysToExpir").value;
+var wDaysToExpir = document.getElementById("dte").value;
 var wRate = document.getElementById("rate").value;
 var wNumberOfBranches = document.getElementById("numberOfBranches").value;
 var wDiv1 = document.getElementById("div1").value;
-var wExDiv1Date = document.getElementById("exDiv1Date").value;
+var wExDiv1Date = document.getElementById("daysToExDiv1").value;
 var wDiv2 = document.getElementById("div2").value;
 var wExDiv2Date = document.getElementById("exDiv2Date").value;
 var wDiv3 = document.getElementById("div3").value;
@@ -8764,6 +9163,243 @@ var putRhoAmerican =  americanPutValueRho - americanPutValueOutPut;
 //option rho
 document.getElementById("americanCallRho").value = callRhoAmerican.toFixed(3);
 document.getElementById("americanPutRho").value = putRhoAmerican.toFixed(3);
+
+
+// tree
+//var zeroZeroStockPx = uber_list[0][2];
+//document.getElementById("zero-zero").value = zeroZeroStockPx;
+var emptyNode = "";
+
+document.getElementById("zero-zero").value = uber_list[0][2];
+
+
+if (bbranches >= 1){
+
+  document.getElementById("one-one").value = uber_list[1][2];
+  document.getElementById("one-zero").value = uber_list[2][2];
+
+}
+else{
+
+  document.getElementById("one-one").value = emptyNode;
+  document.getElementById("one-zero").value = emptyNode;
+}
+
+
+
+
+if (bbranches >= 2){
+
+  document.getElementById("two-two").value = uber_list[3][2];
+  document.getElementById("two-one").value = uber_list[4][2];
+  document.getElementById("two-zero").value = uber_list[5][2];
+
+}
+else{
+
+  document.getElementById("two-two").value = emptyNode;
+  document.getElementById("two-one").value = emptyNode;
+  document.getElementById("two-zero").value = emptyNode;
+}
+
+
+
+
+if (bbranches >= 3){
+
+  document.getElementById("three-three").value = uber_list[6][2];
+  document.getElementById("three-two").value = uber_list[7][2];
+  document.getElementById("three-one").value = uber_list[8][2];
+  document.getElementById("three-zero").value = uber_list[9][2];
+}
+else{
+
+  document.getElementById("three-three").value = emptyNode;
+  document.getElementById("three-two").value = emptyNode;
+  document.getElementById("three-one").value = emptyNode;
+  document.getElementById("three-zero").value = emptyNode;
+}
+
+
+
+
+if (bbranches >= 4){
+
+  document.getElementById("four-four").value = uber_list[10][2];
+  document.getElementById("four-three").value = uber_list[11][2];
+  document.getElementById("four-two").value = uber_list[12][2];
+  document.getElementById("four-one").value = uber_list[13][2];
+  document.getElementById("four-zero").value = uber_list[14][2];
+
+}
+else{
+
+  document.getElementById("four-four").value = emptyNode;
+  document.getElementById("four-three").value = emptyNode;
+  document.getElementById("four-two").value = emptyNode;
+  document.getElementById("four-one").value = emptyNode;
+  document.getElementById("four-zero").value = emptyNode;
+
+}
+
+
+
+if (bbranches >= 5){
+
+  document.getElementById("five-five").value = uber_list[15][2];
+  document.getElementById("five-four").value = uber_list[16][2];
+  document.getElementById("five-three").value = uber_list[17][2];
+  document.getElementById("five-two").value = uber_list[18][2];
+  document.getElementById("five-one").value = uber_list[19][2];
+  document.getElementById("five-zero").value = uber_list[20][2];
+}
+else{
+  document.getElementById("five-five").value = emptyNode;
+  document.getElementById("five-four").value = emptyNode;
+  document.getElementById("five-three").value = emptyNode;
+  document.getElementById("five-two").value = emptyNode;
+  document.getElementById("five-one").value = emptyNode;
+  document.getElementById("five-zero").value = emptyNode;
+}
+
+
+
+
+if (bbranches >= 6){
+
+  document.getElementById("six-six").value = uber_list[21][2];
+  document.getElementById("six-five").value = uber_list[22][2];
+  document.getElementById("six-four").value = uber_list[23][2];
+  document.getElementById("six-three").value = uber_list[24][2];
+  document.getElementById("six-two").value = uber_list[25][2];
+  document.getElementById("six-one").value = uber_list[26][2];
+  document.getElementById("six-zero").value = uber_list[27][2];
+}
+else{
+  document.getElementById("six-six").value = emptyNode;
+  document.getElementById("six-five").value = emptyNode;
+  document.getElementById("six-four").value = emptyNode;
+  document.getElementById("six-three").value = emptyNode;
+  document.getElementById("six-two").value = emptyNode;
+  document.getElementById("six-one").value = emptyNode;
+  document.getElementById("six-zero").value = emptyNode;
+}
+
+
+
+
+if (bbranches >= 7){
+
+  document.getElementById("seven-seven").value = uber_list[28][2];
+  document.getElementById("seven-six").value = uber_list[29][2];
+  document.getElementById("seven-five").value = uber_list[30][2];
+  document.getElementById("seven-four").value = uber_list[31][2];
+  document.getElementById("seven-three").value = uber_list[32][2];
+  document.getElementById("seven-two").value = uber_list[33][2];
+  document.getElementById("seven-one").value = uber_list[34][2];
+  document.getElementById("seven-zero").value = uber_list[35][2];
+}
+else{
+
+  document.getElementById("seven-seven").value = emptyNode;
+  document.getElementById("seven-six").value = emptyNode;
+  document.getElementById("seven-five").value = emptyNode;
+  document.getElementById("seven-four").value = emptyNode;
+  document.getElementById("seven-three").value = emptyNode;
+  document.getElementById("seven-two").value = emptyNode;
+  document.getElementById("seven-one").value = emptyNode;
+  document.getElementById("seven-zero").value = emptyNode;
+}
+
+
+
+if (bbranches >= 8){
+
+  document.getElementById("eight-eight").value = uber_list[36][2];
+  document.getElementById("eight-seven").value = uber_list[37][2];
+  document.getElementById("eight-six").value = uber_list[38][2];
+  document.getElementById("eight-five").value = uber_list[39][2];
+  document.getElementById("eight-four").value = uber_list[40][2];
+  document.getElementById("eight-three").value = uber_list[41][2];
+  document.getElementById("eight-two").value = uber_list[42][2];
+  document.getElementById("eight-one").value = uber_list[43][2];
+  document.getElementById("eight-zero").value = uber_list[44][2];
+}
+else{
+
+  document.getElementById("eight-eight").value = emptyNode;
+  document.getElementById("eight-seven").value = emptyNode;
+  document.getElementById("eight-six").value = emptyNode;
+  document.getElementById("eight-five").value = emptyNode;
+  document.getElementById("eight-four").value = emptyNode;
+  document.getElementById("eight-three").value = emptyNode;
+  document.getElementById("eight-two").value = emptyNode;
+  document.getElementById("eight-one").value = emptyNode;
+  document.getElementById("eight-zero").value = emptyNode;
+}
+
+
+
+if (bbranches >= 9){
+
+  document.getElementById("nine-nine").value = uber_list[45][2];
+  document.getElementById("nine-eight").value = uber_list[46][2];
+  document.getElementById("nine-seven").value = uber_list[47][2];
+  document.getElementById("nine-six").value = uber_list[48][2];
+  document.getElementById("nine-five").value = uber_list[49][2];
+  document.getElementById("nine-four").value = uber_list[50][2];
+  document.getElementById("nine-three").value = uber_list[51][2];
+  document.getElementById("nine-two").value = uber_list[52][2];
+  document.getElementById("nine-one").value = uber_list[53][2];
+  document.getElementById("nine-zero").value = uber_list[54][2];
+}
+else{
+
+  document.getElementById("nine-nine").value = emptyNode;
+  document.getElementById("nine-eight").value = emptyNode;
+  document.getElementById("nine-seven").value = emptyNode;
+  document.getElementById("nine-six").value = emptyNode;
+  document.getElementById("nine-five").value = emptyNode;
+  document.getElementById("nine-four").value = emptyNode;
+  document.getElementById("nine-three").value = emptyNode;
+  document.getElementById("nine-two").value = emptyNode;
+  document.getElementById("nine-one").value = emptyNode;
+  document.getElementById("nine-zero").value = emptyNode;
+}
+
+
+if (bbranches >= 10){
+
+  document.getElementById("ten-ten").value = uber_list[55][2];
+  document.getElementById("ten-nine").value = uber_list[56][2];
+  document.getElementById("ten-eight").value = uber_list[57][2];
+  document.getElementById("ten-seven").value = uber_list[58][2];
+  document.getElementById("ten-six").value = uber_list[59][2];
+  document.getElementById("ten-five").value = uber_list[60][2];
+  document.getElementById("ten-four").value = uber_list[61][2];
+  document.getElementById("ten-three").value = uber_list[62][2];
+  document.getElementById("ten-two").value = uber_list[63][2];
+  document.getElementById("ten-one").value = uber_list[64][2];
+  document.getElementById("ten-zero").value = uber_list[65][2];
+
+}
+else{
+  document.getElementById("ten-ten").value = emptyNode;
+  document.getElementById("ten-nine").value = emptyNode;
+  document.getElementById("ten-eight").value = emptyNode;
+  document.getElementById("ten-seven").value = emptyNode;
+  document.getElementById("ten-six").value = emptyNode;
+  document.getElementById("ten-five").value = emptyNode;
+  document.getElementById("ten-four").value = emptyNode;
+  document.getElementById("ten-three").value = emptyNode;
+  document.getElementById("ten-two").value = emptyNode;
+  document.getElementById("ten-one").value = emptyNode;
+  document.getElementById("ten-zero").value = emptyNode;
+}
+
+
+
+
 
 
 
