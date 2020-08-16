@@ -318,7 +318,7 @@ body {
   margin-left: auto;
   transform: rotate(-90deg);
   padding: 0;
-  overflow: auto;
+  overflow: hidden;
 
 }
 
