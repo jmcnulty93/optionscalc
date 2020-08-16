@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <!-- My CSS Styles -->
-    <link rel="stylesheet" href="firstoptionstyles.css">
+    <link rel="stylesheet" href="css/timestyles.css">
 
 
     <!--js and jquery for drop down menus-->
@@ -31,16 +31,16 @@
 
           <div class="row">
 
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Ticker</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Ticker</label>
               <input class="boxes" id="ticker" type="text" value="IBM">
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Stock Price</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Stock Price</label>
               <input class="boxes" id="stockPx" type="text" value = "51">
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Strike Price</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Strike</label>
               <input class="boxes" id="strikePx" type="text" value = "55">
             </div>
 
@@ -48,12 +48,12 @@
 
           <div class="row">
 
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Now</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Now</label>
               <input class="boxes" id="nowDate" type="date" >
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Expir Date</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Expir Date</label>
               <input class="boxes" id="expirationDate" type="date" onchange="pushDaysToExpirCalc()">
             </div>
 
@@ -63,8 +63,8 @@
             <!--<label>Days To Expir</label>
             <input id="daysToExpir" type="text" value="30">-->
 
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Days To Exp</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">daysToExpir</label>
               <input class="boxes" id="dte" type="text" value="10" >
             </div>
 
@@ -73,16 +73,16 @@
 
           <div class="row">
 
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Volatility</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Volatility</label>
               <input class="boxes" id="vol" id="vol" type="text" value = "40">
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Interest Rate</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Interest Rate</label>
               <input class="boxes" id="rate" type="text" value = "1.25">
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Number of Branches</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Branches</label>
               <input class="boxes" id="numberOfBranches" type="text" value = "10">
             </div>
 
@@ -90,16 +90,16 @@
 
           <div class="row">
 
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Div 1</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Div 1</label>
               <input class="boxes" id="div1" type="text" value = "0">
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Ex-Div1 Date</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Ex-Div1 Date</label>
               <input class="boxes" id="exDiv1Date" type="date" onchange="pushDaysToExDiv1Calc()">
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Days to Ex-Div 1</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Days to Ex-Div 1</label>
               <input class="boxes" id="daysToExDiv1" type="text" value = "0">
             </div>
 
@@ -107,16 +107,16 @@
 
           <div class="row">
 
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Div 2</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Div 2</label>
               <input class="boxes" id="div2" type="text" value = "0">
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Ex-Div2 Date</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Ex-Div2 Date</label>
               <input class="boxes" id="exDiv2Date" type="date" onchange="pushDaysToExDiv2Calc()">
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Days to Ex-Div 2</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Days to Ex-Div 2</label>
               <input class="boxes" id="daysToExDiv2" type="text" value = "0">
             </div>
 
@@ -124,16 +124,16 @@
 
           <div class="row">
 
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Div 3</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Div 3</label>
               <input class="boxes" id="div3" type="text" value = "0">
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Ex-Div3 Date</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Ex-Div3 Date</label>
               <input class="boxes" id="exDiv3Date" type="date" onchange="pushDaysToExDiv3Calc()">
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Days to Ex-Div 3</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Days to Ex-Div 3</label>
               <input class="boxes" id="daysToExDiv3" type="text" value = "0">
             </div>
 
@@ -141,16 +141,16 @@
 
           <div class="row">
 
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Div 4</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Div 4</label>
               <input class="boxes" id="div4" type="text" value = "0">
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Ex-Div4 Date</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Ex-Div4 Date</label>
               <input class="boxes" id="exDiv4Date" type="date" onchange="pushDaysToExDiv4Calc()">
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Days to Ex-Div 4</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Days to Ex-Div 4</label>
               <input class="boxes" id="daysToExDiv4" type="text" value = "0">
             </div>
 
@@ -158,24 +158,24 @@
 
           <div class="row">
 
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>American Call</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">American Call</label>
               <input class="boxes" id="americanCall" type="text" value = "0">
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>American Put</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">American Put</label>
               <input class="boxes" id="americanPut" type="text" value = "0">
             </div>
           </div>
 
           <div class="row">
 
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Call Delta</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Call Delta</label>
               <input class="boxes" id="americanCallDelta" type="text" value = "0">
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Put Delta</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Put Delta</label>
               <input class="boxes" id="americanPutDelta" type="text" value = "0">
             </div>
 
@@ -183,12 +183,12 @@
 
           <div class="row">
 
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Call Gamma</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Call Gamma</label>
               <input class="boxes" id="americanCallGamma" type="text" value = "0">
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Put Gamma</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Put Gamma</label>
               <input class="boxes" id="americanPutGamma" type="text" value = "0">
             </div>
 
@@ -196,12 +196,12 @@
 
           <div class="row">
 
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Call Theta</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Call Theta</label>
               <input class="boxes" id="americanCallTheta" type="text" value = "0">
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Put Theta</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Put Theta</label>
               <input class="boxes" id="americanPutTheta" type="text" value = "0">
             </div>
 
@@ -209,12 +209,12 @@
 
           <div class="row">
 
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Call Vega</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Call Vega</label>
               <input class="boxes" id="americanCallVega" type="text" value = "0">
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Put Vega</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Put Vega</label>
               <input class="boxes" id="americanPutVega" type="text" value = "0">
             </div>
 
@@ -222,12 +222,12 @@
 
           <div class="row">
 
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Call Rho</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Call Rho</label>
               <input class="boxes" id="americanCallRho" type="text" value = "0">
             </div>
-            <div class="col-lg-4 col-md-3 col-sm-12">
-              <label>Put Rho</label>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Put Rho</label>
               <input class="boxes" id="americanPutRho" type="text" value = "0">
             </div>
 
@@ -980,4 +980,3 @@
   </footer>
 
 </html>
-
