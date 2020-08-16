@@ -2,12 +2,12 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>FirstOp</title>
+    <title>time</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <!-- My CSS Styles -->
-    <link rel="stylesheet" href="firstoptionstyles.css">
+    <link rel="stylesheet" href="css/timestyles.css">
 
 
     <!--js and jquery for drop down menus-->
@@ -19,112 +19,228 @@
   </head>
   <body>
     <div class="container">
-      <div class="<inputs">
+      <div class="inputs">
         inputs
         <br />
         <!--<a href="page2.html">page2</a>
         <br />-->
         <button id="calc" type="button" onclick="goCalc()">Calculate</button>
         <br />
+
         <form class="user-inputs" action="index.html" method="post">
-          <label>Ticker</label>
-          <input id="ticker" type="text" value="IBM">
-          <label>Stock Price</label>
-          <input id="stockPx" type="text" value = "51">
-          <label>Strike Price</label>
-          <input id="strikePx" type="text" value = "55">
-          <label>Volatility</label>
-          <input id="vol" id="vol" type="text" value = "40">
-          <br />
 
-          <label>Now</label>
-          <input id="nowDate" type="date" >
-          <label>Expir Date</label>
-          <input id="expirationDate" type="date" onchange="pushDaysToExpirCalc()">
-          <!--<label>Enter Days</label>
-          <input id="hardCodeDaysToExpir" type="text" onchange="hardCodeDaysToExpir1 (), pushDaysToExpirCalc()">-->
+          <div class="row">
 
-          <!--<label>Days To Expir</label>
-          <input id="daysToExpir" type="text" value="30">-->
-          <label>Days To Exp</label>
-          <input id="dte" type="text" value="10" >
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Ticker</label>
+              <input class="boxes" id="ticker" type="text" value="IBM">
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Stock Price</label>
+              <input class="boxes" id="stockPx" type="text" value = "51">
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Strike Price</label>
+              <input class="boxes" id="strikePx" type="text" value = "55">
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Now</label>
+              <input class="boxes" id="nowDate" type="date" >
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Expir Date</label>
+              <input class="boxes" id="expirationDate" type="date" onchange="pushDaysToExpirCalc()">
+            </div>
+
+            <!--<label>Enter Days</label>
+            <input id="hardCodeDaysToExpir" type="text" onchange="hardCodeDaysToExpir1 (), pushDaysToExpirCalc()">-->
+
+            <!--<label>Days To Expir</label>
+            <input id="daysToExpir" type="text" value="30">-->
+
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Days To Exp</label>
+              <input class="boxes" id="dte" type="text" value="10" >
+            </div>
+
+          </div>
 
 
+          <div class="row">
 
-          <br />
-          <label>Interest Rate</label>
-          <input id="rate" type="text" value = "1.25">
-          <label>Number of Branches</label>
-          <input id="numberOfBranches" type="text" value = "10">
-          <br />
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Volatility</label>
+              <input class="boxes" id="vol" id="vol" type="text" value = "40">
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Interest Rate</label>
+              <input class="boxes" id="rate" type="text" value = "1.25">
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Number of Branches</label>
+              <input class="boxes" id="numberOfBranches" type="text" value = "10">
+            </div>
 
-          <br />
-          <label>Div 1</label>
-          <input id="div1" type="text" value = "0">
-          <label>Ex-Div1 Date</label>
-          <input id="exDiv1Date" type="date" onchange="pushDaysToExDiv1Calc()">
-          <label>Days to Ex-Div 1</label>
-          <input id="daysToExDiv1" type="text" value = "0">
-          <br />
-          <label>Div 2</label>
-          <input id="div2" type="text" value = "0">
-          <label>Ex-Div2 Date</label>
-          <input id="exDiv2Date" type="date" onchange="pushDaysToExDiv2Calc()">
-          <label>Days to Ex-Div 2</label>
-          <input id="daysToExDiv2" type="text" value = "0">
-          <br />
-          <label>Div 3</label>
-          <input id="div3" type="text" value = "0">
-          <label>Ex-Div3 Date</label>
-          <input id="exDiv3Date" type="date" onchange="pushDaysToExDiv3Calc()">
-          <label>Days to Ex-Div 3</label>
-          <input id="daysToExDiv3" type="text" value = "0">
-          <br />
-          <label>Div 4</label>
-          <input id="div4" type="text" value = "0">
-          <label>Ex-Div4 Date</label>
-          <input id="exDiv4Date" type="date" onchange="pushDaysToExDiv4Calc()">
-          <label>Days to Ex-Div 4</label>
-          <input id="daysToExDiv4" type="text" value = "0">
+          </div>
 
-          <br />
-          <label>American Call</label>
-          <input id="americanCall" type="text" value = "0">
-          <label>American Put</label>
-          <input id="americanPut" type="text" value = "0">
-          <br />
-          <label>Call Delta</label>
-          <input id="americanCallDelta" type="text" value = "0">
-          <label>Put Delta</label>
-          <input id="americanPutDelta" type="text" value = "0">
-          <br />
-          <label>Call Gamma</label>
-          <input id="americanCallGamma" type="text" value = "0">
-          <label>Put Gamma</label>
-          <input id="americanPutGamma" type="text" value = "0">
-          <br />
-          <label>Call Theta</label>
-          <input id="americanCallTheta" type="text" value = "0">
-          <label>Put Theta</label>
-          <input id="americanPutTheta" type="text" value = "0">
-          <br />
-          <label>Call Vega</label>
-          <input id="americanCallVega" type="text" value = "0">
-          <label>Put Vega</label>
-          <input id="americanPutVega" type="text" value = "0">
-          <br />
-          <label>Call Rho</label>
-          <input id="americanCallRho" type="text" value = "0">
-          <label>Put Rho</label>
-          <input id="americanPutRho" type="text" value = "0">
-          <br />
+          <div class="row">
 
-          <br />
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Div 1</label>
+              <input class="boxes" id="div1" type="text" value = "0">
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Ex-Div1 Date</label>
+              <input class="boxes" id="exDiv1Date" type="date" onchange="pushDaysToExDiv1Calc()">
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Days to Ex-Div 1</label>
+              <input class="boxes" id="daysToExDiv1" type="text" value = "0">
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Div 2</label>
+              <input class="boxes" id="div2" type="text" value = "0">
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Ex-Div2 Date</label>
+              <input class="boxes" id="exDiv2Date" type="date" onchange="pushDaysToExDiv2Calc()">
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Days to Ex-Div 2</label>
+              <input class="boxes" id="daysToExDiv2" type="text" value = "0">
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Div 3</label>
+              <input class="boxes" id="div3" type="text" value = "0">
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Ex-Div3 Date</label>
+              <input class="boxes" id="exDiv3Date" type="date" onchange="pushDaysToExDiv3Calc()">
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Days to Ex-Div 3</label>
+              <input class="boxes" id="daysToExDiv3" type="text" value = "0">
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Div 4</label>
+              <input class="boxes" id="div4" type="text" value = "0">
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Ex-Div4 Date</label>
+              <input class="boxes" id="exDiv4Date" type="date" onchange="pushDaysToExDiv4Calc()">
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Days to Ex-Div 4</label>
+              <input class="boxes" id="daysToExDiv4" type="text" value = "0">
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>American Call</label>
+              <input class="boxes" id="americanCall" type="text" value = "0">
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>American Put</label>
+              <input class="boxes" id="americanPut" type="text" value = "0">
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Call Delta</label>
+              <input class="boxes" id="americanCallDelta" type="text" value = "0">
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Put Delta</label>
+              <input class="boxes" id="americanPutDelta" type="text" value = "0">
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Call Gamma</label>
+              <input class="boxes" id="americanCallGamma" type="text" value = "0">
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Put Gamma</label>
+              <input class="boxes" id="americanPutGamma" type="text" value = "0">
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Call Theta</label>
+              <input class="boxes" id="americanCallTheta" type="text" value = "0">
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Put Theta</label>
+              <input class="boxes" id="americanPutTheta" type="text" value = "0">
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Call Vega</label>
+              <input class="boxes" id="americanCallVega" type="text" value = "0">
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Put Vega</label>
+              <input class="boxes" id="americanPutVega" type="text" value = "0">
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Call Rho</label>
+              <input class="boxes" id="americanCallRho" type="text" value = "0">
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <label>Put Rho</label>
+              <input class="boxes" id="americanPutRho" type="text" value = "0">
+            </div>
+
+          </div>
+
+
 
           <!--<label>Euro Call Binomial</label>
           <input id="euroCallBinomial" type="text" value = "0">
           <label>Euro Put Binomail</label>
           <input id="euroPutBinomial" type="text" value = "0"> -->
+
+          </form>
 
 
       </div>
@@ -132,9 +248,248 @@
     </div>
 
 <!-------------------------------------------------------------------------------------------->
+
+    <div class="containerTreeLabels" id="treeLabels1">
+
+      <div class="row row-center zero_branchLabel">
+
+        <div class="zeroBranchLabel">
+          <a class="" href="#">0</a>
+        </div>
+        <div class="oneBranchLabel">
+          <a class="" href="#">1</a>
+        </div>
+        <div class="twoBranchLabel">
+          <a class="" href="#">2</a>
+        </div>
+        <div class="threeBranchLabel">
+          <a class="" href="#">3</a>
+        </div>
+        <div class="fourBranchLabel">
+          <a class="" href="#">4</a>
+        </div>
+        <div class="fiveBranchLabel">
+          <a class="" href="#">5</a>
+        </div>
+        <div class="sixBranchLabel">
+          <a class="" href="#">6</a>
+        </div>
+        <div class="sevenBranchLabel">
+          <a class="" href="#">7</a>
+        </div>
+        <div class="eightBranchLabel">
+          <a class="" href="#">8</a>
+        </div>
+        <div class="nineBranchLabel">
+          <a class="" href="#">9</a>
+        </div>
+        <div class="tenBranchLabel">
+          <a class="" href="#">10</a>
+        </div>
+        <div>
+          <label class="branchNumberLabelFonts">&nbsp;&nbsp;Branch</label>
+        </div>
+      </div>
+
+    </div>
+<!-------------------------------------------------------------------------------------------->
+
+<!--the branch ends on this day in terms of days to expiration...last branch ends on expiration day-->
+
+    <div class="containerBranchDayEndLabels" id="branchDayEndLabel">
+
+      <div class="row row-center branchDayEnd">
+        <div class="zeroBranchDayEnd">
+          <input class="branchDayEndLabelInfo" id="zeroDayEndLabel" type="text"  />
+        </div>
+        <div class="oneBranchDayEnd">
+          <input class="branchDayEndLabelInfo" id="oneDayEndLabel" type="text"  />
+        </div>
+        <div class="twoBranchDayEnd">
+          <input class="branchDayEndLabelInfo" id="twoDayEndLabel" type="text"  />
+        </div>
+        <div class="threeBranchDayEnd">
+          <input class="branchDayEndLabelInfo" id="threeDayEndLabel" type="text"  />
+        </div>
+        <div class="fourBranchDayEnd">
+          <input class="branchDayEndLabelInfo" id="fourDayEndLabel" type="text"  />
+        </div>
+        <div class="fiveBranchDayEnd">
+          <input class="branchDayEndLabelInfo" id="fiveDayEndLabel" type="text"  />
+        </div>
+        <div class="sixBranchDayEnd">
+          <input class="branchDayEndLabelInfo" id="sixDayEndLabel" type="text"  />
+        </div>
+        <div class="sevenBranchDayEnd">
+          <input class="branchDayEndLabelInfo" id="sevenDayEndLabel" type="text"  />
+        </div>
+        <div class="eightBranchDayEnd">
+          <input class="branchDayEndLabelInfo" id="eightDayEndLabel" type="text"  />
+        </div>
+        <div class="nineBranchDayEnd">
+          <input class="branchDayEndLabelInfo" id="nineDayEndLabel" type="text"  />
+        </div>
+        <div class="tenBranchDayEnd">
+          <input class="branchDayEndLabelInfo" id="tenDayEndLabel" type="text"  />
+        </div>
+        <div>
+          <label class="branchDayEndLabelFonts">&nbsp;&nbsp;Branch Ends On Day</label>
+        </div>
+      </div>
+    </div>
+
+
+
+<!-------------------------------------------------------------------------------------------->
+
+<!--the branch ends on this day in terms of days to expiration...last branch ends on expiration date-->
+
+    <div class="containerBranchDateEndLabels" id="branchDateEndLabel">
+
+      <div class="row row-center branchDateEnd">
+        <div class="zeroBranchDateEnd">
+          <input class="branchDateEndLabelInfo" id="zeroDateEndLabel" type="text"  />
+        </div>
+        <div class="oneBranchDateEnd">
+          <input class="branchDateEndLabelInfo" id="oneDateEndLabel" type="text"  />
+        </div>
+        <div class="twoBranchDateEnd">
+          <input class="branchDateEndLabelInfo" id="twoDateEndLabel" type="text"  />
+        </div>
+        <div class="threeBranchDateEnd">
+          <input class="branchDateEndLabelInfo" id="threeDateEndLabel" type="text"  />
+        </div>
+        <div class="fourBranchDateEnd">
+          <input class="branchDateEndLabelInfo" id="fourDateEndLabel" type="text"  />
+        </div>
+        <div class="fiveBranchDateEnd">
+          <input class="branchDateEndLabelInfo" id="fiveDateEndLabel" type="text"  />
+        </div>
+        <div class="sixBranchDateEnd">
+          <input class="branchDateEndLabelInfo" id="sixDateEndLabel" type="text"  />
+        </div>
+        <div class="sevenBranchDateEnd">
+          <input class="branchDateEndLabelInfo" id="sevenDateEndLabel" type="text"  />
+        </div>
+        <div class="eightBranchDateEnd">
+          <input class="branchDateEndLabelInfo" id="eightDateEndLabel" type="text"  />
+        </div>
+        <div class="nineBranchDateEnd">
+          <input class="branchDateEndLabelInfo" id="nineDateEndLabel" type="text"  />
+        </div>
+        <div class="tenBranchDateEnd">
+          <input class="branchDateEndLabelInfo" id="tenDateEndLabel" type="text"  />
+        </div>
+        <div>
+          <label class="branchDateEndLabelFonts">&nbsp;&nbsp;Branch Ends On Date</label>
+        </div>
+      </div>
+    </div>
+
+
+
+<!-------------------------------------------------------------------------------------------->
+
+<!--div info for branch-->
+
+    <div class="containerDivInfoLabels" id="divInfoLabel">
+
+      <div class="row row-center divInfo">
+        <div class="zeroBranchDivInfo">
+          <input class="divLabelInfo" id="zeroDivInfoLabel" type="text"  />
+        </div>
+        <div class="oneBranchDivInfo">
+          <input class="divLabelInfo" id="oneDivInfoLabel" type="text"  />
+        </div>
+        <div class="twoBranchDivInfo">
+          <input class="divLabelInfo" id="twoDivInfoLabel" type="text"  />
+        </div>
+        <div class="threeBranchDivInfo">
+          <input class="divLabelInfo" id="threeDivInfoLabel" type="text"  />
+        </div>
+        <div class="fourBranchDivInfo">
+          <input class="divLabelInfo" id="fourDivInfoLabel" type="text"  />
+        </div>
+        <div class="fiveBranchDivInfo">
+          <input class="divLabelInfo" id="fiveDivInfoLabel" type="text"  />
+        </div>
+        <div class="sixBranchDivInfo">
+          <input class="divLabelInfo" id="sixDivInfoLabel" type="text"  />
+        </div>
+        <div class="sevenBranchDivInfo">
+          <input class="divLabelInfo" id="sevenDivInfoLabel" type="text"  />
+        </div>
+        <div class="eightBranchDivInfo">
+          <input class="divLabelInfo" id="eightDivInfoLabel" type="text"  />
+        </div>
+        <div class="nineBranchDivInfo">
+          <input class="divLabelInfo" id="nineDivInfoLabel" type="text"  />
+        </div>
+        <div class="tenBranchDivInfo">
+          <input class="divLabelInfo" id="tenDivInfoLabel" type="text"  />
+        </div>
+        <div>
+          <label class="divInfoLabelFonts">&nbsp;&nbsp;Dividend</label>
+        </div>
+      </div>
+    </div>
+
+
+
+<!-------------------------------------------------------------------------------------------->
+
+<!--ex-div stockPx info for branch-->
+
+    <div class="containerExDivStockPxLabels" id="exDivStockPxLabel">
+
+      <div class="row row-center divInfo">
+        <div class="zeroBranchExDivStockPx">
+          <input class="exDivStockPxInfo" id="zeroExDivStockPx" type="text"  />
+        </div>
+        <div class="oneBranchExDivStockPx">
+          <input class="exDivStockPxInfo" id="oneExDivStockPx" type="text"  />
+        </div>
+        <div class="twoBranchExDivStockPx">
+          <input class="exDivStockPxInfo" id="twoExDivStockPx" type="text"  />
+        </div>
+        <div class="threeBranchExDivStockPx">
+          <input class="exDivStockPxInfo" id="threeExDivStockPx" type="text"  />
+        </div>
+        <div class="fourBranchExDivStockPx">
+          <input class="exDivStockPxInfo" id="fourExDivStockPx" type="text"  />
+        </div>
+        <div class="fiveBranchExDivStockPx">
+          <input class="exDivStockPxInfo" id="fiveExDivStockPx" type="text"  />
+        </div>
+        <div class="sixBranchExDivStockPx">
+          <input class="exDivStockPxInfo" id="sixExDivStockPx" type="text"  />
+        </div>
+        <div class="sevenBranchExDivStockPx">
+          <input class="exDivStockPxInfo" id="sevenExDivStockPx" type="text"  />
+        </div>
+        <div class="eightBranchExDivStockPx">
+          <input class="exDivStockPxInfo" id="eightExDivStockPx" type="text"  />
+        </div>
+        <div class="nineBranchExDivStockPx">
+          <input class="exDivStockPxInfo" id="nineExDivStockPx" type="text"  />
+        </div>
+        <div class="tenBranchExDivStockPx">
+          <input class="exDivStockPxInfo" id="tenExDivStockPx" type="text"  />
+        </div>
+        <div>
+          <label class="exDivStockPxLabelFonts">&nbsp;&nbsp;Ex-Div Stock Price</label>
+        </div>
+      </div>
+    </div>
+
+
+
+<!-------------------------------------------------------------------------------------------->
+
+
 <!-- upper node chart with stockPx -->
 
-    <div class="container-fluid" id="tree">
+    <div class="containerC" id="tree">
 
       <div class="row row-center zero_branchT">
         <div class="node_zeroT">
@@ -625,3 +980,4 @@
   </footer>
 
 </html>
+
