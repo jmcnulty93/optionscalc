@@ -6,10 +6,295 @@ body {
 .container {
   background-color: green;
   width: 100%;
-  height: 600px
+  height: 700px
+  overflow: auto;
+}
+.boxes{
+  background-color: orange;
+  color: black;
+  width: 150px;
+}
+/*************************************************************************/
+/* CSS for Branch Labels above tree and other data like Branh Day End, etc */
+
+.containerTreeLabels {
+
+  height: 35px;
+  width: 700px;
+  background-color: black;
+  text-align: center;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  /*margin: auto;*/
+  transform: rotate(-360deg);
+
+}
+
+.zeroBranchLabel {
+  background-color: green;
+  text-align: center;
+  font-size: 1rem;
+  height: 35px;
+  width: 35px;
+}
+
+.oneBranchLabel {
+  background-color: orange;
+  text-align: center;
+  font-size: 1rem;
+  height: 35px;
+  width: 35px;
+}
+.twoBranchLabel {
+  background-color: blue;
+  text-align: center;
+  font-size: 1rem;
+  height: 35px;
+  width: 35px;
+}
+.threeBranchLabel {
+  background-color: red;
+  text-align: center;
+  font-size: 1rem;
+  height: 35px;
+  width: 35px;
+}
+
+.fourBranchLabel {
+  background-color: grey;
+  text-align: center;
+  font-size: 1rem;
+  height: 35px;
+  width: 35px;
+}
+
+.fiveBranchLabel {
+  background-color: yellow;
+  text-align: center;
+  font-size: 1rem;
+  height: 35px;
+  width: 35px;
+}
+
+.sixBranchLabel {
+  background-color: indigo;
+  text-align: center;
+  font-size: 1rem;
+  height: 35px;
+  width: 35px;
+}
+
+.sevenBranchLabel {
+  background-color: violet;
+  text-align: center;
+  font-size: 1rem;
+  height: 35px;
+  width: 35px;
+}
+
+.eightBranchLabel {
+  background-color: brown;
+  text-align: center;
+  font-size: 1rem;
+  height: 35px;
+  width: 35px;
+}
+
+.nineBranchLabel {
+  background-color: gold;
+  text-align: center;
+  font-size: 1rem;
+  height: 35px;
+  width: 35px;
+}
+
+.tenBranchLabel {
+  background-color: green;
+  text-align: center;
+  font-size: 1rem;
+  height: 35px;
+  width: 35px;
+}
+
+.branchNumberLabelFonts {
+  background-color: black;
+  color: gold;
+  text-align: center;
+  font-size: 1rem;
+  height: 35px;
+  width: 200px;
 }
 
 /*************************************************************************/
+
+/* CSS for Branch End Day Info */
+
+.containerBranchDayEndLabels {
+
+  height: 35px;
+  width: 700px;
+  background-color: black;
+  text-align: center;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  transform: rotate(-360deg);
+
+}
+
+
+.branchDayEndLabelInfo {
+  height: 35px;
+  width: 35px;
+  background-color: pink;
+  text-align: center;
+  font-size: .15rem;
+  /*border-radius: 100%;*/
+  /*border: 1px solid;*/
+  margin: 0 auto;
+  /*transform: rotate(90deg);*/
+}
+
+.branchDayEndLabelFonts {
+  background-color: black;
+  color: gold;
+  text-align: center;
+  font-size: 1rem;
+  height: 35px;
+  width: 200px;
+}
+
+
+
+/*************************************************************************/
+
+/* CSS for Branch Date End Info */
+
+.containerBranchDateEndLabels {
+
+  height: 35px;
+  width: 700px;
+  background-color: black;
+  text-align: center;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  transform: rotate(-360deg);
+
+}
+
+
+.branchDateEndLabelInfo {
+  height: 35px;
+  width: 35px;
+  background-color: pink;
+  text-align: center;
+  font-size: .15rem;
+  /*border-radius: 100%;*/
+  /*border: 1px solid;*/
+  margin: 0 auto;
+  /*transform: rotate(90deg);*/
+}
+
+
+
+.branchDateEndLabelFonts {
+  background-color: black;
+  color: gold;
+  text-align: center;
+  font-size: 1rem;
+  height: 35px;
+  width: 200px;
+}
+
+
+
+/*************************************************************************/
+
+/* CSS for Branch Div Info */
+
+.containerDivInfoLabels {
+
+  height: 35px;
+  width: 700px;
+  background-color: black;
+  text-align: center;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  transform: rotate(-360deg);
+
+}
+
+
+.divLabelInfo {
+  height: 35px;
+  width: 35px;
+  background-color: pink;
+  text-align: center;
+  font-size: .15rem;
+  /*border-radius: 100%;*/
+  /*border: 1px solid;*/
+  margin: 0 auto;
+  /*transform: rotate(90deg);*/
+}
+
+.divInfoLabelFonts {
+  background-color: black;
+  color: gold;
+  text-align: center;
+  font-size: 1rem;
+  height: 35px;
+  width: 200px;
+}
+
+
+
+/*************************************************************************/
+
+/* CSS for Ex-Div stockPx Info */
+
+.containerExDivStockPxLabels {
+
+  height: 35px;
+  width: 700px;
+  background-color: black;
+  text-align: center;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  transform: rotate(-360deg);
+
+}
+
+
+.exDivStockPxInfo {
+  height: 35px;
+  width: 35px;
+  background-color: pink;
+  text-align: center;
+  font-size: .15rem;
+  /*border-radius: 100%;*/
+  /*border: 1px solid;*/
+  margin: 0 auto;
+  /*transform: rotate(90deg);*/
+}
+
+.exDivStockPxLabelFonts {
+  background-color: black;
+  color: gold;
+  text-align: center;
+  font-size: 1rem;
+  height: 35px;
+  width: 200px;
+}
+
+
+
+/*************************************************************************/
+
+
 
 #tree {
 
@@ -17,8 +302,13 @@ body {
   width: 700px;
   background-color: black;
   text-align: center;
-  margin-top: 50px;
+  margin-top: 5px;
+  /*margin-bottom: auto;*/
+  margin-right: auto;
+  margin-left: auto;
   transform: rotate(-90deg);
+  padding: 0;
+  overflow: auto;
 
 }
 
@@ -85,8 +375,8 @@ body {
 /****************************/
 
 .node_zeroT {
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   background-color: green;
   text-align: center;
   font-size: .15rem;
@@ -97,8 +387,8 @@ body {
 }
 
 .node_firstT {
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   background-color: orange;
   text-align: center;
   font-size: .15rem;
@@ -111,8 +401,8 @@ body {
 }
 
 .node_middleT {
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   background-color: orange;
   text-align: center;
   font-size: .15rem;
@@ -125,8 +415,8 @@ body {
 }
 
 .node_lastT {
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   background-color: orange;
   text-align: center;
   font-size: .15rem;
@@ -140,6 +430,7 @@ body {
 
 
 /***************************************************************/
+
 /*
 #zero-zero {
   height: 30px;
@@ -177,8 +468,8 @@ body {
   /*transform: rotate(90deg);
 }*/
 .nodeStockPx {
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   background-color: pink;
   text-align: center;
   font-size: .15rem;
@@ -258,8 +549,8 @@ body {
 }
 
 .node_zero {
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   background-color: pink;
   text-align: center;
   font-size: .15rem;
@@ -284,8 +575,8 @@ body {
 
 
 .node_first {
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   background-color: pink;
   text-align: center;
   font-size: .15rem;
@@ -298,8 +589,8 @@ body {
 }
 
 .node_middle {
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   background-color: pink;
   text-align: center;
   font-size: .15rem;
@@ -313,8 +604,8 @@ body {
 
 
 .node_last {
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   background-color: pink;
   text-align: center;
   font-size: .15rem;
