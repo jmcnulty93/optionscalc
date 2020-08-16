@@ -323,51 +323,59 @@ body {
 .one_branchT {
   background-color: orange;
   text-align: center;
-  font-size: 0.2rem;
+  font-size: 0.5rem;
 }
 .two_branchT {
   background-color: blue;
   text-align: center;
-  font-size: 0.2rem;
+  font-size: 0.5rem ;
 }
 .three_branchT {
   background-color: red;
   text-align: center;
+  font-size: 0.5rem ;
 }
 
 .four_branchT {
   background-color: grey;
   text-align: center;
+  font-size: 0.5rem ;
 }
 
 .five_branchT {
   background-color: yellow;
   text-align: center;
+  font-size: 0.5rem ;
 }
 
 .six_branchT {
   background-color: indigo;
   text-align: center;
+  font-size: 0.5rem ;
 }
 
 .seven_branchT {
   background-color: violet;
   text-align: center;
+  font-size: 0.5rem ;
 }
 
 .eight_branchT {
   background-color: brown;
   text-align: center;
+  font-size: 0.5rem ;
 }
 
 .nine_branchT {
   background-color: gold;
   text-align: center;
+  font-size: 0.5rem ;
 }
 
 .ten_branchT {
   background-color: green;
   text-align: center;
+  font-size: 0.5rem ;
 }
 
 
@@ -379,7 +387,7 @@ body {
   width: 35px;
   background-color: green;
   text-align: center;
-  font-size: .15rem;
+  font-size: .5rem;
   border-radius: 100%;
   /*border: 1px solid;*/
   margin: 0 auto;
@@ -391,7 +399,7 @@ body {
   width: 35px;
   background-color: orange;
   text-align: center;
-  font-size: .15rem;
+  font-size: .5rem;
   border-radius: 100%;
   /*border: 1px solid;*/
   /* margin: 0 0 0 auto; */
@@ -405,7 +413,7 @@ body {
   width: 35px;
   background-color: orange;
   text-align: center;
-  font-size: .15rem;
+  font-size: .5rem;
   border-radius: 100%;
   /*border: 1px solid;*/
   /* margin: 0 0 0 auto; */
@@ -419,7 +427,7 @@ body {
   width: 35px;
   background-color: orange;
   text-align: center;
-  font-size: .15rem;
+  font-size: .5rem;
   border-radius: 100%;
   /*border: 1px solid;*/
   /* margin: 0 0 0 auto; */
