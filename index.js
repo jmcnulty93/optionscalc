@@ -1,3 +1,37 @@
+
+//////////////// dividends button //////////////////////
+var coll = document.getElementsByClassName("dividends");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
+
+//////////////// greeks button //////////////////////
+var coll = document.getElementsByClassName("greeks");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
 ////////// Now : Date in website ///////////////
 
 var now = new Date ();
@@ -2631,7 +2665,7 @@ function callGamma () {
     var cgd1 = ( (uber_list[3][4] - uber_list[4][4]) / (uber_list[3][2]  - uber_list[4][2] ) ).toFixed(2) * 1 ;
     var cgd2 = ( (uber_list[4][4] - uber_list[5][4]) / (uber_list[4][2]  - uber_list[5][2] ) ).toFixed(2) * 1 ;
     var cgd3 = ( (uber_list[3][2] - uber_list[5][2]  ) / 2).toFixed(2) * 1 ;
-    var cGammaF = ( (cgd1 - cgd2) / cgd3 ).toFixed(2) * 1;
+    var cGammaF = ( (cgd1 - cgd2) / cgd3 ).toFixed(3) * 1;
   }
 
   return cGammaF
@@ -2660,7 +2694,7 @@ function putGamma () {
     var pgd1 = ( (uber_list[3][7] - uber_list[4][7]) / (uber_list[3][2]  - uber_list[4][2] ) ).toFixed(2) * 1 ;
     var pgd2 = ( (uber_list[4][7] - uber_list[5][7]) / (uber_list[4][2]  - uber_list[5][2] ) ).toFixed(2) * 1 ;
     var pgd3 = ( (uber_list[3][2] - uber_list[5][2]  ) / 2).toFixed(2) * 1 ;
-    var pGammaF = ( (pgd1 - pgd2) / pgd3 ).toFixed(2) * 1;
+    var pGammaF = ( (pgd1 - pgd2) / pgd3 ).toFixed(3) * 1;
   }
 
   return pGammaF
@@ -9654,4 +9688,5 @@ document.getElementById("americanPutRho").value = putRhoAmerican.toFixed(3);
 
 
 }
+
 
