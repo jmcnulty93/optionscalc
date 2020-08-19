@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <!-- My CSS Styles -->
-    <link rel="stylesheet" href="firstoptionstyles.css">
+    <link rel="stylesheet" href="css/timestyles.css">
 
 
     <!--js and jquery for drop down menus-->
@@ -50,7 +50,7 @@
 
             <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
               <label class="titles">Now</label>
-              <input class="boxes" id="nowDate" type="date" >
+              <input class="boxes" id="nowDate" type="date" onchange="pushDaysToExpirCalc()">
             </div>
             <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
               <label class="titles">Expir Date</label>
@@ -993,4 +993,5 @@
   </footer>
 
 </html>
+
 
