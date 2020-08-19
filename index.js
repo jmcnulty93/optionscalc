@@ -41,6 +41,7 @@ var gd = now.getDate();
 var nowDefault = gfy+"-"+gm+"-"+gd ;
 typeof nowDefault;
 
+// the functions dayTimeFix and monthTimeFix get the day and month in correct date picker format
 
 function dayTimeFix () {
 
@@ -54,9 +55,9 @@ function dayTimeFix () {
   }
 }
 
-
 var gdFix = dayTimeFix();
 gdFix;
+
 
 function monthTimeFix () {
 
@@ -73,6 +74,7 @@ function monthTimeFix () {
 var gmFix = monthTimeFix();
 gmFix;
 
+
 var nowDefaultFix = gfy+"-"+gmFix+"-"+gdFix ;
 nowDefaultFix;
 
@@ -80,9 +82,12 @@ var pushCurrentTime = document.getElementById("nowDate").defaultValue = nowDefau
 //var pushCurrentTimeForExpirDate = document.getElementById("expirationDate").defaultValue = nowDefaultFix ;
 
 var getCurentTime = document.getElementById("nowDate").value;
+var newStartDate = new Date (getCurentTime);
 
 
-var currentTimeMili = now.getTime();
+
+//var currentTimeMili = now.getTime();
+var currentTimeMili = newStartDate.getTime();
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -136,9 +141,36 @@ var currentTimeMili = now.getTime();
 
 function pushDaysToExpirCalc () {
 
+  var getCurentTime = document.getElementById("nowDate").value;
+  var newStartDate = new Date (getCurentTime);
+
+
+  var now1GFY = newStartDate.getFullYear();
+  now1GFY;
+  var now1GM = newStartDate.getMonth();
+  now1GM;
+  var now1GD = newStartDate.getDate() + 1;
+  now1GD;
+  var now1Fix = new Date (now1GFY, now1GM, now1GD, 15, 0, 0, 0 )
+  now1Fix;
+  var now1FixTimeMili = now1Fix.getTime();
+  now1FixTimeMili;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var newNow = new Date (now1FixTimeMili);
+  newNow;
+
+  var currentTimeMili = now1FixTimeMili;
+
+///////////////////////////////////////////////////////////////////
+
+
   var expirDate1 = document.getElementById("expirationDate").value;
   expirDate1Time = new Date (expirDate1);
   expirDate1Time;
+
+ ///////
 
   var expirDate1TimeMili = expirDate1Time.getTime();
 
@@ -9688,5 +9720,6 @@ document.getElementById("americanPutRho").value = putRhoAmerican.toFixed(3);
 
 
 }
+
 
 
