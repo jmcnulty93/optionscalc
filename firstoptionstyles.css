@@ -23,6 +23,13 @@ body {
   width: 150px;
 }
 
+#rightNowDate{
+
+  background-color: orange;
+  color: black;
+  width: 205px;
+}
+
 .inputBoxes{
   border-style: double;
 
@@ -31,6 +38,11 @@ body {
 
 .titles {
   width: 125px;
+}
+
+#rightNowTitle{
+  width: 80px;
+  margin-left: 50px;
 }
 
 .dividends {
