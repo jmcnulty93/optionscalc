@@ -38,8 +38,12 @@ var now = new Date ();
 var gfy = now.getFullYear();
 var gm = now.getMonth() + 1;
 var gd = now.getDate();
+var gH = now.getHours();
+var gMin = now.getMinutes();
+var gS = now.getSeconds();
 var nowDefault = gfy+"-"+gm+"-"+gd ;
 typeof nowDefault;
+var rightNowDefault = gm+"-"+gd+"-"+gfy+"  "+gH+":"+gMin+":"+gS;
 
 // the functions dayTimeFix and monthTimeFix get the day and month in correct date picker format
 
@@ -79,15 +83,28 @@ var nowDefaultFix = gfy+"-"+gmFix+"-"+gdFix ;
 nowDefaultFix;
 
 var pushCurrentTime = document.getElementById("nowDate").defaultValue = nowDefaultFix ;
+
+var pushRightNowTimeInfo = document.getElementById("rightNowDate").defaultValue = now;
+//var pushRightNowTimeInfo = document.getElementById("rightNowDate").defaultValue = rightNowDefault;
+
 //var pushCurrentTimeForExpirDate = document.getElementById("expirationDate").defaultValue = nowDefaultFix ;
 
 var getCurentTime = document.getElementById("nowDate").value;
 var newStartDate = new Date (getCurentTime);
-
-
+var now1GFY = newStartDate.getFullYear();
+now1GFY;
+var now1GM = newStartDate.getMonth();
+now1GM;
+var now1GD = newStartDate.getDate() + 1;
+now1GD;
+var now1Fix = new Date (now1GFY, now1GM, now1GD, 15, 0, 0, 0 )
+now1Fix;
+var now1FixTimeMili = now1Fix.getTime();
+now1FixTimeMili;
+var currentTimeMili = now1FixTimeMili;
 
 //var currentTimeMili = now.getTime();
-var currentTimeMili = newStartDate.getTime();
+
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -139,7 +156,24 @@ var currentTimeMili = newStartDate.getTime();
 //  pushDaysToExpir1;
 //}
 
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+////////000000000  what is currentTimeMili : is it nowDate or rightNowDate?  /////////////
+////////  depends on currentTimeMiliCount:
+////////   if currentTimeMiliCount = 0 then currentTimeMili uses nowDate
+////////   if currentTimeMiliCount = 1 then currentTimeMili uses rightNowDate (to the second of today)
+////////  this is needed for Branch End Date Info to go back and forth between a current date of
+////////  today or any day at 3pm (which return a tradition daysToExpir count) versus
+///////   today right now down to the second which return fractional daysToExpir count
+
+var currentTimeMiliCount = 0;
+
+//11111111111111111111///////////////////
+
 function pushDaysToExpirCalc () {
+
+  //var currentTimeMiliCount = 0;
 
   var getCurentTime = document.getElementById("nowDate").value;
   var newStartDate = new Date (getCurentTime);
@@ -205,7 +239,93 @@ function pushDaysToExpirCalc () {
   var pushDaysToExpir1 = document.getElementById("dte").value = daysToExpir1CurrentFix.toFixed(2) * 1;
   pushDaysToExpir1;
 
+  return  currentTimeMiliCount = 0
+
 }
+
+
+///2222222222222222////////
+function pushDaysToExpirCalcExactSeconds () {
+
+
+
+  //var getCurentTime = document.getElementById("nowDate").value;
+  var newStartDate = new Date ();
+
+
+  var now1GFY = newStartDate.getFullYear();
+  now1GFY;
+  var now1GM = newStartDate.getMonth();
+  now1GM;
+  var now1GD = newStartDate.getDate();
+  now1GD
+  var now1Hours = newStartDate.getHours();
+  now1GD;
+  var now1Min = newStartDate.getMinutes();
+  now1GD;
+  var now1Sec = newStartDate.getSeconds();
+  now1GD;
+
+  var now1Fix = new Date (now1GFY, now1GM, now1GD, now1Hours, now1Min, now1Sec, 0 )
+  now1Fix;
+  var now1FixTimeMili = now1Fix.getTime();
+  now1FixTimeMili;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var newNow = new Date (now1FixTimeMili);
+  newNow;
+
+  var currentTimeMili = now1FixTimeMili;
+
+///////////////////////////////////////////////////////////////////
+
+
+  var expirDate1 = document.getElementById("expirationDate").value;
+  expirDate1Time = new Date (expirDate1);
+  expirDate1Time;
+
+ ///////
+
+  var expirDate1TimeMili = expirDate1Time.getTime();
+
+  var daysToExpirMili = expirDate1TimeMili - currentTimeMili;
+  daysToExpirMili;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpirCurrent = daysToExpirMili / millisecondsPerDay ;
+  daysToExpirCurrent;
+
+  //////
+
+  var expir1GFY = expirDate1Time.getFullYear();
+  expir1GFY;
+  var expir1GM = expirDate1Time.getMonth();
+  expir1GM;
+  var expir1GD = expirDate1Time.getDate() + 1;
+  expir1GD;
+  var expirDate1Fix = new Date (expir1GFY, expir1GM, expir1GD, 15, 0, 0, 0 )
+  expirDate1Fix;
+  var expirDate1FixTimeMili = expirDate1Fix.getTime();
+  expirDate1FixTimeMili;
+  var daysToExpirMiliFix = expirDate1FixTimeMili - currentTimeMili;
+  daysToExpirMiliFix;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpir1CurrentFix = daysToExpirMiliFix / millisecondsPerDay ;
+  daysToExpir1CurrentFix;
+
+  var pushDaysToExpir1 = document.getElementById("dte").value = daysToExpir1CurrentFix.toFixed(2) * 1;
+  pushDaysToExpir1;
+
+  var pushUpdateRightNowTimeInfo = document.getElementById("rightNowDate").value = newStartDate;
+
+  return  currentTimeMiliCount = 1
+
+}
+
 
 /////////////////////////////////////////////////////////////////////////////////////
 // this function changes the days to expiration with a hard input on days (not a date pick..but changes the date picker day)
@@ -290,6 +410,22 @@ function pushDaysToExpirCalc () {
 
 function pushDaysToExDiv1Calc () {
 
+  var getCurentTime = document.getElementById("nowDate").value;
+  var newStartDate = new Date (getCurentTime);
+  var now1GFY = newStartDate.getFullYear();
+  now1GFY;
+  var now1GM = newStartDate.getMonth();
+  now1GM;
+  var now1GD = newStartDate.getDate() + 1;
+  now1GD;
+  var now1Fix = new Date (now1GFY, now1GM, now1GD, 15, 0, 0, 0 )
+  now1Fix;
+  var now1FixTimeMili = now1Fix.getTime();
+  now1FixTimeMili;
+  var currentTimeMili = now1FixTimeMili;
+
+  /////
+
   var expirDate1 = document.getElementById("exDiv1Date").value;
   expirDate1Time = new Date (expirDate1);
   expirDate1Time;
@@ -329,9 +465,92 @@ function pushDaysToExDiv1Calc () {
 
 }
 
+/////////////////////////////////////////////////////////////////////////////////////
+
+function pushExactDaysToExDiv1Calc () {
+
+  var getCurentTime = document.getElementById("rightNowDate").value;
+  var newStartDate = new Date (getCurentTime);
+  var now1GFY = newStartDate.getFullYear();
+  now1GFY;
+  var now1GM = newStartDate.getMonth();
+  now1GM;
+  var now1GD = newStartDate.getDate();
+  now1GD;
+  var now1Hours = newStartDate.getHours();
+  now1GD;
+  var now1Min = newStartDate.getMinutes();
+  now1GD;
+  var now1Sec = newStartDate.getSeconds();
+  now1GD;
+
+  var now1Fix = new Date (now1GFY, now1GM, now1GD,  now1Hours, now1Min, now1Sec, 0  )
+  now1Fix;
+  var now1FixTimeMili = now1Fix.getTime();
+  now1FixTimeMili;
+  var currentTimeMili = now1FixTimeMili;
+
+  /////
+
+  var expirDate1 = document.getElementById("exDiv1Date").value;
+  expirDate1Time = new Date (expirDate1);
+  expirDate1Time;
+
+  var expirDate1TimeMili = expirDate1Time.getTime();
+
+  var daysToExpirMili = expirDate1TimeMili - currentTimeMili;
+  daysToExpirMili;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpirCurrent = daysToExpirMili / millisecondsPerDay ;
+  daysToExpirCurrent;
+
+  //////
+
+  var expir1GFY = expirDate1Time.getFullYear();
+  expir1GFY;
+  var expir1GM = expirDate1Time.getMonth();
+  expir1GM;
+  var expir1GD = expirDate1Time.getDate() + 1;
+  expir1GD;
+  var expirDate1Fix = new Date (expir1GFY, expir1GM, expir1GD, 15, 0, 0, 0 )
+  expirDate1Fix;
+  var expirDate1FixTimeMili = expirDate1Fix.getTime();
+  expirDate1FixTimeMili;
+  var daysToExpirMiliFix = expirDate1FixTimeMili - currentTimeMili;
+  daysToExpirMiliFix;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpir1CurrentFix = daysToExpirMiliFix / millisecondsPerDay ;
+  daysToExpir1CurrentFix;
+
+  var pushDaysToExpir1 = document.getElementById("daysToExDiv1").value = daysToExpir1CurrentFix.toFixed(2) * 1;
+  pushDaysToExpir1;
+
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////////////
 
 function pushDaysToExDiv2Calc () {
+
+  var getCurentTime = document.getElementById("nowDate").value;
+  var newStartDate = new Date (getCurentTime);
+  var now1GFY = newStartDate.getFullYear();
+  now1GFY;
+  var now1GM = newStartDate.getMonth();
+  now1GM;
+  var now1GD = newStartDate.getDate() + 1;
+  now1GD;
+  var now1Fix = new Date (now1GFY, now1GM, now1GD, 15, 0, 0, 0 )
+  now1Fix;
+  var now1FixTimeMili = now1Fix.getTime();
+  now1FixTimeMili;
+  var currentTimeMili = now1FixTimeMili;
+
+  //////
 
   var expirDate1 = document.getElementById("exDiv2Date").value;
   expirDate1Time = new Date (expirDate1);
@@ -376,6 +595,22 @@ function pushDaysToExDiv2Calc () {
 
 function pushDaysToExDiv3Calc () {
 
+  var getCurentTime = document.getElementById("nowDate").value;
+  var newStartDate = new Date (getCurentTime);
+  var now1GFY = newStartDate.getFullYear();
+  now1GFY;
+  var now1GM = newStartDate.getMonth();
+  now1GM;
+  var now1GD = newStartDate.getDate() + 1;
+  now1GD;
+  var now1Fix = new Date (now1GFY, now1GM, now1GD, 15, 0, 0, 0 )
+  now1Fix;
+  var now1FixTimeMili = now1Fix.getTime();
+  now1FixTimeMili;
+  var currentTimeMili = now1FixTimeMili;
+
+  //////
+
   var expirDate1 = document.getElementById("exDiv3Date").value;
   expirDate1Time = new Date (expirDate1);
   expirDate1Time;
@@ -418,6 +653,22 @@ function pushDaysToExDiv3Calc () {
 //////////////////////////////////////////////////////////////////////////////////////
 
 function pushDaysToExDiv4Calc () {
+
+  var getCurentTime = document.getElementById("nowDate").value;
+  var newStartDate = new Date (getCurentTime);
+  var now1GFY = newStartDate.getFullYear();
+  now1GFY;
+  var now1GM = newStartDate.getMonth();
+  now1GM;
+  var now1GD = newStartDate.getDate() + 1;
+  now1GD;
+  var now1Fix = new Date (now1GFY, now1GM, now1GD, 15, 0, 0, 0 )
+  now1Fix;
+  var now1FixTimeMili = now1Fix.getTime();
+  now1FixTimeMili;
+  var currentTimeMili = now1FixTimeMili;
+
+  //////
 
   var expirDate1 = document.getElementById("exDiv4Date").value;
   expirDate1Time = new Date (expirDate1);
@@ -2809,6 +3060,62 @@ document.getElementById("tenDayEndLabel").value = uber_list[tenBranchInfoIndexUb
 
 
 // branch end date info //
+
+//////////////////////////////////
+
+var getCurentTimeExact = document.getElementById("rightNowDate").value;
+
+var newStartDateExact = new Date (getCurentTimeExact);
+
+
+var now1GFYExact = newStartDateExact.getFullYear();
+now1GFYExact;
+var now1GMExact = newStartDateExact.getMonth();
+now1GMExact;
+var now1GDExact = newStartDateExact.getDate();
+now1GDExact
+var now1HoursExact = newStartDateExact.getHours();
+now1GDExact;
+var now1MinExact = newStartDateExact.getMinutes();
+now1GDExact;
+var now1SecExact = newStartDateExact.getSeconds();
+now1GDExact;
+
+var now1FixExact = new Date (now1GFYExact, now1GMExact, now1GDExact, now1HoursExact, now1MinExact, now1SecExact, 0 )
+now1FixExact;
+var now1FixTimeMiliExact = now1FixExact.getTime();
+now1FixTimeMiliExact;
+
+
+
+/////////////////////////////////
+
+///this is for normal date 3pm CST (same as currentTimeMiliCount = 0)
+var getCurentTime = document.getElementById("nowDate").value;
+var newStartDate = new Date (getCurentTime);
+var now1GFY = newStartDate.getFullYear();
+now1GFY;
+var now1GM = newStartDate.getMonth();
+now1GM;
+var now1GD = newStartDate.getDate() + 1;
+now1GD;
+var now1Fix = new Date (now1GFY, now1GM, now1GD, 15, 0, 0, 0 )
+now1Fix;
+var now1FixTimeMili = now1Fix.getTime();
+now1FixTimeMili;
+
+//var currentTimeMili = now.getTime();
+///////////////////////////////////////
+if (currentTimeMiliCount == 0) {
+
+  var currentTimeMili = now1FixTimeMili;
+
+}
+else{
+  var currentTimeMili = now1FixTimeMiliExact;
+}
+/////////////////////////////////////////////
+
 
 var millisecondsPerDay = 24* 60 * 60 * 1000 ;
 millisecondsPerDay;
@@ -9720,6 +10027,5 @@ document.getElementById("americanPutRho").value = putRhoAmerican.toFixed(3);
 
 
 }
-
 
 
