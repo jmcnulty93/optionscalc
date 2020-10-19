@@ -1,6 +1,57 @@
+/// MAIN FUNCTION goCalc() starts around 716 /////
+
 
 //////////////// dividends button //////////////////////
 var coll = document.getElementsByClassName("dividends");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
+//////////////// black scholes notes button //////////////////////
+var coll = document.getElementsByClassName("blackScholesNotes");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
+//////////////// black scholes stats button //////////////////////
+var coll = document.getElementsByClassName("blackScholesStats");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
+
+//////////////// monte carlo button //////////////////////
+var coll = document.getElementsByClassName("monteCarloStats");
 var i;
 
 for (i = 0; i < coll.length; i++) {
@@ -245,84 +296,101 @@ function pushDaysToExpirCalc () {
 
 
 ///2222222222222222////////
+// this is for the update time button....updates Today to todays date at exact hr, min, sec
+// in the Today box, the current date is pushed when the site is loaded or refreshed
+// when date pickers (drop down calendars) are used the pushDaysToExpirCalc function is runSimulations
+// pushDaysToExpirCalc function sets an exact time for Todays date to the date selected at 3pm
+// expiration date is set to the date selected at 3pm Chicago (CST) time
+// since both Today and Expir Date are set to the selected date at 3pm, you will see a clean (integer) number of days...
+// no decmils ... unless the dates selected have a daylight savings time change in the interim
+// when the function below is run (pushDaysToExpirCalcExactSeconds) ...Today is changed
+// the date for Today is still the current date, but the time changes to the exact hr, mic, sec right now...
+// versus 3pm CST
 function pushDaysToExpirCalcExactSeconds () {
 
+  var expirDate1 = document.getElementById("expirationDate").value;
+
+  if (expirDate1 === "") {
+    document.getElementById("dte").value =  "select Expir Date in calendar"
+  }
+
+  else{
+    //var getCurentTime = document.getElementById("nowDate").value;
+    var newStartDate = new Date ();
 
 
-  //var getCurentTime = document.getElementById("nowDate").value;
-  var newStartDate = new Date ();
+    var now1GFY = newStartDate.getFullYear();
+    now1GFY;
+    var now1GM = newStartDate.getMonth();
+    now1GM;
+    var now1GD = newStartDate.getDate();
+    now1GD
+    var now1Hours = newStartDate.getHours();
+    now1GD;
+    var now1Min = newStartDate.getMinutes();
+    now1GD;
+    var now1Sec = newStartDate.getSeconds();
+    now1GD;
 
+    var now1Fix = new Date (now1GFY, now1GM, now1GD, now1Hours, now1Min, now1Sec, 0 )
+    now1Fix;
+    var now1FixTimeMili = now1Fix.getTime();
+    now1FixTimeMili;
 
-  var now1GFY = newStartDate.getFullYear();
-  now1GFY;
-  var now1GM = newStartDate.getMonth();
-  now1GM;
-  var now1GD = newStartDate.getDate();
-  now1GD
-  var now1Hours = newStartDate.getHours();
-  now1GD;
-  var now1Min = newStartDate.getMinutes();
-  now1GD;
-  var now1Sec = newStartDate.getSeconds();
-  now1GD;
+    var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
 
-  var now1Fix = new Date (now1GFY, now1GM, now1GD, now1Hours, now1Min, now1Sec, 0 )
-  now1Fix;
-  var now1FixTimeMili = now1Fix.getTime();
-  now1FixTimeMili;
+    var newNow = new Date (now1FixTimeMili);
+    newNow;
 
-  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
-
-  var newNow = new Date (now1FixTimeMili);
-  newNow;
-
-  var currentTimeMili = now1FixTimeMili;
+    var currentTimeMili = now1FixTimeMili;
 
 ///////////////////////////////////////////////////////////////////
 
 
-  var expirDate1 = document.getElementById("expirationDate").value;
-  expirDate1Time = new Date (expirDate1);
-  expirDate1Time;
+    var expirDate1 = document.getElementById("expirationDate").value;
+    expirDate1Time = new Date (expirDate1);
+    expirDate1Time;
 
  ///////
 
-  var expirDate1TimeMili = expirDate1Time.getTime();
+    var expirDate1TimeMili = expirDate1Time.getTime();
 
-  var daysToExpirMili = expirDate1TimeMili - currentTimeMili;
-  daysToExpirMili;
+    var daysToExpirMili = expirDate1TimeMili - currentTimeMili;
+    daysToExpirMili;
 
-  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+    var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
 
-  var daysToExpirCurrent = daysToExpirMili / millisecondsPerDay ;
-  daysToExpirCurrent;
+    var daysToExpirCurrent = daysToExpirMili / millisecondsPerDay ;
+    daysToExpirCurrent;
 
   //////
 
-  var expir1GFY = expirDate1Time.getFullYear();
-  expir1GFY;
-  var expir1GM = expirDate1Time.getMonth();
-  expir1GM;
-  var expir1GD = expirDate1Time.getDate() + 1;
-  expir1GD;
-  var expirDate1Fix = new Date (expir1GFY, expir1GM, expir1GD, 15, 0, 0, 0 )
-  expirDate1Fix;
-  var expirDate1FixTimeMili = expirDate1Fix.getTime();
-  expirDate1FixTimeMili;
-  var daysToExpirMiliFix = expirDate1FixTimeMili - currentTimeMili;
-  daysToExpirMiliFix;
+    var expir1GFY = expirDate1Time.getFullYear();
+    expir1GFY;
+    var expir1GM = expirDate1Time.getMonth();
+    expir1GM;
+    var expir1GD = expirDate1Time.getDate() + 1;
+    expir1GD;
+    var expirDate1Fix = new Date (expir1GFY, expir1GM, expir1GD, 15, 0, 0, 0 )
+    expirDate1Fix;
+    var expirDate1FixTimeMili = expirDate1Fix.getTime();
+    expirDate1FixTimeMili;
+    var daysToExpirMiliFix = expirDate1FixTimeMili - currentTimeMili;
+    daysToExpirMiliFix;
 
-  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+    var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
 
-  var daysToExpir1CurrentFix = daysToExpirMiliFix / millisecondsPerDay ;
-  daysToExpir1CurrentFix;
+    var daysToExpir1CurrentFix = daysToExpirMiliFix / millisecondsPerDay ;
+    daysToExpir1CurrentFix;
 
-  var pushDaysToExpir1 = document.getElementById("dte").value = daysToExpir1CurrentFix.toFixed(2) * 1;
-  pushDaysToExpir1;
+    var pushDaysToExpir1 = document.getElementById("dte").value = daysToExpir1CurrentFix.toFixed(2) * 1;
+    pushDaysToExpir1;
 
-  var pushUpdateRightNowTimeInfo = document.getElementById("rightNowDate").value = newStartDate;
+    var pushUpdateRightNowTimeInfo = document.getElementById("rightNowDate").value = newStartDate;
 
-  return  currentTimeMiliCount = 1
+    return  currentTimeMiliCount = 1
+
+  }
 
 }
 
@@ -591,6 +659,72 @@ function pushDaysToExDiv2Calc () {
 
 }
 
+///////////////////////////
+
+function pushExactDaysToExDiv2Calc () {
+
+  var getCurentTime = document.getElementById("rightNowDate").value;
+  var newStartDate = new Date (getCurentTime);
+  var now1GFY = newStartDate.getFullYear();
+  now1GFY;
+  var now1GM = newStartDate.getMonth();
+  now1GM;
+  var now1GD = newStartDate.getDate();
+  now1GD;
+  var now1Hours = newStartDate.getHours();
+  now1GD;
+  var now1Min = newStartDate.getMinutes();
+  now1GD;
+  var now1Sec = newStartDate.getSeconds();
+  now1GD;
+
+  var now1Fix = new Date (now1GFY, now1GM, now1GD,  now1Hours, now1Min, now1Sec, 0  )
+  now1Fix;
+  var now1FixTimeMili = now1Fix.getTime();
+  now1FixTimeMili;
+  var currentTimeMili = now1FixTimeMili;
+
+  /////
+
+  var expirDate2 = document.getElementById("exDiv2Date").value;
+  expirDate2Time = new Date (expirDate2);
+  expirDate2Time;
+
+  var expirDate2TimeMili = expirDate2Time.getTime();
+
+  var daysToExpirMili = expirDate2TimeMili - currentTimeMili;
+  daysToExpirMili;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpirCurrent = daysToExpirMili / millisecondsPerDay ;
+  daysToExpirCurrent;
+
+  //////
+
+  var expir2GFY = expirDate2Time.getFullYear();
+  expir2GFY;
+  var expir2GM = expirDate2Time.getMonth();
+  expir2GM;
+  var expir2GD = expirDate2Time.getDate() + 1;
+  expir2GD;
+  var expirDate2Fix = new Date (expir2GFY, expir2GM, expir2GD, 15, 0, 0, 0 )
+  expirDate2Fix;
+  var expirDate2FixTimeMili = expirDate2Fix.getTime();
+  expirDate2FixTimeMili;
+  var daysToExpirMiliFix = expirDate2FixTimeMili - currentTimeMili;
+  daysToExpirMiliFix;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpir2CurrentFix = daysToExpirMiliFix / millisecondsPerDay ;
+  daysToExpir2CurrentFix;
+
+  var pushDaysToExpir2 = document.getElementById("daysToExDiv2").value = daysToExpir2CurrentFix.toFixed(2) * 1;
+  pushDaysToExpir2;
+
+}
+
 //////////////////////////////////////////////////////////////////////////////////////
 
 function pushDaysToExDiv3Calc () {
@@ -650,6 +784,73 @@ function pushDaysToExDiv3Calc () {
 
 }
 
+//////////////////////
+
+function pushExactDaysToExDiv3Calc () {
+
+  var getCurentTime = document.getElementById("rightNowDate").value;
+  var newStartDate = new Date (getCurentTime);
+  var now1GFY = newStartDate.getFullYear();
+  now1GFY;
+  var now1GM = newStartDate.getMonth();
+  now1GM;
+  var now1GD = newStartDate.getDate();
+  now1GD;
+  var now1Hours = newStartDate.getHours();
+  now1GD;
+  var now1Min = newStartDate.getMinutes();
+  now1GD;
+  var now1Sec = newStartDate.getSeconds();
+  now1GD;
+
+  var now1Fix = new Date (now1GFY, now1GM, now1GD,  now1Hours, now1Min, now1Sec, 0  )
+  now1Fix;
+  var now1FixTimeMili = now1Fix.getTime();
+  now1FixTimeMili;
+  var currentTimeMili = now1FixTimeMili;
+
+  /////
+
+  var expirDate2 = document.getElementById("exDiv3Date").value;
+  expirDate2Time = new Date (expirDate2);
+  expirDate2Time;
+
+  var expirDate2TimeMili = expirDate2Time.getTime();
+
+  var daysToExpirMili = expirDate2TimeMili - currentTimeMili;
+  daysToExpirMili;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpirCurrent = daysToExpirMili / millisecondsPerDay ;
+  daysToExpirCurrent;
+
+  //////
+
+  var expir2GFY = expirDate2Time.getFullYear();
+  expir2GFY;
+  var expir2GM = expirDate2Time.getMonth();
+  expir2GM;
+  var expir2GD = expirDate2Time.getDate() + 1;
+  expir2GD;
+  var expirDate2Fix = new Date (expir2GFY, expir2GM, expir2GD, 15, 0, 0, 0 )
+  expirDate2Fix;
+  var expirDate2FixTimeMili = expirDate2Fix.getTime();
+  expirDate2FixTimeMili;
+  var daysToExpirMiliFix = expirDate2FixTimeMili - currentTimeMili;
+  daysToExpirMiliFix;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpir2CurrentFix = daysToExpirMiliFix / millisecondsPerDay ;
+  daysToExpir2CurrentFix;
+
+  var pushDaysToExpir2 = document.getElementById("daysToExDiv3").value = daysToExpir2CurrentFix.toFixed(2) * 1;
+  pushDaysToExpir2;
+
+}
+
+
 //////////////////////////////////////////////////////////////////////////////////////
 
 function pushDaysToExDiv4Calc () {
@@ -706,6 +907,72 @@ function pushDaysToExDiv4Calc () {
 
   var pushDaysToExpir1 = document.getElementById("daysToExDiv4").value = daysToExpir1CurrentFix.toFixed(2) * 1;
   pushDaysToExpir1;
+
+}
+
+///////////////////
+
+function pushExactDaysToExDiv4Calc () {
+
+  var getCurentTime = document.getElementById("rightNowDate").value;
+  var newStartDate = new Date (getCurentTime);
+  var now1GFY = newStartDate.getFullYear();
+  now1GFY;
+  var now1GM = newStartDate.getMonth();
+  now1GM;
+  var now1GD = newStartDate.getDate();
+  now1GD;
+  var now1Hours = newStartDate.getHours();
+  now1GD;
+  var now1Min = newStartDate.getMinutes();
+  now1GD;
+  var now1Sec = newStartDate.getSeconds();
+  now1GD;
+
+  var now1Fix = new Date (now1GFY, now1GM, now1GD,  now1Hours, now1Min, now1Sec, 0  )
+  now1Fix;
+  var now1FixTimeMili = now1Fix.getTime();
+  now1FixTimeMili;
+  var currentTimeMili = now1FixTimeMili;
+
+  /////
+
+  var expirDate2 = document.getElementById("exDiv4Date").value;
+  expirDate2Time = new Date (expirDate2);
+  expirDate2Time;
+
+  var expirDate2TimeMili = expirDate2Time.getTime();
+
+  var daysToExpirMili = expirDate2TimeMili - currentTimeMili;
+  daysToExpirMili;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpirCurrent = daysToExpirMili / millisecondsPerDay ;
+  daysToExpirCurrent;
+
+  //////
+
+  var expir2GFY = expirDate2Time.getFullYear();
+  expir2GFY;
+  var expir2GM = expirDate2Time.getMonth();
+  expir2GM;
+  var expir2GD = expirDate2Time.getDate() + 1;
+  expir2GD;
+  var expirDate2Fix = new Date (expir2GFY, expir2GM, expir2GD, 15, 0, 0, 0 )
+  expirDate2Fix;
+  var expirDate2FixTimeMili = expirDate2Fix.getTime();
+  expirDate2FixTimeMili;
+  var daysToExpirMiliFix = expirDate2FixTimeMili - currentTimeMili;
+  daysToExpirMiliFix;
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+
+  var daysToExpir2CurrentFix = daysToExpirMiliFix / millisecondsPerDay ;
+  daysToExpir2CurrentFix;
+
+  var pushDaysToExpir2 = document.getElementById("daysToExDiv4").value = daysToExpir2CurrentFix.toFixed(2) * 1;
+  pushDaysToExpir2;
 
 }
 
@@ -773,44 +1040,92 @@ var div1 = wDiv1 * 1;
 var daysToDiv1Ex = wExDiv1Date * 1;
 var divBranch1 = daysToDiv1Ex / daysPerBranch;
 var cleanDivBranch1 = Math.ceil(divBranch1);
+var timeToDiv1Ex = daysToDiv1Ex / 365 ;
+var div1PV = div1 * e**(r * timeToDiv1Ex * -1);
 
 var div2 = wDiv2 * 1;
 var daysToDiv2Ex = wExDiv2Date * 1;
 var divBranch2 = daysToDiv2Ex / daysPerBranch;
 var cleanDivBranch2 = Math.ceil(divBranch2);
+var timeToDiv2Ex = daysToDiv2Ex / 365 ;
+var div2PV = div2 * e**(r * timeToDiv2Ex * -1);
 
 var div3 = wDiv3 * 1;
 var daysToDiv3Ex = wExDiv3Date * 1;
 var divBranch3 = daysToDiv3Ex / daysPerBranch;
 var cleanDivBranch3 = Math.ceil(divBranch3);
+var timeToDiv3Ex = daysToDiv3Ex / 365 ;
+var div3PV = div3 * e**(r * timeToDiv3Ex * -1);
 
 var div4 = wDiv4 * 1;
 var daysToDiv4Ex = wExDiv4Date * 1;
 var divBranch4 = daysToDiv4Ex / daysPerBranch;
 var cleanDivBranch4 = Math.ceil(divBranch4);
+var timeToDiv4Ex = daysToDiv4Ex / 365 ;
+var div4PV = div4 * e**(r * timeToDiv4Ex * -1);
 
 var div5 = 0;
 var daysToDiv5Ex = 300;
 var divBranch5 = daysToDiv5Ex / daysPerBranch;
 var cleanDivBranch5 = Math.ceil(divBranch5);
+var timeToDiv5Ex = daysToDiv5Ex / 365 ;
+var div5PV = div5 * e**(r * timeToDiv5Ex * -1);
 
 var div6 = 0;
 var daysToDiv6Ex = 300;
 var divBranch6 = daysToDiv6Ex / daysPerBranch;
 var cleanDivBranch6 = Math.ceil(divBranch6);
+var timeToDiv6Ex = daysToDiv6Ex / 365 ;
+var div6PV = div6 * e**(r * timeToDiv6Ex * -1);
 
 var div7 = 0;
 var daysToDiv7Ex = 542;
 var divBranch7 = daysToDiv7Ex / daysPerBranch;
 var cleanDivBranch7 = Math.ceil(divBranch7);
+var timeToDiv7Ex = daysToDiv7Ex / 365 ;
+var div7PV = div7 * e**(r * timeToDiv7Ex * -1);
 
 var div8 = 0;
 var daysToDiv8Ex = 632;
 var divBranch8 = daysToDiv8Ex / daysPerBranch;
 var cleanDivBranch8 = Math.ceil(divBranch8);
+var timeToDiv8Ex = daysToDiv8Ex / 365 ;
+var div8PV = div8 * e**(r * timeToDiv8Ex * -1);
 
 
 var divInfo = [[1, cleanDivBranch1, div1],[2, cleanDivBranch2, div2],[3, cleanDivBranch3, div3],[4, cleanDivBranch4, div4],[5, cleanDivBranch5, div5],[6, cleanDivBranch6, div6],[7, cleanDivBranch7, div7],[8, cleanDivBranch8, div8]];
+
+
+///////// PV of Divs for Black Sholes (BS) option values ///////////
+///////// spot price for stock with divs in BS is currStockPx - PV of Divs ////////
+
+var divInfoPV = [[1, cleanDivBranch1, div1PV],[2, cleanDivBranch2, div2PV],[3, cleanDivBranch3, div3PV],[4, cleanDivBranch4, div4PV],[5, cleanDivBranch5, div5PV],[6, cleanDivBranch6, div6PV],[7, cleanDivBranch7, div7PV],[8, cleanDivBranch8, div8PV]];
+
+function currStockPxBlackScholes () {
+
+  var count = 0;
+  var iter = 0;
+  var cumlaDivPVList = [];
+  var cumlaDivPV = 0
+
+  while (divInfoPV[count][1] <= bbranches){
+    cumlaDivPVList.push(divInfoPV[count][2]);
+    count = count + 1;
+  }
+
+  while (iter <= (cumlaDivPVList.length - 1)) {
+    cumlaDivPV = cumlaDivPV + cumlaDivPVList[iter];
+    iter = iter + 1
+  }
+
+  var currStockPxForBS = currStockPx - cumlaDivPV;
+
+  return currStockPxForBS
+
+}
+
+var currStockPxBS = currStockPxBlackScholes ();
+currStockPxBS;
 
 /////////////////////////////////////////////
 
@@ -3003,8 +3318,8 @@ document.getElementById("americanCallGamma").value = cGamma;
 document.getElementById("americanPutGamma").value = pGamma;
 
 
-//document.getElementById("euroCallBinomial").value = euroCallValueOutPut.toFixed(2);
-//document.getElementById("euroPutBinomial").value = euroPutValueOutPut.toFixed(2);
+document.getElementById("euroCallBinomial").value = euroCallValueOutPut.toFixed(2);
+document.getElementById("euroPutBinomial").value = euroPutValueOutPut.toFixed(2);
 
 
 
@@ -7908,10 +8223,6 @@ var pvFactor = e**( r * timePerBranch * (-1) ) ;
 
 
 
-
-
-
-
 var div1 = wDiv1 * 1;
 var daysToDiv1Ex = wExDiv1Date * 1;
 var divBranch1 = daysToDiv1Ex / daysPerBranch;
@@ -10023,9 +10334,2117 @@ document.getElementById("americanPutRho").value = putRhoAmerican.toFixed(3);
 
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+////BLACK SCHOLES ///////////////
 
+/// this produces a list of std dev from -10 to 10 with an increment of .001
+
+function stdDevCreate () {
+
+    var lowDev = -10.00;
+    var upperDev = 10;
+    var increment = .001;
+    var stdDevList = []
+
+    while (lowDev <= upperDev){
+        stdDevList.push(lowDev.toFixed(3)*1);
+        lowDev = lowDev + increment;
+    }
+
+    return stdDevList
+}
+
+var stdDevList = stdDevCreate();
+stdDevList;
+
+
+
+
+//// this takes the std dev list and creats a new list of the std devs squared
+function stdDevSquared () {
+
+    var y = 0;
+    var x = stdDevList.length;
+    var stdDevSquaredList = [];
+
+    while (y < x) {
+
+        stdDevSquaredList.push(stdDevList[y]**2);
+        y = y + 1;
+
+    }
+
+    return stdDevSquaredList
+}
+
+var stdDevSquaredList = stdDevSquared ();
+stdDevSquaredList;
+
+
+
+
+//// this produces the standard normal curve
+//// it takes each std dev from -10 to 10 (.001 increments) as an x values
+///  the yValue function creates the y value along the cursive
+///  each x value now has a width of .001 and a height equal to the yValue
+///  we now have tons of tiny rectangles that approximate the area under the curve (which is 1)
+
+
+function yValue () {
+
+    var pi = 3.14159265359
+    var invSqRootTwoPi = ( 1 / ((2*pi)**.5) ) ;
+    var e = 2.718281828;
+    var x = 0;
+    var interval = .001;
+    var normalDensity = [];
+
+    while (x < stdDevSquaredList.length) {
+
+        normalDensity.push  ( ( ( ((1 / (e**(stdDevSquaredList[x]))**.5 ))) * interval ) * ( invSqRootTwoPi ) );
+        x = x + 1;
+
+    }
+
+    return normalDensity
+
+}
+
+var normalDensityList = yValue ();
+normalDensityList;
+
+//////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////this function takes in a std dev (x value) and returns the area under the normal curve
+/// up to that x value.....the Cumlative Normal Function (LHS Area) (1-LHS Area = RHS Area)
+/// same as NORMDIST (cumla = true) in Excel or NORMSDIST if you use (mean=0, stdev = 1, cumla = true)
+function cumlativeNormal (stdDeviation) {
+
+    if (stdDeviation >= 10){
+        return 1
+    }
+
+    else if (stdDeviation < -10) {
+        return 0
+    }
+
+    else{
+
+        var x = ( (stdDeviation * 1000) + 10000 )
+        var y = 0;
+        var cumlaList = [];
+        zz = 0;
+
+        while (y <= x) {
+
+            zz = zz + normalDensityList[y];
+            y = y + 1 ;
+
+        }
+
+        //var cdf = zz - ( normalDensityList[x+1] * .1522982 )
+        var cdf = zz - ( normalDensityList[x+1] * .5 )
+        //var cdf = zz - ( normalDensityList[10000] * .1522982 )
+        // zz is the area under the curve up to the desired std dev....
+        // a small adj needed to be made by subtracting ( normalDensityList[10000] * .1522982 )
+
+        return cdf.toFixed(10) * 1
+
+
+    }
 
 
 }
 
 
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+/// this function returns a y value of a point on the normal curve with the x value being the std device
+/// 0 std dev is the mean of the distribution
+
+
+function probabilityMassNormal (stdDeviation) {
+
+    var x = ( (stdDeviation * 1000) + 10000 )
+
+    var y = (normalDensityList[x]) * 1000
+
+
+
+    return y.toFixed(8) * 1
+
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+// to make the NORMINV function in Excel we first need to build a list of std devs with each
+// std dev's cumlative area under the curve....then we can look up a cumliative area (probablility)..
+// and return the associated std dev.
+//  the NORMDIST function in Excel takes a std dev and return the associated culmative area under the curve...
+//  the NORMINV function takes a cumlative area and returns the associated std dev
+//  we need the NORMINV for Monte Carlo simulations
+
+function cumlaAreaNormalAtEachStdDev () {
+
+  var count = 0;
+  var iter = 0;
+  var sum = 0;
+  var cumlaAreaListRaw = [];
+  var cumlaAreaList = [];
+
+  while (count < normalDensityList.length){
+    cumlaAreaList.push(normalDensityList[count] + sum);
+    sum = sum + normalDensityList[count];
+    count = count + 1;
+  }
+
+  return cumlaAreaList
+}
+
+var cumlaAreaAtStdDevListRaw = cumlaAreaNormalAtEachStdDev ();
+cumlaAreaAtStdDevListRaw;
+
+
+
+////////
+
+
+function cleanCumlaAreaAtStdDevListRaw() {
+
+    var count = 0;
+    var iter = 0;
+    var cleanList = [];
+
+    while (count < cumlaAreaAtStdDevListRaw.length){
+
+        var item = cumlaAreaAtStdDevListRaw[count];
+        var cleanItem = item.toFixed(4) * 1 ;
+
+        cleanList.push(cleanItem);
+
+        count = count + 1;
+    }
+
+    return cleanList
+
+}
+
+var cumlaAreaAtStdDevList = cleanCumlaAreaAtStdDevListRaw();
+cumlaAreaAtStdDevList;
+
+
+///////////////////////////////////////////////////////////////
+
+function zip_upTwo (x,y){  //(x,y,z,a,b,c,d,e,f,g,h,i)
+  var iter1 = x.length - 1;
+  child1 = []
+  parent1 = []
+  count = 0
+
+  while (count <= iter1){
+
+    child1.push(x[count])
+    child1.push(y[count])
+    //child1.push(z[count])
+    //child1.push(a[count])
+    //child1.push(b[count])
+    //child1.push(c[count])
+    //child1.push(d[count])
+    //child1.push(e[count])
+    //child1.push(f[count])
+    //child1.push(g[count])
+    //child1.push(h[count])
+    //child1.push(i[count])
+
+
+    parent1.push(child1)
+    child1 = []
+    count = count + 1
+
+  }
+
+  return parent1
+
+}
+
+var sdAndCumlaArea = zip_upTwo(stdDevList, cumlaAreaAtStdDevList);
+sdAndCumlaArea;
+
+///////////////////
+// inverseCumlaAreaReturnsStdDev takes in a probability (really a std dev..or area under normal curve ....
+//  since we are using mean of zero and std dev of 1)...and return the std dev associated with that prob..
+//  this is the same as the NORMINV function in Excel
+///////////////////
+
+function inverseCumlaAreaReturnsStdDev (areaUnderCurve) {
+
+    var count = 0;
+    var iter = 0;
+    var x = areaUnderCurve;
+
+    while (x >= sdAndCumlaArea[count][1]) {
+
+        count = count + 1;
+    }
+
+    return sdAndCumlaArea[count][0]
+
+}
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// need dinInfoPV if you want to value a Euro option with BS on a stock that pays divs
+
+var divInfoPV = [[1, cleanDivBranch1, div1PV],[2, cleanDivBranch2, div2PV],[3, cleanDivBranch3, div3PV],[4, cleanDivBranch4, div4PV],[5, cleanDivBranch5, div5PV],[6, cleanDivBranch6, div6PV],[7, cleanDivBranch7, div7PV],[8, cleanDivBranch8, div8PV]];
+
+
+///if the stock pays divs then the correct stock px to use to value the options is:
+///  the currStockPx - PV of CumlativeDivsToExpir
+function currStockPxBlackScholes () {
+
+  var count = 0;
+  var iter = 0;
+  var cumlaDivPVList = [];
+  var cumlaDivPV = 0
+
+
+
+  while (divInfoPV[count][1] <= bbranches){
+    cumlaDivPVList.push(divInfoPV[count][2]);
+    count = count + 1;
+  }
+
+  while (iter <= (cumlaDivPVList.length - 1)) {
+    cumlaDivPV = cumlaDivPV + cumlaDivPVList[iter];
+    iter = iter + 1
+  }
+
+  var currStockPxForBS = currStockPx - cumlaDivPV;
+
+  return currStockPxForBS.toFixed(2) * 1
+
+}
+
+var currStockPxBS = currStockPxBlackScholes ();
+currStockPxBS;
+
+
+
+// Math.log() is the same the Natural Log (LN) :  log e x = ?  ... e to ? = x ... log e x = 1 : x = 0
+
+
+//need to reset r bc the rho calc set var r = var r = ( (wRate / 100) * 1  ) + .01
+// therefore we will reset all key variables except for divs and currStockPxBS which can be found
+// around lind 829 and 10339 of index.js .  it sits inside goCalc() funtion which this currently is...
+
+var currStockPx = wStockPx * 1;
+
+var strike = wStrikePx * 1;
+var daysToExpir = wDaysToExpir * 1;
+var bbranches = wNumberOfBranches * 1;
+var daysPerBranch = daysToExpir / bbranches;
+
+var e = 2.718281828459045 ;
+
+var vol = (wVol / 100) * 1 ;
+var time = (daysToExpir / 365)  ;
+var timePerBranch = (time / bbranches) ;
+var u = e**( vol * ((time/bbranches)**0.5) );
+var d = 1 / u ;
+var r = (wRate / 100) * 1 ;
+var rr = e**( r * timePerBranch) ;
+var p = (rr-d)/(u-d) ;
+
+var pvFactor = e**( r * timePerBranch * (-1) ) ;
+
+/////////////////////////////////
+
+
+var lnSK = Math.log( currStockPxBS / strike ) ;
+var lnKS = Math.log( strike / currStockPxBS ) ;
+var lnSKClean = lnSK.toFixed(5) * 1;
+var lnKSClean = lnKS.toFixed(5) * 1;
+var pvOfK = strike * (e**(r * time * -1));
+var pvOfKClean = pvOfK.toFixed(5) * 1;
+var variance = vol**2;
+var varianceClean = variance.toFixed(5) * 1;
+var sqrtTime = Math.sqrt(time);
+var sqrtTimeClean = sqrtTime.toFixed(5) * 1;
+var oneStdDev = sqrtTime * vol ;
+var oneStdDevClean = oneStdDev.toFixed(5) * 1;
+
+var d1 = ( lnSKClean + ( ( r + (varianceClean/2) ) * time ) ) / ( oneStdDevClean ) ;
+var d1Rounded = d1.toFixed(3) ;
+var d2 =  d1 - oneStdDev ;
+var d2Rounded = d2.toFixed(3)
+// need to round d1 and d2 to 3 decmils to make cumlativeNormal() work...bc it used the index numbers
+// of the normalDensityList...bc it has 10,000 values above zero and 10,000 below.  so, we need a values
+// for d1 or d2 to look like 1.447 or -0.323
+var nD1 = cumlativeNormal(d1Rounded) ;
+var nD2 = cumlativeNormal (d2Rounded) ;
+
+var callBlackScholes = (currStockPxBS * nD1) - (pvOfK * nD2) ;
+var callBS = callBlackScholes.toFixed(2) * 1 ;
+var putBlackScholes = pvOfK - currStockPxBS + callBlackScholes ;
+var putBS = putBlackScholes.toFixed(2) * 1 ;
+
+
+
+document.getElementById("euroCallBS").value = callBS.toFixed(2);
+document.getElementById("euroPutBS").value = putBS.toFixed(2);
+document.getElementById("d1BS").value = d1;
+document.getElementById("d2BS").value = d2;
+document.getElementById("Nd1BS").value = nD1;
+document.getElementById("Nd2BS").value = nD2;
+
+document.getElementById("d1BSTwo").value = d1;
+document.getElementById("d2BSTwo").value = d2;
+document.getElementById("Nd1BSTwo").value = nD1;
+document.getElementById("Nd2BSTwo").value = nD2;
+
+//document.getElementById("lnSK").value = lnSKClean;
+document.getElementById("lnKS").value = lnKSClean;
+document.getElementById("variance").value = varianceClean;
+document.getElementById("sqrtTime").value = sqrtTimeClean;
+document.getElementById("oneStdDev").value = oneStdDevClean;
+
+document.getElementById("r").value = r;
+document.getElementById("time").value = time;
+
+
+
+
+
+
+
+}
+
+////// that is the end of goCalc() function ////////////////////////////////////////////////
+////// that is the end of goCalc() function ////////////////////////////////////////////////
+////// that is the end of goCalc() function ////////////////////////////////////////////////
+
+
+///// MONTE CARLO  /////////////////////////////////////////////////////////////////////////
+
+function monteCarlo() {
+
+
+
+  var wTicker = document.getElementById("ticker").value;
+  var wStockPx = document.getElementById("stockPx").value;
+  var wStrikePx = document.getElementById("strikePx").value;
+  var wVol = document.getElementById("vol").value;
+  //var wDaysToExpir = document.getElementById("daysToExpir").value;
+  var wDaysToExpir = document.getElementById("dte").value;
+  var wRate = document.getElementById("rate").value;
+  var wNumberOfBranches = document.getElementById("numberOfBranches").value;
+  var wDiv1 = document.getElementById("div1").value;
+  var wExDiv1Date = document.getElementById("daysToExDiv1").value;
+  var wDiv2 = document.getElementById("div2").value;
+  var wExDiv2Date = document.getElementById("daysToExDiv2").value;
+  var wDiv3 = document.getElementById("div3").value;
+  var wExDiv3Date = document.getElementById("daysToExDiv3").value;
+  var wDiv4 = document.getElementById("div4").value;
+  var wExDiv4Date = document.getElementById("daysToExDiv4").value;
+  var wSimulationNumber = document.getElementById("simulationNumber").value;
+
+
+
+
+  var currStockPx = wStockPx * 1;
+
+  var strike = wStrikePx * 1;
+  var daysToExpir = wDaysToExpir * 1;
+  var bbranches = wNumberOfBranches * 1;
+  var daysPerBranch = daysToExpir / bbranches;
+
+  var e = 2.718281828459045 ;
+
+  var vol = (wVol / 100) * 1 ;
+  var time = (daysToExpir / 365)  ;
+  var timePerBranch = (time / bbranches) ;
+  var u = e**( vol * ((time/bbranches)**0.5) );
+  var d = 1 / u ;
+  var r = (wRate / 100) * 1 ;
+  var rr = e**( r * timePerBranch) ;
+  var p = (rr-d)/(u-d) ;
+
+  var pvFactor = e**( r * timePerBranch * (-1) ) ;
+  var pvExprirToNow = e**( r * time * (-1))
+
+  /////////////////////////////////
+
+
+  var lnSK = Math.log( currStockPxBS / strike ) ;
+  var lnKS = Math.log( strike / currStockPxBS ) ;
+  var lnSKClean = lnSK.toFixed(5) * 1;
+  var lnKSClean = lnKS.toFixed(5) * 1;
+  var pvOfK = strike * (e**(r * time * -1));
+  var pvOfKClean = pvOfK.toFixed(5) * 1;
+  var variance = vol**2;
+  var varianceClean = variance.toFixed(5) * 1;
+  var sqrtTime = Math.sqrt(time);
+  var sqrtTimeClean = sqrtTime.toFixed(5) * 1;
+  var oneStdDev = sqrtTime * vol ;
+  var oneStdDevClean = oneStdDev.toFixed(5) * 1;
+
+  var simulationNumber = wSimulationNumber * 1;
+
+
+  //  this is Black Scholes formula...dont need this for Monte Carlo
+  // var d1 = ( lnSKClean + ( ( r + (varianceClean/2) ) * time ) ) / ( oneStdDevClean ) ;
+  // var d2 =  d1 - oneStdDev ;
+  // var nD1 = cumlativeNormal(d1) ;
+  // var nD2 = cumlativeNormal (d2) ;
+  //
+  // var callBlackScholes = (currStockPxBS * nD1) - (pvOfK * nD2) ;
+  // var callBS = callBlackScholes.toFixed(2) * 1 ;
+  // var putBlackScholes = pvOfK - currStockPxBS + callBlackScholes ;
+  // var putBS = putBlackScholes.toFixed(2) * 1 ;
+
+
+
+
+
+
+
+
+  var div1 = wDiv1 * 1;
+  var daysToDiv1Ex = wExDiv1Date * 1;
+  var divBranch1 = daysToDiv1Ex / daysPerBranch;
+  var cleanDivBranch1 = Math.ceil(divBranch1);
+  var timeToDiv1Ex = daysToDiv1Ex / 365 ;
+  var div1PV = div1 * e**(r * timeToDiv1Ex * -1);
+
+  var div2 = wDiv2 * 1;
+  var daysToDiv2Ex = wExDiv2Date * 1;
+  var divBranch2 = daysToDiv2Ex / daysPerBranch;
+  var cleanDivBranch2 = Math.ceil(divBranch2);
+  var timeToDiv2Ex = daysToDiv2Ex / 365 ;
+  var div2PV = div2 * e**(r * timeToDiv2Ex * -1);
+
+  var div3 = wDiv3 * 1;
+  var daysToDiv3Ex = wExDiv3Date * 1;
+  var divBranch3 = daysToDiv3Ex / daysPerBranch;
+  var cleanDivBranch3 = Math.ceil(divBranch3);
+  var timeToDiv3Ex = daysToDiv3Ex / 365 ;
+  var div3PV = div3 * e**(r * timeToDiv3Ex * -1);
+
+  var div4 = wDiv4 * 1;
+  var daysToDiv4Ex = wExDiv4Date * 1;
+  var divBranch4 = daysToDiv4Ex / daysPerBranch;
+  var cleanDivBranch4 = Math.ceil(divBranch4);
+  var timeToDiv4Ex = daysToDiv4Ex / 365 ;
+  var div4PV = div4 * e**(r * timeToDiv4Ex * -1);
+
+  var div5 = 0;
+  var daysToDiv5Ex = 300;
+  var divBranch5 = daysToDiv5Ex / daysPerBranch;
+  var cleanDivBranch5 = Math.ceil(divBranch5);
+  var timeToDiv5Ex = daysToDiv5Ex / 365 ;
+  var div5PV = div5 * e**(r * timeToDiv5Ex * -1);
+
+  var div6 = 0;
+  var daysToDiv6Ex = 300;
+  var divBranch6 = daysToDiv6Ex / daysPerBranch;
+  var cleanDivBranch6 = Math.ceil(divBranch6);
+  var timeToDiv6Ex = daysToDiv6Ex / 365 ;
+  var div6PV = div6 * e**(r * timeToDiv6Ex * -1);
+
+  var div7 = 0;
+  var daysToDiv7Ex = 542;
+  var divBranch7 = daysToDiv7Ex / daysPerBranch;
+  var cleanDivBranch7 = Math.ceil(divBranch7);
+  var timeToDiv7Ex = daysToDiv7Ex / 365 ;
+  var div7PV = div7 * e**(r * timeToDiv7Ex * -1);
+
+  var div8 = 0;
+  var daysToDiv8Ex = 632;
+  var divBranch8 = daysToDiv8Ex / daysPerBranch;
+  var cleanDivBranch8 = Math.ceil(divBranch8);
+  var timeToDiv8Ex = daysToDiv8Ex / 365 ;
+  var div8PV = div8 * e**(r * timeToDiv8Ex * -1);
+
+
+  //var divInfo = [[1, cleanDivBranch1, div1],[2, cleanDivBranch2, div2],[3, cleanDivBranch3, div3],[4, cleanDivBranch4, div4],[5, cleanDivBranch5, div5],[6, cleanDivBranch6, div6],[7, cleanDivBranch7, div7],[8, cleanDivBranch8, div8]];
+
+
+  ///////// PV of Divs for Black Sholes (BS) option values ///////////
+  ///////// spot price for stock with divs in BS is currStockPx - PV of Divs ////////
+
+  var divInfoPV = [[1, cleanDivBranch1, div1PV],[2, cleanDivBranch2, div2PV],[3, cleanDivBranch3, div3PV],[4, cleanDivBranch4, div4PV],[5, cleanDivBranch5, div5PV],[6, cleanDivBranch6, div6PV],[7, cleanDivBranch7, div7PV],[8, cleanDivBranch8, div8PV]];
+
+  function currStockPxBlackScholes () {
+
+    var count = 0;
+    var iter = 0;
+    var cumlaDivPVList = [];
+    var cumlaDivPV = 0
+
+    while (divInfoPV[count][1] <= bbranches){
+      cumlaDivPVList.push(divInfoPV[count][2]);
+      count = count + 1;
+    }
+
+    while (iter <= (cumlaDivPVList.length - 1)) {
+      cumlaDivPV = cumlaDivPV + cumlaDivPVList[iter];
+      iter = iter + 1
+    }
+
+    var currStockPxForBS = currStockPx - cumlaDivPV;
+
+    return currStockPxForBS
+
+  }
+
+  var currStockPxBS = currStockPxBlackScholes ();
+  currStockPxBS;
+
+
+  ////////////////////////////
+
+
+
+  /// this produces a list of std dev from -10 to 10 with an increment of .001
+
+  function stdDevCreate () {
+
+      var lowDev = -10.00;
+      var upperDev = 10;
+      var increment = .001;
+      var stdDevList = []
+
+      while (lowDev <= upperDev){
+          stdDevList.push(lowDev.toFixed(3)*1);
+          lowDev = lowDev + increment;
+      }
+
+      return stdDevList
+  }
+
+  var stdDevList = stdDevCreate();
+  stdDevList;
+
+
+
+
+  //// this takes the std dev list and creats a new list of the std devs squared
+  function stdDevSquared () {
+
+      var y = 0;
+      var x = stdDevList.length;
+      var stdDevSquaredList = [];
+
+      while (y < x) {
+
+          stdDevSquaredList.push(stdDevList[y]**2);
+          y = y + 1;
+
+      }
+
+      return stdDevSquaredList
+  }
+
+  var stdDevSquaredList = stdDevSquared ();
+  stdDevSquaredList;
+
+
+
+
+  //// this produces the standard normal curve
+  //// it takes each std dev from -10 to 10 (.001 increments) as an x values
+  ///  the yValue function creates the y value along the curve
+  ///  each x value now has a width of .001 and a height equal to the yValue
+  ///  we now have tons of tiny rectangles that approximate the area under the curve (which is 1)
+  // area is acutually (2*PI)**.5  but we divide by (2*PI)**.5 to make the area equal 1
+
+
+  function yValue () {
+
+      var pi = 3.14159265359
+      var invSqRootTwoPi = ( 1 / ((2*pi)**.5) ) ;
+      var e = 2.718281828;
+      var x = 0;
+      var interval = .001;
+      var normalDensity = [];
+
+      while (x < stdDevSquaredList.length) {
+
+          normalDensity.push  ( ( ( ((1 / (e**(stdDevSquaredList[x]))**.5 ))) * interval ) * ( invSqRootTwoPi ) );
+          x = x + 1;
+
+      }
+
+      return normalDensity
+
+  }
+
+  var normalDensityList = yValue ();
+  normalDensityList;
+
+
+  ////////////////////////////////////////////////////////////////////
+  function stockPxByStdDev (){
+    var count = 0;
+    var iter = 0;
+    var meanOfDist = currStockPxBS * (e**( (r - (variance/2)) * time)) ;
+    var stockPxByStdDevList = [];
+
+    while (count < stdDevList.length){
+      stockPxByStdDevList.push( meanOfDist * (e**(stdDevList[count] * oneStdDev) )) ;
+      count = count + 1;
+    }
+    return stockPxByStdDevList
+  }
+
+  var stockPxAtEachStdDev = stockPxByStdDev();
+  stockPxAtEachStdDev;
+
+  ///////////////////////
+
+
+
+  //////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  ////this function takes in a std dev (x value) and returns the area under the normal curve
+  /// up to that x value.....the Cumlative Normal Function (LHS Area) (1-LHS Area = RHS Area)
+  /// same as NORMDIST (cumla = true) in Excel or NORMSDIST if you use (mean=0, stdev = 1, cumla = true)
+
+  // don't need cumlativeNormal (stdDeviation) for Monte Carlo
+
+  // function cumlativeNormal (stdDeviation) {
+  //
+  //     if (stdDeviation > 10){
+  //         return 1
+  //     }
+  //
+  //     else if (stdDeviation < -10) {
+  //         return 0
+  //     }
+  //
+  //     else{
+  //
+  //         var x = ( (stdDeviation * 1000) + 10000 )
+  //         var y = 0;
+  //         var cumlaList = [];
+  //         zz = 0;
+  //
+  //         while (y <= x) {
+  //
+  //             zz = zz + normalDensityList[y];
+  //             y = y + 1 ;
+  //
+  //         }
+  //
+  //         //var cdf = zz - ( normalDensityList[x+1] * .1522982 )
+  //         var cdf = zz - ( normalDensityList[x+1] * .5 )
+  //         //var cdf = zz - ( normalDensityList[10000] * .1522982 )
+  //
+  //         return cdf.toFixed(10) * 1
+  //
+  //
+  //     }
+  //
+  //
+  // }
+
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////
+  /// this function returns a y value of a point on the normal curve with the x value being the std dev
+  /// 0 std dev is the mean of the distribution
+
+
+  function probabilityMassNormal (stdDeviation) {
+
+      var x = ( (stdDeviation * 1000) + 10000 )
+
+      var y = (normalDensityList[x]) * 1000
+
+
+
+      return y.toFixed(8) * 1
+
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////
+
+  // to make the NORMINV function in Excel we first need to build a list of std devs with each
+  // std dev's cumlative area under the curve....then we can look up a cumliative area (probablility)..
+  // and return the associated std dev.
+  //  the NORMDIST function in Excel takes a std dev and return the associated culmative area under the curve...
+  //  the NORMINV function takes a cumlative area and returns the associated std dev
+  //  we need the NORMINV for Monte Carlo simulations
+
+  function cumlaAreaNormalAtEachStdDev () {
+
+    var count = 0;
+    var iter = 0;
+    var sum = 0;
+    var cumlaAreaListRaw = [];
+    var cumlaAreaList = [];
+
+    while (count < normalDensityList.length){
+      cumlaAreaList.push(normalDensityList[count] + sum);
+      sum = sum + normalDensityList[count];
+      count = count + 1;
+    }
+
+    return cumlaAreaList
+  }
+
+  var cumlaAreaAtStdDevListRaw = cumlaAreaNormalAtEachStdDev ();
+  cumlaAreaAtStdDevListRaw;
+
+
+
+  ////////
+
+
+  function cleanCumlaAreaAtStdDevListRaw() {
+
+      var count = 0;
+      var iter = 0;
+      var cleanList = [];
+
+      while (count < cumlaAreaAtStdDevListRaw.length){
+
+          var item = cumlaAreaAtStdDevListRaw[count];
+          var cleanItem = item.toFixed(4) * 1 ;
+
+          cleanList.push(cleanItem);
+
+          count = count + 1;
+      }
+
+      return cleanList
+
+  }
+
+  var cumlaAreaAtStdDevList = cleanCumlaAreaAtStdDevListRaw();
+  cumlaAreaAtStdDevList;
+
+
+  ///////////////////////////////////////////////////////////////
+
+  function zip_upTwo (x,y){  //(x,y,z,a,b,c,d,e,f,g,h,i)
+    var iter1 = x.length - 1;
+    child1 = []
+    parent1 = []
+    count = 0
+
+    while (count <= iter1){
+
+      child1.push(x[count])
+      child1.push(y[count])
+      //child1.push(z[count])
+      //child1.push(a[count])
+      //child1.push(b[count])
+      //child1.push(c[count])
+      //child1.push(d[count])
+      //child1.push(e[count])
+      //child1.push(f[count])
+      //child1.push(g[count])
+      //child1.push(h[count])
+      //child1.push(i[count])
+
+
+      parent1.push(child1)
+      child1 = []
+      count = count + 1
+
+    }
+
+    return parent1
+
+  }
+
+  var sdAndCumlaArea = zip_upTwo(stdDevList, cumlaAreaAtStdDevList);
+  sdAndCumlaArea;
+
+  ///////////////////
+  // inverseCumlaAreaReturnsStdDev takes in a probability (really a std dev..or area under normal curve ....
+  //  since we are using mean of zero and std dev of 1)...and return the std dev associated with that prob..
+  //  this is the same as the NORMINV function in Excel
+  ///////////////////
+
+  function inverseCumlaAreaReturnsStdDev (areaUnderCurve) {
+
+      var count = 0;
+      var iter = 0;
+      var x = areaUnderCurve;
+
+      while (x >= sdAndCumlaArea[count][1]) {
+
+          count = count + 1;
+      }
+
+      return sdAndCumlaArea[count][0]
+
+  }
+
+
+
+  ////////////////////////////////
+
+  function simulationsCall () {
+
+    var meanOfDistofStdDevs = ( r - ((vol**2)/2))  * time ;
+
+    // need to account for the drift in stockPX (riskFreeRate - halfTheVariance = meanOfDistofStdDevs)
+    // meanOfDistofStdDevs is a continuous rate of drift....
+    // remember all assets must earn risk free rate of return in risk neutral world..so r is like zero_branch
+    // a risk free return will go up a fixed amount each day... no vol...zero annualized std.dev....zero variance
+    // an asset that is risky will also have vol....vol erodes return by half the variance with respect to time...
+    // this is an approximation of CAGR (compunded annual growth rate) or geometric mean of returns....
+    // versus the average of returns.....but we use the risk free as our average retrun that gets eroded
+    // average return that gets eroded by half the variance during the time period is the expected return
+    // the expected return is the mean of the normal distribtion
+
+    var currStockPxBSAdj = currStockPxBS * (e**meanOfDistofStdDevs) ;
+
+    var count = 0 ;
+    var iter = 0 ;
+    var adder = 0;
+    var sumer = 0;
+
+    var mcFinalStockPxOfEachSimulationSum = 0;
+    var mcFinalStockPxIfSimulationGreaterThanStrikeSum = 0;
+
+    var areaUnderCurve = Math.random();
+    var randStdDev = inverseCumlaAreaReturnsStdDev (areaUnderCurve);
+
+    var branchesPerDay = bbranches / daysToExpir ;
+    var volPerBranch = vol / ((365 * branchesPerDay)**.5);
+
+    var randStdDevForThisVol = randStdDev * volPerBranch;
+
+    var monteCarloList = [currStockPxBSAdj];
+
+    var numberOfSimulations = simulationNumber;
+    var finalStockPxOfEachSimulation = [currStockPxBSAdj];
+    var finalMCSimulationStockPxMax = finalStockPxOfEachSimulation[0];
+    var finalMCSimulationStockPxMin = finalStockPxOfEachSimulation[0];
+
+    var monteCarloSimCollectionList = [];
+    var simulationsGreaterThanStrikeList = [];
+
+
+
+    while (count < numberOfSimulations) {
+
+      while (iter < bbranches) {
+
+        areaUnderCurve = Math.random();
+        randStdDev = inverseCumlaAreaReturnsStdDev (areaUnderCurve);
+
+        branchesPerDay = bbranches / daysToExpir ;
+        volPerBranch = vol / ((365 * branchesPerDay)**.5);
+
+        randStdDevForThisVol = randStdDev * volPerBranch;
+
+        //var simStock = currStockPxBS * e**(randStdDevForThisVol);
+        //var simStockClean = simStock.toFixed(2);
+
+        monteCarloList.push(monteCarloList[iter] * e**(randStdDevForThisVol));
+        //monteCarloList.push(simStockClean);
+
+        iter = iter + 1;
+
+      }
+
+
+
+      //make final value monte carlo collection
+      finalStockPxOfEachSimulation.push(monteCarloList[monteCarloList.length-1])
+
+      ////////
+      // monteCarloSimCollectionList.length - 6  will equal numberOfSimulations
+      //these are the future values at expirations so any positive value needs to be discounted back to today
+      if ((monteCarloList[monteCarloList.length-1] - strike)  > 0) {
+       monteCarloSimCollectionList.push( (monteCarloList[monteCarloList.length-1] - strike) * pvExprirToNow);
+       simulationsGreaterThanStrikeList.push(monteCarloList[monteCarloList.length-1]);
+      }
+      else{
+        monteCarloSimCollectionList.push(0);
+      }
+
+
+
+      if (finalStockPxOfEachSimulation[count] >  finalMCSimulationStockPxMax) {
+        finalMCSimulationStockPxMax = finalStockPxOfEachSimulation[count];
+      }
+
+      if (finalStockPxOfEachSimulation[count] <  finalMCSimulationStockPxMin) {
+        finalMCSimulationStockPxMin = finalStockPxOfEachSimulation[count];
+      }
+
+
+
+      count = count + 1;
+      iter = 0;
+      monteCarloList = [currStockPxBSAdj]
+
+
+    }
+
+    //////
+    while (adder < finalStockPxOfEachSimulation.length){
+      mcFinalStockPxOfEachSimulationSum = mcFinalStockPxOfEachSimulationSum + finalStockPxOfEachSimulation[adder];
+      adder = adder + 1;
+    }
+
+    //remember if 100 simulations then finalStockPxOfEachSimulation.length is 101 bc it is a list that starts with currStockPxBSAdj as zero index
+    var mcStockPxAverage = mcFinalStockPxOfEachSimulationSum / finalStockPxOfEachSimulation.length ;
+    //////
+
+    ///////
+    while (sumer < simulationsGreaterThanStrikeList.length){
+      mcFinalStockPxIfSimulationGreaterThanStrikeSum = mcFinalStockPxIfSimulationGreaterThanStrikeSum + simulationsGreaterThanStrikeList[sumer];
+      sumer = sumer + 1;
+    }
+
+    var numOfSimulationsGreaterThanStrike = simulationsGreaterThanStrikeList.length;
+    var avgPxOfSimulationsGreaterThanStrike = mcFinalStockPxIfSimulationGreaterThanStrikeSum / numOfSimulationsGreaterThanStrike ;
+
+    // remember cant use finalStockPxOfEachSimulation.length bc it has numberOfSimulations plus one since it is a list that starts with currStockPxBSAdj as zero index
+    var approximationOfNd2 = numOfSimulationsGreaterThanStrike / numberOfSimulations;
+
+    monteCarloSimCollectionList.push(finalMCSimulationStockPxMax);
+    monteCarloSimCollectionList.push(finalMCSimulationStockPxMin);
+    monteCarloSimCollectionList.push(mcStockPxAverage);
+    monteCarloSimCollectionList.push(numOfSimulationsGreaterThanStrike);
+    monteCarloSimCollectionList.push(avgPxOfSimulationsGreaterThanStrike);
+    monteCarloSimCollectionList.push(approximationOfNd2);
+
+    return monteCarloSimCollectionList
+
+
+  }
+
+
+
+  var callValueMonteCarloSimulations = simulationsCall ();
+  callValueMonteCarloSimulations;
+
+  var mcSimulationsStockPxMax = callValueMonteCarloSimulations[callValueMonteCarloSimulations.length-6];
+  mcSimulationsStockPxMax;
+
+  var mcSimulationsStockPxMin = callValueMonteCarloSimulations[callValueMonteCarloSimulations.length-5];
+  mcSimulationsStockPxMin;
+
+  var mcSimulationsStockPxAvg = callValueMonteCarloSimulations[callValueMonteCarloSimulations.length-4];
+  mcSimulationsStockPxAvg;
+
+  var mcSimulationsGreaterThanStrike = callValueMonteCarloSimulations[callValueMonteCarloSimulations.length-3];
+  mcSimulationsGreaterThanStrike;
+
+  var mcAvgPxOfSimulationsGreaterThanStrike = callValueMonteCarloSimulations[callValueMonteCarloSimulations.length-2];
+  mcAvgPxOfSimulationsGreaterThanStrike;
+
+  var mcApproximationOfNd2 = callValueMonteCarloSimulations[callValueMonteCarloSimulations.length-1];
+  mcApproximationOfNd2;
+
+  var mcApproximationOfNd1 = (pvExprirToNow * (mcAvgPxOfSimulationsGreaterThanStrike * mcApproximationOfNd2) ) / currStockPxBS ;
+  mcApproximationOfNd1;
+
+  var pvOfKNd2 = strike * pvExprirToNow * mcApproximationOfNd2;
+  pvOfKNd2;
+
+  var sNd1 = currStockPxBS * mcApproximationOfNd1;
+  sNd1;
+
+  var alternateMCBSCallValue = sNd1 - pvOfKNd2;
+  alternateMCBSCallValue;
+
+
+
+
+/////
+
+  function callAverageMonteCarlo () {
+
+    var count = 0;
+    var iter = 0;
+    // monteCarloSimCollectionList.length - 6  will equal numberOfSimulations
+    var numberOfResultsInSimulation = callValueMonteCarloSimulations.length - 6;
+    var callSimulationSum = 0;
+
+    while (count < numberOfResultsInSimulation) {
+
+      callSimulationSum = callSimulationSum + callValueMonteCarloSimulations[count];
+      count = count + 1;
+
+
+    }
+
+    return (callSimulationSum / numberOfResultsInSimulation  )
+
+  }
+
+  var callValueMonteCarlo = callAverageMonteCarlo ();
+  callValueMonteCarlo;
+
+
+
+
+document.getElementById("mcCallValue").value = callValueMonteCarlo.toFixed(4);
+document.getElementById("mcStockPxMax").value = mcSimulationsStockPxMax.toFixed(2);
+document.getElementById("mcStockPxMin").value = mcSimulationsStockPxMin.toFixed(2);
+document.getElementById("mcStockPxAvg").value = mcSimulationsStockPxAvg.toFixed(2);
+document.getElementById("simulationsAboveStrike").value = mcSimulationsGreaterThanStrike;
+document.getElementById("simulationsAboveStrikeAvg").value = mcAvgPxOfSimulationsGreaterThanStrike.toFixed(2);
+document.getElementById("mcN(d2)").value = mcApproximationOfNd2;
+document.getElementById("mcN(d1)").value = mcApproximationOfNd1.toFixed(8);
+document.getElementById("pvFactorToExpir").value = pvExprirToNow.toFixed(6);
+document.getElementById("X*PVF*N(d2)").value = pvOfKNd2.toFixed(4);
+document.getElementById("S*N(d1)").value = sNd1.toFixed(4);
+document.getElementById("altMCBSCallValue").value = alternateMCBSCallValue.toFixed(4);
+
+
+}
+
+
+
+//function blackScholesStats() {
+
+
+
+  var wTicker = document.getElementById("ticker").value;
+  var wStockPx = document.getElementById("stockPx").value;
+  var wStrikePx = document.getElementById("strikePx").value;
+  var wVol = document.getElementById("vol").value;
+  //var wDaysToExpir = document.getElementById("daysToExpir").value;
+  var wDaysToExpir = document.getElementById("dte").value;
+  var wRate = document.getElementById("rate").value;
+  var wNumberOfBranches = document.getElementById("numberOfBranches").value;
+
+  var wDiv1 = document.getElementById("div1").value;
+  var wExDiv1Date = document.getElementById("daysToExDiv1").value;
+  var wDiv2 = document.getElementById("div2").value;
+  var wExDiv2Date = document.getElementById("daysToExDiv2").value;
+  var wDiv3 = document.getElementById("div3").value;
+  var wExDiv3Date = document.getElementById("daysToExDiv3").value;
+  var wDiv4 = document.getElementById("div4").value;
+  var wExDiv4Date = document.getElementById("daysToExDiv4").value;
+
+  var wSimulationNumber = document.getElementById("simulationNumber").value;
+
+  var wCDFInput = document.getElementById("CDFInput").value;
+  var wProbMassInput = document.getElementById("probMassInput").value;
+  var wCDFInverseInput = document.getElementById("cdfInverseInput").value;
+
+
+  var currStockPx = wStockPx * 1;
+
+  var strike = wStrikePx * 1;
+  var daysToExpir = wDaysToExpir * 1;
+  var bbranches = wNumberOfBranches * 1;
+  var daysPerBranch = daysToExpir / bbranches;
+
+  var e = 2.718281828459045 ;
+
+  var vol = (wVol / 100) * 1 ;
+  var time = (daysToExpir / 365)  ;
+  var timePerBranch = (time / bbranches) ;
+  var u = e**( vol * ((time/bbranches)**0.5) );
+  var d = 1 / u ;
+  var r = (wRate / 100) * 1 ;
+  var rr = e**( r * timePerBranch) ;
+  var p = (rr-d)/(u-d) ;
+
+  var pvFactor = e**( r * timePerBranch * (-1) ) ;
+  var pvExprirToNow = e**( r * time * (-1))
+
+  /////////////////////////////////
+
+
+  var lnSK = Math.log( currStockPxBS / strike ) ;
+  var lnKS = Math.log( strike / currStockPxBS ) ;
+  var lnSKClean = lnSK.toFixed(5) * 1;
+  var lnKSClean = lnKS.toFixed(5) * 1;
+  var pvOfK = strike * (e**(r * time * -1));
+  var pvOfKClean = pvOfK.toFixed(5) * 1;
+  var variance = vol**2;
+  var varianceClean = variance.toFixed(5) * 1;
+  var sqrtTime = Math.sqrt(time);
+  var sqrtTimeClean = sqrtTime.toFixed(5) * 1;
+  var oneStdDev = sqrtTime * vol ;
+  var oneStdDevClean = oneStdDev.toFixed(5) * 1;
+
+  var simulationNumber = wSimulationNumber * 1;
+
+  // need to round anything that takes an input and accesses the normalDensityList to 3 decmil places
+  var probMassInput = wProbMassInput * 1;
+  var probMassInputRounded = probMassInput.toFixed(3) ;
+
+  var cdfInput = wCDFInput * 1;
+  var cdfInputRounded = cdfInput.toFixed(3) ;
+
+  var cdfInverseInput = wCDFInverseInput * 1;
+
+
+  //  this is Black Scholes formula...dont need this for Monte Carlo
+  // var d1 = ( lnSKClean + ( ( r + (varianceClean/2) ) * time ) ) / ( oneStdDevClean ) ;
+  // var d2 =  d1 - oneStdDev ;
+  // var nD1 = cumlativeNormal(d1) ;
+  // var nD2 = cumlativeNormal (d2) ;
+  //
+  // var callBlackScholes = (currStockPxBS * nD1) - (pvOfK * nD2) ;
+  // var callBS = callBlackScholes.toFixed(2) * 1 ;
+  // var putBlackScholes = pvOfK - currStockPxBS + callBlackScholes ;
+  // var putBS = putBlackScholes.toFixed(2) * 1 ;
+
+
+
+
+
+
+
+
+  var div1 = wDiv1 * 1;
+  var daysToDiv1Ex = wExDiv1Date * 1;
+  var divBranch1 = daysToDiv1Ex / daysPerBranch;
+  var cleanDivBranch1 = Math.ceil(divBranch1);
+  var timeToDiv1Ex = daysToDiv1Ex / 365 ;
+  var div1PV = div1 * e**(r * timeToDiv1Ex * -1);
+
+  var div2 = wDiv2 * 1;
+  var daysToDiv2Ex = wExDiv2Date * 1;
+  var divBranch2 = daysToDiv2Ex / daysPerBranch;
+  var cleanDivBranch2 = Math.ceil(divBranch2);
+  var timeToDiv2Ex = daysToDiv2Ex / 365 ;
+  var div2PV = div2 * e**(r * timeToDiv2Ex * -1);
+
+  var div3 = wDiv3 * 1;
+  var daysToDiv3Ex = wExDiv3Date * 1;
+  var divBranch3 = daysToDiv3Ex / daysPerBranch;
+  var cleanDivBranch3 = Math.ceil(divBranch3);
+  var timeToDiv3Ex = daysToDiv3Ex / 365 ;
+  var div3PV = div3 * e**(r * timeToDiv3Ex * -1);
+
+  var div4 = wDiv4 * 1;
+  var daysToDiv4Ex = wExDiv4Date * 1;
+  var divBranch4 = daysToDiv4Ex / daysPerBranch;
+  var cleanDivBranch4 = Math.ceil(divBranch4);
+  var timeToDiv4Ex = daysToDiv4Ex / 365 ;
+  var div4PV = div4 * e**(r * timeToDiv4Ex * -1);
+
+  var div5 = 0;
+  var daysToDiv5Ex = 300;
+  var divBranch5 = daysToDiv5Ex / daysPerBranch;
+  var cleanDivBranch5 = Math.ceil(divBranch5);
+  var timeToDiv5Ex = daysToDiv5Ex / 365 ;
+  var div5PV = div5 * e**(r * timeToDiv5Ex * -1);
+
+  var div6 = 0;
+  var daysToDiv6Ex = 300;
+  var divBranch6 = daysToDiv6Ex / daysPerBranch;
+  var cleanDivBranch6 = Math.ceil(divBranch6);
+  var timeToDiv6Ex = daysToDiv6Ex / 365 ;
+  var div6PV = div6 * e**(r * timeToDiv6Ex * -1);
+
+  var div7 = 0;
+  var daysToDiv7Ex = 542;
+  var divBranch7 = daysToDiv7Ex / daysPerBranch;
+  var cleanDivBranch7 = Math.ceil(divBranch7);
+  var timeToDiv7Ex = daysToDiv7Ex / 365 ;
+  var div7PV = div7 * e**(r * timeToDiv7Ex * -1);
+
+  var div8 = 0;
+  var daysToDiv8Ex = 632;
+  var divBranch8 = daysToDiv8Ex / daysPerBranch;
+  var cleanDivBranch8 = Math.ceil(divBranch8);
+  var timeToDiv8Ex = daysToDiv8Ex / 365 ;
+  var div8PV = div8 * e**(r * timeToDiv8Ex * -1);
+
+
+  //var divInfo = [[1, cleanDivBranch1, div1],[2, cleanDivBranch2, div2],[3, cleanDivBranch3, div3],[4, cleanDivBranch4, div4],[5, cleanDivBranch5, div5],[6, cleanDivBranch6, div6],[7, cleanDivBranch7, div7],[8, cleanDivBranch8, div8]];
+
+
+  ///////// PV of Divs for Black Sholes (BS) option values ///////////
+  ///////// spot price for stock with divs in BS is currStockPx - PV of Divs ////////
+
+  var divInfoPV = [[1, cleanDivBranch1, div1PV],[2, cleanDivBranch2, div2PV],[3, cleanDivBranch3, div3PV],[4, cleanDivBranch4, div4PV],[5, cleanDivBranch5, div5PV],[6, cleanDivBranch6, div6PV],[7, cleanDivBranch7, div7PV],[8, cleanDivBranch8, div8PV]];
+
+  function currStockPxBlackScholes (x) {
+
+    var count = 0;
+    var iter = 0;
+    var cumlaDivPVList = [];
+    var cumlaDivPV = 0
+
+    while (divInfoPV[count][1] <= bbranches){
+      cumlaDivPVList.push(divInfoPV[count][2]);
+      count = count + 1;
+    }
+
+    while (iter <= (cumlaDivPVList.length - 1)) {
+      cumlaDivPV = cumlaDivPV + cumlaDivPVList[iter];
+      iter = iter + 1
+    }
+
+    var currStockPxForBS = currStockPx - cumlaDivPV;
+    var currStockPxForBS = x - cumlaDivPV;
+
+    return currStockPxForBS
+
+  }
+
+  var currStockPxBS = currStockPxBlackScholes (currStockPx);
+  currStockPxBS;
+
+
+  ////////////////////////////
+  ///////////////////////////
+  //  grabs the currStockPx from above and updates it in the BS Stats box
+  document.getElementById("stockPx2").value = currStockPx;
+
+  function updateStockPriceInBSStats () {
+    var wStockPx = document.getElementById("stockPx").value;
+    var stockPrice2 = wStockPx * 1 ;
+
+    return document.getElementById("stockPx2").value = stockPrice2
+  }
+
+
+  ////////////////////
+
+  //  grabs currStockPxBS from above and updates by thru index.html Stock Price box at top onchange="currStockPxBlackScholes ()"
+  document.getElementById("currStockPxBS2").value = currStockPxBS;
+
+  function updateCurrStockPxBSInBSStats () {
+
+    var wTicker = document.getElementById("ticker").value;
+    var wStockPx = document.getElementById("stockPx").value;
+    var wStrikePx = document.getElementById("strikePx").value;
+    var wVol = document.getElementById("vol").value;
+    //var wDaysToExpir = document.getElementById("daysToExpir").value;
+    var wDaysToExpir = document.getElementById("dte").value;
+    var wRate = document.getElementById("rate").value;
+    var wNumberOfBranches = document.getElementById("numberOfBranches").value;
+
+
+    var wDiv1 = document.getElementById("div1").value;
+    var wExDiv1Date = document.getElementById("daysToExDiv1").value;
+    var wDiv2 = document.getElementById("div2").value;
+    var wExDiv2Date = document.getElementById("daysToExDiv2").value;
+    var wDiv3 = document.getElementById("div3").value;
+    var wExDiv3Date = document.getElementById("daysToExDiv3").value;
+    var wDiv4 = document.getElementById("div4").value;
+    var wExDiv4Date = document.getElementById("daysToExDiv4").value;
+
+    var currStockPx = wStockPx * 1 ;
+    var strike = wStrikePx * 1;
+    var daysToExpir = wDaysToExpir * 1;
+    var bbranches = wNumberOfBranches * 1;
+    var daysPerBranch = daysToExpir / bbranches;
+
+    var e = 2.718281828459045 ;
+
+    var vol = (wVol / 100) * 1 ;
+    var time = (daysToExpir / 365)  ;
+    var timePerBranch = (time / bbranches) ;
+    var u = e**( vol * ((time/bbranches)**0.5) );
+    var d = 1 / u ;
+    var r = (wRate / 100) * 1 ;
+    var rr = e**( r * timePerBranch) ;
+    var p = (rr-d)/(u-d) ;
+
+    var pvFactor = e**( r * timePerBranch * (-1) ) ;
+    var pvExprirToNow = e**( r * time * (-1))
+
+    /////////////////////////////////
+
+
+    var lnSK = Math.log( currStockPxBS / strike ) ;
+    var lnKS = Math.log( strike / currStockPxBS ) ;
+    var lnSKClean = lnSK.toFixed(5) * 1;
+    var lnKSClean = lnKS.toFixed(5) * 1;
+    var pvOfK = strike * (e**(r * time * -1));
+    var pvOfKClean = pvOfK.toFixed(5) * 1;
+    var variance = vol**2;
+    var varianceClean = variance.toFixed(5) * 1;
+    var sqrtTime = Math.sqrt(time);
+    var sqrtTimeClean = sqrtTime.toFixed(5) * 1;
+    var oneStdDev = sqrtTime * vol ;
+    var oneStdDevClean = oneStdDev.toFixed(5) * 1;
+
+
+    var div1 = wDiv1 * 1;
+    var daysToDiv1Ex = wExDiv1Date * 1;
+    var divBranch1 = daysToDiv1Ex / daysPerBranch;
+    var cleanDivBranch1 = Math.ceil(divBranch1);
+    var timeToDiv1Ex = daysToDiv1Ex / 365 ;
+    var div1PV = div1 * e**(r * timeToDiv1Ex * -1);
+
+    var div2 = wDiv2 * 1;
+    var daysToDiv2Ex = wExDiv2Date * 1;
+    var divBranch2 = daysToDiv2Ex / daysPerBranch;
+    var cleanDivBranch2 = Math.ceil(divBranch2);
+    var timeToDiv2Ex = daysToDiv2Ex / 365 ;
+    var div2PV = div2 * e**(r * timeToDiv2Ex * -1);
+
+    var div3 = wDiv3 * 1;
+    var daysToDiv3Ex = wExDiv3Date * 1;
+    var divBranch3 = daysToDiv3Ex / daysPerBranch;
+    var cleanDivBranch3 = Math.ceil(divBranch3);
+    var timeToDiv3Ex = daysToDiv3Ex / 365 ;
+    var div3PV = div3 * e**(r * timeToDiv3Ex * -1);
+
+    var div4 = wDiv4 * 1;
+    var daysToDiv4Ex = wExDiv4Date * 1;
+    var divBranch4 = daysToDiv4Ex / daysPerBranch;
+    var cleanDivBranch4 = Math.ceil(divBranch4);
+    var timeToDiv4Ex = daysToDiv4Ex / 365 ;
+    var div4PV = div4 * e**(r * timeToDiv4Ex * -1);
+
+    var div5 = 0;
+    var daysToDiv5Ex = 300;
+    var divBranch5 = daysToDiv5Ex / daysPerBranch;
+    var cleanDivBranch5 = Math.ceil(divBranch5);
+    var timeToDiv5Ex = daysToDiv5Ex / 365 ;
+    var div5PV = div5 * e**(r * timeToDiv5Ex * -1);
+
+    var div6 = 0;
+    var daysToDiv6Ex = 300;
+    var divBranch6 = daysToDiv6Ex / daysPerBranch;
+    var cleanDivBranch6 = Math.ceil(divBranch6);
+    var timeToDiv6Ex = daysToDiv6Ex / 365 ;
+    var div6PV = div6 * e**(r * timeToDiv6Ex * -1);
+
+    var div7 = 0;
+    var daysToDiv7Ex = 542;
+    var divBranch7 = daysToDiv7Ex / daysPerBranch;
+    var cleanDivBranch7 = Math.ceil(divBranch7);
+    var timeToDiv7Ex = daysToDiv7Ex / 365 ;
+    var div7PV = div7 * e**(r * timeToDiv7Ex * -1);
+
+    var div8 = 0;
+    var daysToDiv8Ex = 632;
+    var divBranch8 = daysToDiv8Ex / daysPerBranch;
+    var cleanDivBranch8 = Math.ceil(divBranch8);
+    var timeToDiv8Ex = daysToDiv8Ex / 365 ;
+    var div8PV = div8 * e**(r * timeToDiv8Ex * -1);
+
+    var divInfoPV = [[1, cleanDivBranch1, div1PV],[2, cleanDivBranch2, div2PV],[3, cleanDivBranch3, div3PV],[4, cleanDivBranch4, div4PV],[5, cleanDivBranch5, div5PV],[6, cleanDivBranch6, div6PV],[7, cleanDivBranch7, div7PV],[8, cleanDivBranch8, div8PV]];
+
+    function currStockPxBlackScholes (x) {
+
+      var count = 0;
+      var iter = 0;
+      var cumlaDivPVList = [];
+      var cumlaDivPV = 0
+
+      while (divInfoPV[count][1] <= bbranches){
+        cumlaDivPVList.push(divInfoPV[count][2]);
+        count = count + 1;
+      }
+
+      while (iter <= (cumlaDivPVList.length - 1)) {
+        cumlaDivPV = cumlaDivPV + cumlaDivPVList[iter];
+        iter = iter + 1
+      }
+
+      var currStockPxForBS = currStockPx - cumlaDivPV;
+      var currStockPxForBS = x - cumlaDivPV;
+
+      return currStockPxForBS
+
+    }
+
+    //var currStockPxBS = currStockPxBlackScholes (currStockPx);
+    //currStockPxBS;
+
+    return document.getElementById("currStockPxBS2").value = currStockPxBlackScholes (currStockPx).toFixed(2);
+  }
+
+/////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+  /// this produces a list of std dev from -10 to 10 with an increment of .001
+
+  function stdDevCreate () {
+
+      var lowDev = -10.00;
+      var upperDev = 10;
+      var increment = .001;
+      var stdDevList = []
+
+      while (lowDev <= upperDev){
+          stdDevList.push(lowDev.toFixed(3)*1);
+          lowDev = lowDev + increment;
+      }
+
+      return stdDevList
+  }
+
+  var stdDevList = stdDevCreate();
+  stdDevList;
+
+
+
+
+  //// this takes the std dev list and creats a new list of the std devs squared
+  function stdDevSquared () {
+
+      var y = 0;
+      var x = stdDevList.length;
+      var stdDevSquaredList = [];
+
+      while (y < x) {
+
+          stdDevSquaredList.push(stdDevList[y]**2);
+          y = y + 1;
+
+      }
+
+      return stdDevSquaredList
+  }
+
+  var stdDevSquaredList = stdDevSquared ();
+  stdDevSquaredList;
+
+
+
+
+  //// this produces the standard normal curve
+  //// it takes each std dev from -10 to 10 (.001 increments) as an x values
+  ///  the yValue function creates the y value along the curve
+  ///  each x value now has a width of .001 and a height equal to the yValue
+  ///  we now have tons of tiny rectangles that approximate the area under the curve (which is 1)
+  // area is acutually (2*PI)**.5  but we divide by (2*PI)**.5 to make the area equal 1
+
+
+  function yValue () {
+
+      var pi = 3.14159265359
+      var invSqRootTwoPi = ( 1 / ((2*pi)**.5) ) ;
+      var e = 2.718281828;
+      var x = 0;
+      var interval = .001;
+      var normalDensity = [];
+
+      while (x < stdDevSquaredList.length) {
+
+          normalDensity.push  ( ( ( ((1 / (e**(stdDevSquaredList[x]))**.5 ))) * interval ) * ( invSqRootTwoPi ) );
+          x = x + 1;
+
+      }
+
+      return normalDensity
+
+  }
+
+  var normalDensityList = yValue ();
+  normalDensityList;
+
+  ////////////////////////
+
+  ////this function takes in a std dev (x value) and returns the area under the normal curve
+  /// up to that x value.....the Cumlative Normal Function (LHS Area) (1-LHS Area = RHS Area)
+  /// same as NORMDIST (cumla = true) in Excel or NORMSDIST if you use (mean=0, stdev = 1, cumla = true)
+  /// don't need cumlative normal (CDF) for montecarlo but you do for BS
+
+  function cumlativeNormal (stdDeviation) {
+
+      if (stdDeviation >= 10){
+          return 1
+      }
+
+      else if (stdDeviation < -10) {
+          return 0
+      }
+
+      else{
+
+          var x = ( (stdDeviation * 1000) + 10000 )
+          var y = 0;
+          var cumlaList = [];
+          zz = 0;
+
+          while (y <= x) {
+
+              zz = zz + normalDensityList[y];
+              y = y + 1 ;
+
+          }
+
+          //var cdf = zz - ( normalDensityList[x+1] * .1522982 )
+          var cdf = zz - ( normalDensityList[x+1] * .5 )
+          //var cdf = zz - ( normalDensityList[10000] * .1522982 )
+          //var cdf = zz - ( normalDensityList[10000] * .5 )
+
+          return cdf.toFixed(10) * 1
+
+
+      }
+
+
+  }
+
+  ////////////////////////////////////
+
+  /// this function returns a y value of a point on the normal curve with the x value being the std dev
+  /// 0 std dev is the mean of the distribution
+  /// same as NORMDIST False in Excel
+
+
+  function probabilityMassNormal (stdDeviation) {
+
+      var x = ( (stdDeviation * 1000) + 10000 )
+
+      var y = (normalDensityList[x]) * 1000
+
+
+
+      return y.toFixed(8) * 1
+
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////
+
+  // to make the NORMINV function in Excel we first need to build a list of std devs with each
+  // std dev's cumlative area under the curve....then we can look up a cumliative area (probablility)..
+  // and return the associated std dev.
+  //  the NORMDIST function in Excel takes a std dev and return the associated culmative area under the curve...
+  //  the NORMINV function takes a cumlative area and returns the associated std dev
+  //  we need the NORMINV for Monte Carlo simulations
+
+  function cumlaAreaNormalAtEachStdDev () {
+
+    var count = 0;
+    var iter = 0;
+    var sum = 0;
+    var cumlaAreaListRaw = [];
+    var cumlaAreaList = [];
+
+    while (count < normalDensityList.length){
+      cumlaAreaList.push(normalDensityList[count] + sum);
+      sum = sum + normalDensityList[count];
+      count = count + 1;
+    }
+
+    return cumlaAreaList
+  }
+
+  var cumlaAreaAtStdDevListRaw = cumlaAreaNormalAtEachStdDev ();
+  cumlaAreaAtStdDevListRaw;
+
+
+
+  ////////
+
+
+  function cleanCumlaAreaAtStdDevListRaw() {
+
+      var count = 0;
+      var iter = 0;
+      var cleanList = [];
+
+      while (count < cumlaAreaAtStdDevListRaw.length){
+
+          var item = cumlaAreaAtStdDevListRaw[count];
+          var cleanItem = item.toFixed(4) * 1 ;
+
+          cleanList.push(cleanItem);
+
+          count = count + 1;
+      }
+
+      return cleanList
+
+  }
+
+  var cumlaAreaAtStdDevList = cleanCumlaAreaAtStdDevListRaw();
+  cumlaAreaAtStdDevList;
+
+
+  ///////////////////////////////////////////////////////////////
+
+  function zip_upTwo (x,y){  //(x,y,z,a,b,c,d,e,f,g,h,i)
+    var iter1 = x.length - 1;
+    child1 = []
+    parent1 = []
+    count = 0
+
+    while (count <= iter1){
+
+      child1.push(x[count])
+      child1.push(y[count])
+      //child1.push(z[count])
+      //child1.push(a[count])
+      //child1.push(b[count])
+      //child1.push(c[count])
+      //child1.push(d[count])
+      //child1.push(e[count])
+      //child1.push(f[count])
+      //child1.push(g[count])
+      //child1.push(h[count])
+      //child1.push(i[count])
+
+
+      parent1.push(child1)
+      child1 = []
+      count = count + 1
+
+    }
+
+    return parent1
+
+  }
+
+  var sdAndCumlaArea = zip_upTwo(stdDevList, cumlaAreaAtStdDevList);
+  sdAndCumlaArea;
+
+  ///////////////////
+  // inverseCumlaAreaReturnsStdDev takes in a probability (really a std dev..or area under normal curve ....
+  //  since we are using mean of zero and std dev of 1)...and return the std dev associated with that prob..
+  //  this is the same as the NORMINV function in Excel
+  ///////////////////
+
+  function inverseCumlaAreaReturnsStdDev (areaUnderCurve) {
+
+      var count = 0;
+      var iter = 0;
+      var x = areaUnderCurve;
+
+      if (areaUnderCurve > 0.9999){
+        return 4.00
+      }
+
+      else if (areaUnderCurve < 0){
+        return -4.00
+      }
+
+      else {
+        while (x >= sdAndCumlaArea[count][1]) {
+
+            count = count + 1;
+        }
+
+        return sdAndCumlaArea[count][0]
+      }
+
+
+  }
+///////////////////////////////////////////
+
+  document.getElementById("probMass").value = probabilityMassNormal(probMassInputRounded).toFixed(5);
+
+  function updateProbMass () {
+    var wProbMassInput = document.getElementById("probMassInput").value;
+    var probMassInput = wProbMassInput * 1 ;
+    var probMassInputRounded = probMassInput.toFixed(3) ;
+
+    return document.getElementById("probMass").value = probabilityMassNormal(probMassInputRounded).toFixed(5);
+  }
+
+
+
+  document.getElementById("CDF").value = cumlativeNormal(cdfInputRounded).toFixed(5);
+
+  function updateCDF () {
+    var wCDFInput = document.getElementById("CDFInput").value;
+    var cdfInput = wCDFInput * 1 ;
+    var cdfInputRounded = cdfInput.toFixed(3)
+
+    return document.getElementById("CDF").value = cumlativeNormal(cdfInputRounded).toFixed(5);
+  }
+
+
+
+  document.getElementById("cdfInverse").value = inverseCumlaAreaReturnsStdDev(cdfInverseInput).toFixed(3);
+
+  function updateCDFInverse () {
+    var wCDFInverseInput = document.getElementById("cdfInverseInput").value;
+    var cdfInverseInput = wCDFInverseInput * 1 ;
+    var cdfInverseInputRounded = cdfInverseInput.toFixed(3) ;
+
+    return document.getElementById("cdfInverse").value = inverseCumlaAreaReturnsStdDev(cdfInverseInput).toFixed(3);
+  }
+
+
+
+
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  //// Integration Functions Start Here
+
+  document.getElementById("intStockPx").value = currStockPxBS.toFixed(2);
+
+  document.getElementById("intStrikePx").value = strike.toFixed(2);
+
+
+function updateIntegration (){
+
+  var wTicker = document.getElementById("ticker").value;
+  var wStockPx = document.getElementById("stockPx").value;
+  var wStrikePx = document.getElementById("strikePx").value;
+  var wVol = document.getElementById("vol").value;
+  //var wDaysToExpir = document.getElementById("daysToExpir").value;
+  var wDaysToExpir = document.getElementById("dte").value;
+  var wRate = document.getElementById("rate").value;
+  var wNumberOfBranches = document.getElementById("numberOfBranches").value;
+
+  var wDiv1 = document.getElementById("div1").value;
+  var wExDiv1Date = document.getElementById("daysToExDiv1").value;
+  var wDiv2 = document.getElementById("div2").value;
+  var wExDiv2Date = document.getElementById("daysToExDiv2").value;
+  var wDiv3 = document.getElementById("div3").value;
+  var wExDiv3Date = document.getElementById("daysToExDiv3").value;
+  var wDiv4 = document.getElementById("div4").value;
+  var wExDiv4Date = document.getElementById("daysToExDiv4").value;
+
+  var wSimulationNumber = document.getElementById("simulationNumber").value;
+
+  var wCDFInput = document.getElementById("CDFInput").value;
+  var wProbMassInput = document.getElementById("probMassInput").value;
+  var wCDFInverseInput = document.getElementById("cdfInverseInput").value;
+
+
+  var currStockPx = wStockPx * 1;
+
+  var strike = wStrikePx * 1;
+  var daysToExpir = wDaysToExpir * 1;
+  var bbranches = wNumberOfBranches * 1;
+  var daysPerBranch = daysToExpir / bbranches;
+
+  var e = 2.718281828459045 ;
+
+  var vol = (wVol / 100) * 1 ;
+  var time = (daysToExpir / 365)  ;
+  var timePerBranch = (time / bbranches) ;
+  var u = e**( vol * ((time/bbranches)**0.5) );
+  var d = 1 / u ;
+  var r = (wRate / 100) * 1 ;
+  var rr = e**( r * timePerBranch) ;
+  var p = (rr-d)/(u-d) ;
+
+  var pvFactor = e**( r * timePerBranch * (-1) ) ;
+  var pvExprirToNow = e**( r * time * (-1))
+
+  /////////////////////////////////
+
+
+  var lnSK = Math.log( currStockPxBS / strike ) ;
+  var lnKS = Math.log( strike / currStockPxBS ) ;
+  var lnSKClean = lnSK.toFixed(5) * 1;
+  var lnKSClean = lnKS.toFixed(5) * 1;
+  var pvOfK = strike * (e**(r * time * -1));
+  var pvOfKClean = pvOfK.toFixed(5) * 1;
+  var variance = vol**2;
+  var varianceClean = variance.toFixed(5) * 1;
+  var sqrtTime = Math.sqrt(time);
+  var sqrtTimeClean = sqrtTime.toFixed(5) * 1;
+  var oneStdDev = sqrtTime * vol ;
+  var oneStdDevClean = oneStdDev.toFixed(5) * 1;
+
+
+  //document.getElementById("intStockPx").value = currStockPxBS.toFixed(2);
+  //document.getElementById("intStrikePx").value = strike.toFixed(2);
+
+  var intStockPrice = document.getElementById("intStockPx").value
+  var intStikePrice = document.getElementById("intStrikePx").value
+
+  ////////////////////////////////////
+
+  function stockPxByStdDev (){
+    var count = 0;
+    var iter = 0;
+    var meanOfDist = intStockPrice * (e**( (r - (variance/2)) * time)) ;
+    var stockPxByStdDevList = [];
+
+    while (count < stdDevList.length){
+      stockPxByStdDevList.push( meanOfDist * (e**(stdDevList[count] * oneStdDev) )) ;
+      count = count + 1;
+    }
+    return stockPxByStdDevList
+  }
+
+  var stockPxAtEachStdDev = stockPxByStdDev();
+  stockPxAtEachStdDev;
+
+  ///////////////////////
+
+  function stockForIntegration () {
+    var count = 0;
+    var iter = 0;
+    var stockList = [] ;
+
+    while (count < stdDevList.length){
+      stockList.push(intStockPrice) ;
+      count = count + 1;
+    }
+    return stockList
+  }
+
+  var intStockPriceListForIntegration = stockForIntegration ();
+  intStockPriceListForIntegration;
+
+  ///////////////////////
+
+  function intStikePriceForIntegration () {
+    var count = 0;
+    var iter = 0;
+    var intStikePriceList = [] ;
+
+    while (count < stdDevList.length){
+      intStikePriceList.push(pvOfK) ;
+      count = count + 1;
+    }
+    return intStikePriceList
+  }
+
+  var pvOfKListForIntegration = intStikePriceForIntegration ();
+  pvOfKListForIntegration;
+
+  ////////////////////////
+
+  function callPOByStdDev () {
+    var count = 0;
+    var iter = 0;
+    var callPOList = [] ;
+
+    while (count < stdDevList.length) {
+      if (stockPxAtEachStdDev[count] < intStikePrice){
+        callPOList.push(0) ;
+      }
+      else{
+        callPOList.push( stockPxAtEachStdDev[count] - intStikePrice) ;
+      }
+      count = count + 1;
+    }
+    return callPOList
+  }
+
+  var callPOAtEachStdDev = callPOByStdDev () ;
+  callPOAtEachStdDev;
+
+///////////////////////////////////////////////////
+
+function stockPxByStdDevNewMean () {
+  var count = 0;
+  var iter = 0;
+  var newintStockPrice = intStockPrice * (e**(variance * time)) ;
+  var newMeanOfDist = newintStockPrice * ( e**( (r- (variance/2) ) * time) ) ;
+  var stockPxByStdDevNewMeanList = [] ;
+
+  while (count < stdDevList.length){
+    stockPxByStdDevNewMeanList.push( newMeanOfDist * (e**(stdDevList[count] * oneStdDev) )) ;
+    count = count + 1;
+  }
+  return stockPxByStdDevNewMeanList
+}
+
+var stockPxAtEachStdDevForNewMean = stockPxByStdDevNewMean ();
+stockPxAtEachStdDevForNewMean;
+
+///////////////////////
+
+function callPOByStdDevForNewMean () {
+  var count = 0;
+  var iter = 0;
+  var callPOListForNewMean = [] ;
+
+  while (count < stdDevList.length) {
+    if (stockPxAtEachStdDevForNewMean[count] < intStikePrice){
+      callPOListForNewMean.push(0) ;
+    }
+    else{
+      callPOListForNewMean.push( stockPxAtEachStdDevForNewMean[count] - intStikePrice) ;
+    }
+    count = count + 1;
+  }
+  return callPOListForNewMean
+}
+
+var callPOAtEachStdDevForNewMean = callPOByStdDevForNewMean () ;
+callPOAtEachStdDevForNewMean;
+
+//////////////////////
+
+function zip_upSix (x,y,z,a,b,c){  //(x,y,z,a,b,c,d,e,f,g,h,i)
+  var iter1 = x.length - 1;
+  child1 = []
+  parent1 = []
+  count = 0
+
+  while (count <= iter1){
+
+    child1.push(x[count])
+    child1.push(y[count])
+    child1.push(z[count])
+    child1.push(a[count])
+    child1.push(b[count])
+    child1.push(c[count])
+    //child1.push(d[count])
+    //child1.push(e[count])
+    //child1.push(f[count])
+    //child1.push(g[count])
+    //child1.push(h[count])
+    //child1.push(i[count])
+
+
+    parent1.push(child1)
+    child1 = []
+    count = count + 1
+
+  }
+
+  return parent1
+
+}
+
+var integrationLists = zip_upSix(normalDensityList, stockPxAtEachStdDev, intStockPriceListForIntegration, pvOfKListForIntegration, callPOAtEachStdDev, callPOAtEachStdDevForNewMean );
+integrationLists;
+
+//////////////////////
+
+function integrateCallPO (){
+  var count = 0;
+  var iter = 0;
+  var weightedCallPOSum = 0 ;
+  var intCallPOList = [] ;
+
+  while (count < normalDensityList.length){
+    intCallPOList.push ( integrationLists[count][0] * integrationLists[count][4] ) ;
+    count = count + 1 ;
+  }
+
+  while (iter < normalDensityList.length){
+    weightedCallPOSum = weightedCallPOSum + intCallPOList[iter] ;
+    iter  = iter + 1;
+  }
+
+  return weightedCallPOSum
+
+}
+
+var integratedCallPO = integrateCallPO ();
+integratedCallPO;
+
+var pvOfIntegratedCallPO = pvExprirToNow * integratedCallPO;
+
+
+document.getElementById("intCallPO").value = integratedCallPO.toFixed(5);
+
+document.getElementById("pvOfIntCallPO").value = pvOfIntegratedCallPO.toFixed(5);
+
+///////////////////////
+
+function integrateStockPxAtEachStdDevAboveintStikePrice (){
+  var count = 0;
+  var iter = 0;
+  var weightedStockPxAboveintStikePriceForNd2CalcedWithCurrStocPxkBS = 0 ;
+  var intStockAboveintStikePriceVsNd2 = [] ;
+
+  while (count < normalDensityList.length){
+    if(integrationLists[count][4] > 0 ){
+      intStockAboveintStikePriceVsNd2.push ( integrationLists[count][0] * integrationLists[count][1] ) ;
+      count = count + 1 ;
+    }
+    else{
+      intStockAboveintStikePriceVsNd2.push ( 0 ) ;
+      count = count + 1 ;
+    }
+  }
+
+  while (iter < normalDensityList.length){
+    weightedStockPxAboveintStikePriceForNd2CalcedWithCurrStocPxkBS = weightedStockPxAboveintStikePriceForNd2CalcedWithCurrStocPxkBS + intStockAboveintStikePriceVsNd2[iter] ;
+    iter  = iter + 1;
+  }
+
+  return weightedStockPxAboveintStikePriceForNd2CalcedWithCurrStocPxkBS
+
+}
+
+var intSNd2 = integrateStockPxAtEachStdDevAboveintStikePrice ();
+intSNd2;
+
+var pvOfIntSNd2 = pvExprirToNow * intSNd2 ;
+
+
+document.getElementById("integratedSNd2").value = intSNd2.toFixed(5);
+
+document.getElementById("pvOfIntegratedSNd2").value = pvOfIntSNd2.toFixed(5);
+
+////////////////////////////////////////
+
+function integrateintStikePricePxVsNd2ValuesAboveintStikePrice (){
+  var count = 0;
+  var iter = 0;
+  var weightedintStikePricePxForNd2AboveintStikePrice = 0 ;
+  var intintStikePricePxVsNd2ForValuesAboveK = [] ;
+
+  while (count < normalDensityList.length){
+    if(integrationLists[count][4] > 0 ){
+      intintStikePricePxVsNd2ForValuesAboveK.push ( integrationLists[count][0] * integrationLists[count][3] ) ;
+      count = count + 1 ;
+    }
+    else{
+      intintStikePricePxVsNd2ForValuesAboveK.push ( 0 ) ;
+      count = count + 1 ;
+    }
+  }
+
+  while (iter < normalDensityList.length){
+    weightedintStikePricePxForNd2AboveintStikePrice = weightedintStikePricePxForNd2AboveintStikePrice + intintStikePricePxVsNd2ForValuesAboveK[iter] ;
+    iter  = iter + 1;
+  }
+
+  return weightedintStikePricePxForNd2AboveintStikePrice
+
+}
+
+var intKNd2 = integrateintStikePricePxVsNd2ValuesAboveintStikePrice ();
+intKNd2;
+
+document.getElementById("integratedKNd2").value = intKNd2.toFixed(5);
+
+////////////////////////////////////////
+
+function integrateintStockPriceVsNewMeanNd2 (){
+  var count = 0;
+  var iter = 0;
+  var weightedStockPxBSForNd2AboveintStikePriceForNewMean = 0 ;
+  var intStockPxBSVsNd2ForValuesAboveKForNewMean = [] ;
+
+  while (count < normalDensityList.length){
+    if(integrationLists[count][5] > 0 ){
+      intStockPxBSVsNd2ForValuesAboveKForNewMean.push ( integrationLists[count][0] * integrationLists[count][2] ) ;
+      count = count + 1 ;
+    }
+    else{
+      intStockPxBSVsNd2ForValuesAboveKForNewMean.push ( 0 ) ;
+      count = count + 1 ;
+    }
+  }
+
+  while (iter < normalDensityList.length){
+    weightedStockPxBSForNd2AboveintStikePriceForNewMean = weightedStockPxBSForNd2AboveintStikePriceForNewMean + intStockPxBSVsNd2ForValuesAboveKForNewMean[iter] ;
+    iter  = iter + 1;
+  }
+
+  return weightedStockPxBSForNd2AboveintStikePriceForNewMean
+
+}
+
+var intSNd2ForNewMean = integrateintStockPriceVsNewMeanNd2 ();
+intSNd2ForNewMean;
+
+document.getElementById("integratedSNd2ForNewMean").value = intSNd2ForNewMean.toFixed(5);
+
+////////////////////////////////////////
+
+}
