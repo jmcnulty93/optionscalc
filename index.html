@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <!-- My CSS Styles -->
-    <link rel="stylesheet" href="firstoptionstyles.css">
+    <link rel="stylesheet" href="css/timestyles.css">
 
 
     <!--js and jquery for drop down menus-->
@@ -24,7 +24,7 @@
         <br />
         <!--<a href="page2.html">page2</a>
         <br />-->
-        <button id="calc" type="button" onclick="goCalc()">Calculate</button>
+        <button id="calc" type="button" onclick="goCalc(), updateCurrStockPxBSInBSStats ()">Calculate</button>
         <br />
 
         <form class="user-inputs" action="index.html" method="post">
@@ -37,7 +37,7 @@
             </div>
             <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
               <label class="titles">Stock Price</label>
-              <input class="boxes" id="stockPx" type="text" value = "51">
+              <input class="boxes" id="stockPx" type="text" value = "51" onchange="updateStockPriceInBSStats(), currStockPxBlackScholes (), updateCurrStockPxBSInBSStats ()">
             </div>
             <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
               <label class="titles">Strike</label>
@@ -78,7 +78,7 @@
             </div>
             <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
               <label class="titles">Exact CST Time</label>
-              <button id="upDateRightNow" type="button" onclick="pushDaysToExpirCalcExactSeconds(), pushExactDaysToExDiv1Calc ()">Update Time</button>
+              <button id="upDateRightNow" type="button" onclick="pushDaysToExpirCalcExactSeconds(), pushExactDaysToExDiv1Calc (), pushExactDaysToExDiv2Calc (), pushExactDaysToExDiv3Calc (), pushExactDaysToExDiv4Calc ()">Update Time</button>
             </div>
             <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
               Click "Update Time" to recalc daysToExpir from Today's Date down to second
@@ -107,6 +107,7 @@
           </div>
 
 
+<!--dividends button -->
           <button type="button" class="dividends">Dividends</button>
             <div class="content">
 
@@ -184,19 +185,668 @@
           <div class="row">
 
             <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
-              <label class="titles">American Call</label>
+              <label class="titles">American Call Binomial</label>
               <input class="boxes" id="americanCall" type="text" value = "0">
             </div>
             <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
-              <label class="titles">American Put</label>
+              <label class="titles">American Put Binomial</label>
               <input class="boxes" id="americanPut" type="text" value = "0">
             </div>
           </div>
 
+          <div class="row">
+
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Euro Call Binomial</label>
+              <input class="boxes" id="euroCallBinomial" type="text" value = "0">
+            </div>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Euro Put Binomial</label>
+              <input class="boxes" id="euroPutBinomial" type="text" value = "0">
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Euro Call BlackScholes</label>
+              <input class="boxes" id="euroCallBS" type="text" value = "0">
+            </div>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">Euro Put BlackScholes</label>
+              <input class="boxes" id="euroPutBS" type="text" value = "0">
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label id="numberOfSimulations" class="titles"># of Simulations</label>
+              <input class="boxes" id="simulationNumber" type="text"  value = "100">
+            </div>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles"></label>
+              <button id="runSimulations" type="button" onclick="monteCarlo()">Run Simulations</button>
+            </div>
+            <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+              <label class="titles">MC Call Average</label>
+              <input class="boxes" id="mcCallValue" type="text" value="0" >
+            </div>
+
+          </div>
+
+
+<!--black scholes notes button -->
+          <button type="button" class="blackScholesNotes">Black Scholes Notes</button>
+            <div class="content">
+              <div>
+                <p>Black Scholes:<p/>
+
+                  Suppose XYX stock is trading 51.00.<br />
+                  XYZ does not pay dividends.  The current risk free rate is 0.00%.<br />
+                  Consider a Call Option on XYZ that has a Strike Price of 55.<br />
+                  The Call expires in 30 days and cannot be exercised before exipiration. (European Style)<br />
+                  <br />
+                  At expiration the Call Option will be worth XYZ - Strike if the XYZ > Strike, otherwise it <br />
+                  will have a mimimum value of zero.  Therefore, the Call Payout at Expiration is zero or XYZ-Strike.<br />
+                  There will only be a positive payout if XYZ is above Strike at Expiration.<br />
+                  When the Stock Price is above the Strike Price, the Strike or Option is considered to be In-The-Money.<br />
+                  <br />
+                  The Black Scholes Model tries to answer the question: What is the Call Option worth today?<br />
+                  (for a European Style option)<br />
+                  <br />
+                  To do this model assigns a probabilty to the Strike Price being In-The-Money at Expiration.<br />
+                  In other words, the probability that XYZ is greater than the Strike at Expiration. <br />
+                  In the model, N(d2) represents the probabilty that the Stock Price is greater than the Strike Price <br />
+                  at Expiration. <br />
+                  If the Stock Px is greater than the Strike Px at Expiration (the Strike is In-The-Money), then the Call<br />
+                  will be exersised and the owner of the Call will pay the Strike Px for the Stock. This will happen in the <br />
+                  future, at expiration.  Therefore, we will be concerned with the probability of paying the Strike Px in the <br />
+                  future.  In today's terms that is the probabilty of paying Present Value of the Strike.<br />
+
+                  <br />
+                  If XYZ is greater than the Strike at Expiration, then the Call will have a positive payout.<br />
+                  So, Black Sholes also must consider all possible positve payouts and assign them a probabilty<br />
+                  to generate an average probability weighted payout.<br />
+                  <!--The average probability weighted payout (APWP) would potentialy be recieved in the future, at Expiration.<br  />
+                  Therefore the present value of the APWP is today's value for the Call Option according to the <br />
+                  Black Scholes Model.<br />-->
+                  <br />
+
+                  <br />
+                  Black Scholes needs 5 inputs:<br />
+                  1. S = Current Stock Px (less that Present Value of Dividends that go Ex before Expiration)<br />
+                  2. K = Strike Price<br />
+                  3. t = Time to Expiration<br />
+                  4. r = Risk Free Rate<br />
+                  5. vol = Volatility (future Volatility: now to expiration)<br />
+                  <br />
+                  <br />
+                  All inputs are known except for the Volatility (Vol).<br />
+                  Vol is an annualized standard deviation. <br />
+                  We need the future Vol.  A typical assumption to make is that future Vol will be similar to past Vol. <br />
+                  The option we are considering has 30 days to Expiration. So, we might look at the past 30 days of stock <br />
+                  price data.  We can calculate the standard deviation of the past 30 calendar days of closing prices.  <br />
+                  On a calendar, some of those days will be weekends or holidays.  So, we will have less than 30 closing prices.<br />
+                  However, there are still 30 days to Expiration.  So, for the Time to Expiration input we will use 30/365. <br />
+                  A calendar month will have roughly 21 trading days.  A calendar year will have roughly 252 trading days.<br />
+                  So, when we calc the std dev of the daily closing prices of the stock we will annualize it be multiplying it <br />
+                  by the square root of 252. If we calc'd the std dev of weekly closes, then we would annualize by multiplying <br />
+                  it by the square root of 365/7 (the # of weeks per yr).  If it were monthly closes then the sqrt of 12. <br />
+                  It could be a shorter time period.  Perhaps the stock price in 10 minute intervals.<br />
+                  The key is to think:  How many data points would I collect in a year. Then multiply by the sqrt of that number.<br />
+                  <br />
+                  Our option has 30 days to expiration and we are trying to estimate a future vol for this time period <br />
+                  based on the past 30 calendar days of daily closing prices in the stock (approx 21).  This is a rather simple scheme. <br />
+                  It could be more complicated to capture more data.  We could use a rolling 30-day average for the past year.<br />
+                  We could weight each 30 day std dev (which has been annualized) to have a weighted rolling 30-day average. <br />
+                  Essentially, you could use any scheme you think is logical to model the stock's future volatiltiy for the <br />
+                  time period you need.<br />
+                  <br />
+                  Once you have an estimate of future volatility, it can be used to create a probability distribution and therefore<br />
+                  a probability.  <br />
+                  <br />
+                  Vol * sqrt(t) = One Std Dev for the time peridod. <br />
+                  2 * (Vol * sqrt(t)) = Two Std Dev or the time period. <br />
+                  These can be translated into stock prices too: <br />
+                  StockPx * e^(Vol * sqrt(t)) = One Std Dev Up <br />
+                  StockPx * e^(2*(Vol * sqrt(t))) = Two Std Dev Up <br />
+                  StockPx * e^(-Vol * sqrt(t)) = One Std Dev Down <br />
+                  StockPx * e^(-2*(Vol * sqrt(t))) = Two Std Dev Down <br />
+                  <br />
+                  A major assumption of the Black Sholes Model is that the percentage returns for a given period (daily, weekly, monthly, 5 minute)<br />
+                  are Normally Distributed. A Normal Distrubtion can give you a proabilty of an item being greater or less than a certain threshold<br />
+                  if you can define how std devs the item is from the mean of the distribution.  In the BS Model we calculate how many std devs the <br />
+                  Strike Price (K) is from from the Current Stock Price (S):<br />
+                  <br />
+                  Number of Std Dev K from S = LN(K/S) / (vol * SQRT(time)) <br />
+                  <br />
+                  LN(K/S) is the natural log of K/S.  <br />
+                  K/S tells us how far K is from S in simple percent. However, we always need the Continously Compunded rate of return.<br />
+                  In the example above:  S = 51 and K = 55 <br />
+                  K/S = 55/51 = 1.07843 ....K is 7.843% greater than S<br />
+                  LN(K/S) = .07551 ...this is: what exponent of e makes e^x = K/S...the continous rate of return in which K is greater than S.<br />
+
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  The BS model makes use of the statistics of a Normal Distribution.<br />
+                  A set of data will have a mean. Each item of data will fall a certain number of standard deviations from the mean.<br />
+                  The data set is also referred to as a distribution. The mean of the data set is also the mean of the distribution. <br />
+                  The closing prices of the stock ticker AAPL for the past 90 days is an exaple of a data set or distribution.<br />
+                  As a general rule of thumb: a data set follows a Normal Distribution if roughly 68.2% of the items fall within 1 stdev<br />
+                  from the mean, 95.4% of the items fall within 2 stdev and 99.6% of the items fall within 3 stdev. <br />
+                  The amount of standard devaitions an item in the data set falls from the mean is known as the item's Z-Score.<br />
+                  Also 50% of the items will fall above the mean and 50% will fall below.<br />
+                  You are probably familar with the Bell Curve:<br />
+                  <!--<div class="col-lg-12">
+                    <img class="title-image" src="/Users/jamesmcnulty/Desktop/Web Development/time/images/Standard_deviation_diagram.svg.png" alt="Bell Curve Diagram">
+                    <img class="title-image" src="images/Standard_deviation_diagram.svg.png" alt="Bell Curve Diagram">
+                  </div>-->
+                  <div class="col-lg-12">
+                    <!--<img class="title-image" src="/Users/jamesmcnulty/Desktop/Web Development/time/images/Normal Distribution deviations.png">-->
+                    <img class="title-image" src="images/Normal Distribution deviations.png" alt="Bell Curve Diagram">
+                  </div>
+                  This Bell Curve or Normal Distribution depicted here has a mean of zero and a standard deviaton of 1.<br />
+                  A Normal Distribution with a mean of zero and stdev of 1 is known as the Standard Normal Distribution.<br />
+                  On the graph of the Standard Normal Distribution above, you see standard deviations plotted on the x-axis.<br />
+                  In other words the x values are the standard devations you see.<br />
+                  You can obtain the y values on the graph by feeding each  x value into the equation below:<br />
+                  (this is a graph of the Standard Normal curve, so you need to use a mean of zero and a standard deviation of 1)<br />
+                  <div class="col-lg-12">
+                    <!--<img class="title-image" src="/Users/jamesmcnulty/Desktop/Web Development/time/images/Standard_deviation_diagram.svg.png" alt="Bell Curve Diagram">-->
+                    <img class="title-image2" src="/Users/jamesmcnulty/Desktop/Web Development/time/images/a45cef4ca1e2fcd4d367ecff5806d8a2878d3821.svg" alt="Bell Curve Diagram">
+                  </div>
+                  With an x value and y value you can plot the Standard Normal Curve.  <br />
+                  A Standard Normal Distribution is a data set that has a mean of zero and a standard deviation of 1 and follows the general<br />
+                  rule of thumb (68-95-99).<br />
+                  <br />
+                  With this curve, a probabiltiy distribution can be constructed for our data set. <br />
+                  To consider probability we must focus on the area between the x-axis and the bell curve.<br />
+                  This area us usually referred to the area under the curve.<br />
+                  <br />
+                  Consider the std dev or Z-Score of 2.00.<br />
+                  2.00 is the x-value we will feed into the equation for the bell curve using a mean of zero and a std dev of 1 in the equation.<br />
+                  This will produce a y-value of 0.053991.<br />
+                  Now we have an (x,y) coordinate of (2.00, 0.053991).  Take a look at the Standard Normal Bell Curve.<br />
+                  You can visually estimate that this point falls right on the curve.<br />
+                  <br />
+                  We could have chosen any Z-Score (x-value) for the curve equation to produce a y-value and therefore<br />
+                  a coordinate that falls on the curve.  We could have chosen -0.55 or -0.550001...there are an infinite number<br />
+                  of Z-Scores we can feed through the equation.  Therefore there an infinte number of y-values and an infinite number of <br />
+                  points on the curve.<br />
+                  <br />
+                  Let's take a look at the Z-Score of 1.00 and the Z-Score of 0.00.  Find this on the x-axis of the Normal Standard Curve graph.<br />
+                  Remember the Standard Normal Distribution (which is represented in the graph) has a mean of zero and a standard deviation of 1.<br />
+                  In the Standard Normal Distribution, 68.2% of the items in the data set will have a Z-Score (standard deviation) within <br />
+                  one standard deviation of the mean, which is zero.  Another way to state this is that 68.2% of the items in the distribution will<br />
+                  have a Z-Score between -1.00 and 1.00.  <br />
+                  Don't confuse the Z-Score of an item in the distribution with the standard deviation of the distribution.<br />
+                  The x-axis of the graph is showing Z-Scores (standard deviation from the mean).<br />
+                  If the distribution is Standard Normal then 68.2% of the items will have a Z-Score between -1.00 and 1.00 <br />
+                  because the distribution has a mean of zero and a standard deviation of 1.<br />
+                  Likewise, as you can see on the graph, 95.4% of the items in the distribution have a Z-Score -2.00 and 2.00. <br />
+                  <br />
+                  Going back to the area under the curve:<br />
+                  For the Standard Normal Distribution the area under the curve is 1.<br />
+                  The area under the curve between -1.00 and 1.00 standard deviaitons from the mean of zero (Z-Scores) is 0.682.<br />
+                  The area under the curve within -2.00 and 2.00 Z-Scores is 0.954 and 0.997 for Z-Scores between -3.00 and 3.00.<br />
+                  The area under the curve below the mean is 0.50.  The area under the curve above the mean is 0.50. <br />
+                  Again consider the Z-Score of 1.00.  The area under the curve from Negative Infinity Z-Score to 1.00 Z-Score <br />
+                  is 0.841.  The area above 1.00 Z-Score to Positive Infinity Z-Score is 1 - 0.841 = 0.159. <br />
+                  <br />
+                  Another way to think about the area under the curve is in the form of probability of randomly finding a particlar Z-Score <br />
+                  above, below or between certain thresholds.<br />
+                  All possible Z-Scores for a Standard Normal Distribution are represented by the area under the curve, which is 1. <br />
+                  Half the area is below the mean and half the Z-Scores will fall below the mean. 34.1% of the area under the curve is <br />
+                  between the mean and 1.00 Z-Scores.  Therefore, if you are randomly selecting items from your data set, 34.1% of them will have<br />
+                  a Z-Score greater than zero and less than 1.00.  15.9% of the items will have a Z-Score greater than 1.00 and 84.1% of the  <br />
+                  Z-Scores will be less than 1.00.<br />
+                  <br />
+                  The area under the curve up to a certain Z-Score is known as the Culative Distribution Function.<br />
+                  The CDF of 1.00 Z-Score is 0.841.  The CDF of 0.00 Z-Score is 0.50.  The CDF of -2.00 Z-Score is 0.021.<br />
+                  Therefore, the CDF is the probability of an item in the data set (distribution) having a Z-Score of less than<br />
+                  the chosen Z-Score.  Again, the CDF of -2.00 Z-Score is 0.021.  The probablility of an item in the data set <br />
+                  having a Z-Score of less than -2.00 Z-Scores is 2.1%.  The probabitly of an item having a Z-Score or greater <br />
+                  than -2.00 is 97.9%.<br />
+
+                  <br />
+                  It is important to note that these probabilities are for ranges of Z-Scores.<br />
+                  Remember, there are in infinite amount of Z-Scores.  Therefore, the probabitily of one particular Z-Score is <br />
+                  1 divided by infinity which is essentially zero. Anything divided by infinity is basically zero.<br />
+                  Recall we could produce the Standard Normal Curve by feeding a Z-Scores (x-values) into the <br />
+                  equation for the curve to produce a y-value.  This is a function. This particular function is referred to as a <br />
+                  coniuous function because it can take in and out put an infinte number of values. In contrast a discrete function<br />
+                  would take in a finite or infinite number of values and output a finite number of values.  <br />
+                  Since the Standard Normal Curve is produced by a continous function, the area below the curve within specific ranges <br />
+                  is calculated with the maths of calculus through the method of integration. The examples used so far have been Z-Scores <br />
+                  that are marked on the graph.  But what is we need the area between Negative Infinity Z-Score and 1.22 Z-Score?<br />
+                  This is the same as the CDF of 1.22 Z-Score.  For this we would go to a CDF table which are pre-calculated areas under<br />
+                  the Standard Normal Curve for a large amount of Z-Scores.  The area listed on the table is the area from Neg Inf Z-Score <br />
+                  to the chosen Z-Score, in other words the CDF of the chosen Z-Score.  Of course the table does not have an infinite amount<br />
+                  of Z-Scores.  Typically, the table lists CDFs for Z-Scores from -3.999 to 0.00 in an interval .001.<br />
+                  The area under the curve at -3.999 Z-Score is 0.00003.  The Standard Normal Distribution has symetry.<br />
+                  As a result, the area above the curve at 3.999 Z-Score is 0.0003. Therefore, 99.99994% of the area under the <br />
+                  curve lies within 4.00 Z-Scores or 4.00 standard deviations from the mean. <br />
+                  <br />
+                  Suppose you need the CDF for 0.73 Z-Score: <br />
+                  0.73 Z-Score CDF = 1 - (-0.73 Z-Score CDF)<br />
+                  The CDF for -0.73 Z-Score is 0.23270.  Therefore the CDF for 0.73 Z-Score = 1 - 0.23270 = 0.76730.<br />
+                  The area under the Standard Normal Curve from Neg Inf Z-Score to 0.73 Z-Score is 0.76730. <br />
+                  The probability that an item from the data set has a Z-Score of less than 0.73 is 76.73%<br />
+                  <br />
+                  Suppose you want the probablilty that a Z-Score is less than 0.73 and greater than 0.50. <br />
+                  The solution is: 0.73 Z-Score CDF - 0.50 Z-Score CDF =  0.76730 - 0.69146 = 0.07584.  <br />
+                  <br />
 
 
 
-          <button type="button" class="greeks">Greeks</button>
+                  <a style="color: orange;"href="https://math.stackexchange.com/questions/901279/constructing-the-normal-cdf-z-tables" target="_blank">CDF Table Link</a>  <br />
+
+
+                  <br />
+                  <br />
+
+                  S = Current Stock Price<br />
+                  K = Strike Price<br />
+                  t = time to expiration = (days to expitation / 365)<br />
+                  r = risk free rate for the time to expiration (treasury yield that corresponds to t)<br />
+                  var/2 = variance divided by 2 <br />
+                  vol = sqrt(variance) <br />
+                  var = variance = vol * vol = vol^2 = vol**2 <br />
+                  <br />
+                  LN(K/S) is:  S * e^? = K .....in other words LN(K/S) = ?.....LN(K/S) is the exponent to e that makes S*e^?=K<br />
+                  e = Euler's Number which is approximately 2.718281828<br />
+                  LN(K/S) is the % distance from K to S (continously compounded)<br />
+                  <br />
+                  ((r - var/2)*t) = mean (mean of the normal distribution)<br />
+                  in short: a risky asset's return has two components:  risk free rate of return +/- the risky rate of return<br />
+                  all risky assets in a risk neutral world will increase by the risk free rate over the time period.<br />
+                  in addition, each risk assets will increase or decrease by their unique risky rate of return (which is assumed to by normally distributed)<br />
+                  r will be the mean return with one caveat:<br />
+                  risky asset's returns will be eroded by half the variance over the time period.<br />
+                  subtracting var/2 from the mean is an approximation of the Geometirc Mean (Geometirc Mean = Compunded Annual Growth Rate (CAGR))<br />
+                  Therefore r is Arithmetic Mean (average). Subtracting var/2*t from the Arithmetic Mean will give us an estimate of the CAGR. <br />
+                  This can also be translated into a Stock Price.  The Stock Price that represents the mean of the distribution is : <br />
+                  SMean = S * e^[((r - var/2)*t)]   <br />
+                  <br />
+                  <br />
+                  [ vol * sqrt(time)] = one standard deviaiton for the time period<br />
+                  <br />
+                  d2 = { [ LN(K/S) - ((r - var/2)*t) ] / [ vol * sqrt(t)] } * -1<br />
+                  d1 = d2 + [ vol * sqrt(time)]<br />
+                  <br />
+                  <br />
+                  d2 is a Z-Score. <br />
+                  LN(K/S) is the continously compounded rate that makes the Stock = Strike. <br />
+                  In other words, the rate of return needed to make the Stike In-the-Money.<br />
+                  ((r - var/2)*t) is the mean of the distribution. <br />
+                  <br />
+                  LN(K/S) - ((r - var/2)*t) can be re-written as : LN(K/SMean) <br />
+                  So, LN(K/S) - ((r - var/2)*t) is just the continously compounded percentage difference between the Strike and the Mean of the Distribution.<br />
+                  This is all divided by One Standard Deviation:   vol * sqrt(t) <br />
+                  This is a Z-Score.  It tells us how may std devs the Strike is from the Mean. <br />
+                  A CDF Table will tells us the probability of a lower Z-Score than the one we calculated.  <br />
+                  The Strike Px remains fixed.  The Stock Px can varry.  So it is the Stock Px that can change the Z-Score. <br />
+                  So, the Z-Score tells the probability of a Stock Px lower than the Strike Px at expiration. <br />
+                  However, we need the probabiltiy of the Stock being greater than the Strike at Expiration. <br />
+                  Or rather, the probability of the Call having a positive payout at Expiraton. <br />
+                  Therefore, the Z-Score must by multiplied by -1.  Then we have d2. <br />
+                  N(d2) is simply the the probability associated with the d2 (Z-Score * -1) we calc'd on the CDF table.<br />
+                  Again, N(d2) is the probablilty the Strike is In-the-Money at Expiration.  Not by how much, just simply if the Stock is greater than the Strike.<br />
+                  Another way to think about it is that if the Call is exercised on Expiration, then the owner will payout the Strike Price. <br />
+                  If this payout of the Strike Price happens, it will happen in the future, at Expiration. <br />
+                  Therefore N(d2) is the proability of payout the Present Value of the Strike Price (PVofK). <br />
+                  In the Call Value below, this is represented by the term :  [ PVofK * N(d2) ] <br />
+                  [ PVofK * N(d2) ] =  Expected Value of Paying Out the Strike Px at Expiration  <br />
+                  <br />
+                  <br />
+                  We know that d2 is a Z-Score.  <br />
+                  d1 = d2 + [ vol * sqrt(time)] ,  which is d2 plus one std dev. <br />
+                  So, d1 is just another Z-Score. You can see in the model d1 is used in the term: [ S * N(d1) ] <br />
+                  Most books do not explain d1 very well.  It us usually called the Expected Value of Paying out the Contignet Receipt of the Stock.<br />
+                  Or, if the Strike is In-The-Money it is the Call Payout (the extra value above the strike you get if the Stock is greater than the Strike)<br />
+                  <br />
+                  Some greater insight on d1 can be gained by examining what Stock Px do we need in the d2 equation to make d2 = d1 ? <br />
+                  Lets call this the StockUp Price since to get d1 we are always adding One Std Dev to d2.  <br />
+                  Therefore StockUpPx  will always be greater than StockPx. <br />
+                  StockUpPx = StockPx * e^(var * t) ......so, another way write d1 is : <br />
+                  <br />
+                  d1 = { [ LN(K / StockPxUp) - ((r - var/2)*t) ] / [ vol * sqrt(t)] } * -1<br />
+                  <br />
+                  Another question to ask is:  If N(d2) is the probability of a positive call payout, then <br />
+                  lets consider only the Stock Prices that cause a positive call payout. Essentially only the Stock Prices <br />
+                  that are greater than Strike at Expiration.  Lets call those PosStockPx.  <br />
+                  What is the Expected Value of PosStockPx ? <br />
+                  Expected Value of PosStockPx = S * N(d1) / N(d2) <br />
+                  therefore, Positive Call Payout = PosStockPx - Strike <br />
+                  Call Value = Expected Value of a Positive Call Payout = N(d2) * Positive Call Payout
+                  <br />
+                  This can also be shown with Monte Carlo simulations to value the call option. <br />
+                  We can isolate the simulations that result in a stock price at expiration that is greater than strke. <br />
+                  The ratio of:  Simulations Greater Than Strike / Total Simulations = N(d2) approximation <br />
+                  Then we can calc the Average of the Simulations Greater Than Strike. <br />
+                  PV of Average of the Simulations Greater Than Strike - Strike = Avg Call Payout if Strike is In-the-Money at Expiration <br />
+                  Avg Call Payout if Strike is In-the-Money at Expiration = Positive Call Payout in BS Model <br />
+                  Expected Call Payout if Strike is In-The-Money at Expir = Avg Call Payout if Strike is In-the-Money at Expiration * N(d2) approximation <br />
+                  Call Value = Expected Call Payout if Strike is In-The-Money at Expir <br />
+                  <br />
+
+
+
+
+
+
+
+                  <br />
+                  C = Call Value =  [ S * N(d1) ] - [ PVofK * N(d2) ]<br />
+                  P = Put Value =  PVofK - S + C <br />
+                  <br />
+                  or <br />
+                  <br />
+                  P = Put Value = [ -S * N(-d1) ] + [ PVofK * N( (vol*sqrt(t)) - d1) ] <br />
+                  C = Call Value = S - PVofK + P <br />
+                  <br />
+                  <br />
+
+
+              </div>
+
+            </div>
+
+<!--black sholes stats button -->
+          <button type="button" class="blackScholesStats">Black Scholes Stats</button>
+            <div class="content">
+              <div class="row">
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">Black Scholes d1</label>
+                  <input class="boxes" id="d1BSTwo" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">Black Scholes d2</label>
+                  <input class="boxes" id="d2BSTwo" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">Stock Price</label>
+                  <input class="boxes" id="stockPx2" type="text" value = "0">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">Black Scholes N(d1)</label>
+                  <input class="boxes" id="Nd1BSTwo" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">Black Scholes N(d2)</label>
+                  <input class="boxes" id="Nd2BSTwo" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">currStockPxBS</label>
+                  <input class="boxes" id="currStockPxBS2" type="text" value = "0">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">Prob Mass: Input StdDev</label>
+                  <input class="boxes" id="probMassInput" type="text" onchange="updateProbMass()" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">CDF Input: StdDev</label>
+                  <input class="boxes" id="CDFInput" type="text" onchange="updateCDF()"  value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">CDF Inverse Input: Probability(area under Std Norm Curve)</label>
+                  <input class="boxes" id="cdfInverseInput" type="text" onchange="updateCDFInverse ()" value = "0">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">Prob Mass</label>
+                  <input class="boxes" id="probMass" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">CDF</label>
+                  <input class="boxes" id="CDF" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">CDF Inverse: returns StdDev</label>
+                  <input class="boxes" id="cdfInverse" type="text" value = "0">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">blank11</label>
+                  <button id="blank11" type="button" onclick="updateIntegration()">Integrate1</button>
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">blank12</label>
+                  <button id="blank12" type="button" onclick="">Integrate2</button>
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">blank13</label>
+                  <input class="boxes" id="blank13" type="text" value = "0">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">Int Stock Px (currStockPxBS in formulas): user types in value</label>
+                  <input class="boxes" id="intStockPx" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">Int Strike Px : user types in value</label>
+                  <input class="boxes" id="intStrikePx" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">blank16</label>
+                  <input class="boxes" id="blank16" type="text" value = "0">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">Int Call PO</label>
+                  <input class="boxes" id="intCallPO" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">PV Int Call PO</label>
+                  <input class="boxes" id="pvOfIntCallPO" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">blank7</label>
+                  <input class="boxes" id="blank7" type="text" value = "0">
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">intSNd2</label>
+                  <input class="boxes" id="integratedSNd2" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">intKNd2</label>
+                  <input class="boxes" id="integratedKNd2" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">intSNd2ForNewMean</label>
+                  <input class="boxes" id="integratedSNd2ForNewMean" type="text" value = "0">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">PV intSNd2 = S*Nd1</label>
+                  <input class="boxes" id="pvOfIntegratedSNd2" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">blank8</label>
+                  <input class="boxes" id="blank8" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">blank9</label>
+                  <input class="boxes" id="blank9" type="text" value = "0">
+                </div>
+              </div>
+
+
+
+            </div>
+
+
+
+<!--monte carlo button -->
+          <button type="button" class="monteCarloStats">Monte Carlo</button>
+            <div class="content">
+
+              <div class="row">
+
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">Black Scholes d1</label>
+                  <input class="boxes" id="d1BS" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">Black Scholes d2</label>
+                  <input class="boxes" id="d2BS" type="text" value = "0">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">Black Scholes N(d1)</label>
+                  <input class="boxes" id="Nd1BS" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">Black Scholes N(d2)</label>
+                  <input class="boxes" id="Nd2BS" type="text" value = "0">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <!--<label class="titles">lnSK</label>-->
+                  <label class="titles">LN (K/S)</label>
+                  <!--<input class="boxes" id="lnSK" type="text" value = "0">-->
+                  <input class="boxes" id="lnKS" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">variance</label>
+                  <input class="boxes" id="variance" type="text" value = "0">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">sqrtTime</label>
+                  <input class="boxes" id="sqrtTime" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">oneStdDev</label>
+                  <input class="boxes" id="oneStdDev" type="text" value = "0">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">r</label>
+                  <input class="boxes" id="r" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">time</label>
+                  <input class="boxes" id="time" type="text" value = "0">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="inputBoxes col-lg-12 col-md-12 col-sm-12">
+                  <label class="titles" id="mcSectionLabel">Monte Carlo Stats</label>
+                  <!--<input class="boxes" id="mcSection" type="text" value = "0">-->
+                </div>
+                <!--<div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">time</label>
+                  <input class="boxes" id="time" type="text" value = "0">
+                </div>-->
+              </div>
+
+              <div class="row">
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label id="mcStockPxMaxLabel" class="titles">StockPx Max</label>
+                  <input class="boxes" id="mcStockPxMax" type="text"  value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label id="mcStockPxMinLabel" class="titles">StockPx Min</label>
+                  <input class="boxes" id="mcStockPxMin" type="text"  value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">StockPx Avg</label>
+                  <input class="boxes" id="mcStockPxAvg" type="text" value="0" >
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label id="simulationsAboveStrikeLabel" class="titles"># Simualtions Above Strike</label>
+                  <input class="boxes" id="simulationsAboveStrike" type="text"  value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label id="simulationsAboveStrikeAvgLabel" class="titles">Avg of Simulations Above Strike</label>
+                  <input class="boxes" id="simulationsAboveStrikeAvg" type="text"  value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">MC N(d2) Approximation</label>
+                  <input class="boxes" id="mcN(d2)" type="text" value="0" >
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label id="blankLabel" class="titles">blank</label>
+                  <input class="boxes" id="blank1" type="text"  value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label id="pvFactorToExpirLabel" class="titles">PVFactor To Expir</label>
+                  <input class="boxes" id="pvFactorToExpir" type="text"  value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">MC N(d1) Approximation</label>
+                  <input class="boxes" id="mcN(d1)" type="text" value="0" >
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label id="X*PVF*N(d2)Label" class="titles">X * pvFactorToExpir * N(d2)MCapprox</label>
+                  <input class="boxes" id="X*PVF*N(d2)" type="text"  value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label id="S*N(d1)Label" class="titles">S * N(d1)MCapprox  [note: S = currStockPxBS]</label>
+                  <input class="boxes" id="S*N(d1)" type="text"  value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">Alt MC-BS Call Value</label>
+                  <input class="boxes" id="altMCBSCallValue" type="text" value="0" >
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+
+<!--american greeks button -->
+          <button type="button" class="greeks">American Greeks</button>
             <div class="content">
 
               <div class="row">
@@ -266,10 +916,7 @@
 
             </div>
 
-          <!--<label>Euro Call Binomial</label>
-          <input id="euroCallBinomial" type="text" value = "0">
-          <label>Euro Put Binomail</label>
-          <input id="euroPutBinomial" type="text" value = "0"> -->
+
 
           </form>
 
