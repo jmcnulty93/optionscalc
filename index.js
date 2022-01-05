@@ -1,5 +1,20 @@
-/// MAIN FUNCTION goCalc() starts around 716 /////
+/// MAIN FUNCTION goCalc() starts around 1100 /////
 
+//////////////// time button //////////////////////
+var coll = document.getElementsByClassName("time");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
 
 //////////////// dividends button //////////////////////
 var coll = document.getElementsByClassName("dividends");
@@ -279,8 +294,18 @@ function pushDaysToExpirCalc () {
   expirDate1Fix;
   var expirDate1FixTimeMili = expirDate1Fix.getTime();
   expirDate1FixTimeMili;
-  var daysToExpirMiliFix = expirDate1FixTimeMili - currentTimeMili;
+
+  //////////////////////////////////////////////
+  var startTZOffset = now1Fix.getTimezoneOffset() ;
+  var expirTZOffset = expirDate1Fix.getTimezoneOffset();
+  var milliPerMin = 1000 * 60 ;
+  var adjTZMilli = (startTZOffset - expirTZOffset) * milliPerMin ;
+  /////////////////////////////////////////////
+
+  var daysToExpirMiliFix = expirDate1FixTimeMili - currentTimeMili + adjTZMilli;
   daysToExpirMiliFix;
+
+  ////////////////////////
 
   var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
 
@@ -355,8 +380,11 @@ function pushDaysToExpirCalcExactSeconds () {
 
     var expirDate1TimeMili = expirDate1Time.getTime();
 
+
     var daysToExpirMili = expirDate1TimeMili - currentTimeMili;
     daysToExpirMili;
+
+    ////////////////////////
 
     var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
 
@@ -375,7 +403,15 @@ function pushDaysToExpirCalcExactSeconds () {
     expirDate1Fix;
     var expirDate1FixTimeMili = expirDate1Fix.getTime();
     expirDate1FixTimeMili;
-    var daysToExpirMiliFix = expirDate1FixTimeMili - currentTimeMili;
+
+    //////////////////////////////////////////////////////////////////
+    var startTZOffset = now1Fix.getTimezoneOffset() ;
+    var expirTZOffset = expirDate1Fix.getTimezoneOffset();
+    var milliPerMin = 1000 * 60 ;
+    var adjTZMilli = (startTZOffset - expirTZOffset) * milliPerMin ;
+    //////////////////////////////////////////////////////////////////
+
+    var daysToExpirMiliFix = expirDate1FixTimeMili - currentTimeMili + adjTZMilli;
     daysToExpirMiliFix;
 
     var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
@@ -472,8 +508,110 @@ function pushDaysToExpirCalcExactSeconds () {
 
 
 /////////////////////////////////////////////////////////////////////////////////////
+//////////
+// this function calcs custom days to expir within the "time: exact start adn expiration times" button
+
+function customTimeToExpir(){
+
+  var wYearStart = document.getElementById("yearStart").value
+  var wMonthStart = document.getElementById("monthStart").value
+  var wDayStart = document.getElementById("dayStart").value
+  var wHourStart = document.getElementById("hourStart").value
+  var wMinuteStart = document.getElementById("minuteStart").value
+  var wSecondStart = document.getElementById("secondStart").value
+
+  var yearStart = wYearStart * 1 ;
+  var monthStart = (wMonthStart * 1) - 1 ;
+  var dayStart = wDayStart * 1 ;
+  var hourStart = wHourStart * 1 ;
+  var minuteStart = wMinuteStart * 1 ;
+  var secondStart = wSecondStart * 1 ;
+
+  var customStartDate = new Date (yearStart, monthStart, dayStart, hourStart, minuteStart, secondStart, 0 ) ;
+  customStartDate;
+
+  var customMilliStartDate = customStartDate.getTime();
+  customMilliStartDate;
+
+  document.getElementById("exactStartDate").value = customStartDate ;
+
+  document.getElementById("startDateMilli").value = customMilliStartDate;
 
 
+
+  var wYearExpir = document.getElementById("yearExpir").value
+  var wMonthExpir = document.getElementById("monthExpir").value
+  var wDayExpir = document.getElementById("dayExpir").value
+  var wHourExpir = document.getElementById("hourExpir").value
+  var wMinuteExpir = document.getElementById("minuteExpir").value
+  var wSecondExpir = document.getElementById("secondExpir").value
+
+  var yearExpir = wYearExpir * 1 ;
+  var monthExpir = (wMonthExpir * 1) - 1 ;
+  var dayExpir = wDayExpir * 1 ;
+  var hourExpir = wHourExpir * 1 ;
+  var minuteExpir = wMinuteExpir * 1 ;
+  var secondExpir = wSecondExpir * 1 ;
+
+  var customExpirDate = new Date (yearExpir, monthExpir, dayExpir, hourExpir, minuteExpir, secondExpir, 0 ) ;
+  customExpirDate;
+
+  var customMilliExpirDate = customExpirDate.getTime();
+  customMilliExpirDate;
+
+  document.getElementById("exactExpirDate").value = customExpirDate ;
+
+  document.getElementById("expirDateMilli").value = customMilliExpirDate ;
+
+
+  var millisecondsToExpirDisplay =  customMilliExpirDate - customMilliStartDate ;
+
+
+  var millisecondsPerDay = 24 * 60 * 60 * 1000 ;
+  var millisecondsPerTradingDay = 6.5 * 60 * 60 * 1000 ;
+
+  var modMillisecondsToExpirDisplay = millisecondsToExpirDisplay % millisecondsPerDay ;
+
+  var fullDaysToExpirDisplay = (millisecondsToExpirDisplay - modMillisecondsToExpirDisplay) / millisecondsPerDay ;
+  var fractionalDaysToExpirDisplay = modMillisecondsToExpirDisplay / millisecondsPerDay ;
+  var fracDaysToExpInMilliDisplay = modMillisecondsToExpirDisplay ;
+
+  var customMillisecondsToExpir =  ( (customMilliExpirDate - customMilliStartDate) / millisecondsPerDay ) ;
+
+  var adjFractionalDay = modMillisecondsToExpirDisplay / millisecondsPerTradingDay ;
+
+  function adjustFractionalDayVsTradingDay() {
+
+    if ( adjFractionalDay > 1){
+      return 1
+    }
+    else{
+      return adjFractionalDay
+    }
+  }
+
+  var adjFractionalDayDisplay = adjustFractionalDayVsTradingDay();
+  adjFractionalDayDisplay;
+
+  var adjDaysToExpirDisplay =   fullDaysToExpirDisplay + adjFractionalDayDisplay ;
+
+
+  document.getElementById("milliToExpir").value = millisecondsToExpirDisplay
+  document.getElementById("millisecondsPerDay").value = millisecondsPerDay
+  document.getElementById("millisecondsPerTradingDay").value = millisecondsPerTradingDay
+
+  document.getElementById("fullDaysToExpir").value = fullDaysToExpirDisplay
+  document.getElementById("fractionalDaysToExpir").value = fractionalDaysToExpirDisplay.toFixed(2)
+  document.getElementById("fracDaysToExpInMilli").value = fracDaysToExpInMilliDisplay
+
+  document.getElementById("dazeToExpir").value = customMillisecondsToExpir.toFixed(2)
+  document.getElementById("adjFractionalDay").value = adjFractionalDayDisplay.toFixed(2)
+  document.getElementById("adjDaysToExpir").value = adjDaysToExpirDisplay.toFixed(2)
+
+
+}
+
+/////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
 function pushDaysToExDiv1Calc () {
@@ -10334,6 +10472,11 @@ document.getElementById("americanPutRho").value = putRhoAmerican.toFixed(3);
 
 
 
+
+
+
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -10601,7 +10744,7 @@ function inverseCumlaAreaReturnsStdDev (areaUnderCurve) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 // need dinInfoPV if you want to value a Euro option with BS on a stock that pays divs
-
+// divInfoPV is within goCalc so its grabbing info from the beginning of goCalc (around 1100)
 var divInfoPV = [[1, cleanDivBranch1, div1PV],[2, cleanDivBranch2, div2PV],[3, cleanDivBranch3, div3PV],[4, cleanDivBranch4, div4PV],[5, cleanDivBranch5, div5PV],[6, cleanDivBranch6, div6PV],[7, cleanDivBranch7, div7PV],[8, cleanDivBranch8, div8PV]];
 
 
@@ -10680,6 +10823,8 @@ var sqrtTimeClean = sqrtTime.toFixed(5) * 1;
 var oneStdDev = sqrtTime * vol ;
 var oneStdDevClean = oneStdDev.toFixed(5) * 1;
 
+
+
 var d1 = ( lnSKClean + ( ( r + (varianceClean/2) ) * time ) ) / ( oneStdDevClean ) ;
 var d1Rounded = d1.toFixed(3) ;
 var d2 =  d1 - oneStdDev ;
@@ -10695,7 +10840,8 @@ var callBS = callBlackScholes.toFixed(2) * 1 ;
 var putBlackScholes = pvOfK - currStockPxBS + callBlackScholes ;
 var putBS = putBlackScholes.toFixed(2) * 1 ;
 
-
+var meanOfDistDisplay = currStockPxBS * ( e**( (r - (variance / 2)) * time ) )
+var currStockPxBSSNd1Nd2 = (currStockPxBS * nD1) / nD2
 
 document.getElementById("euroCallBS").value = callBS.toFixed(2);
 document.getElementById("euroPutBS").value = putBS.toFixed(2);
@@ -10718,8 +10864,8 @@ document.getElementById("oneStdDev").value = oneStdDevClean;
 document.getElementById("r").value = r;
 document.getElementById("time").value = time;
 
-
-
+document.getElementById("meanOfDist").value = meanOfDistDisplay.toFixed(2);
+document.getElementById("currStockPxBSSNd1Nd2").value = currStockPxBSSNd1Nd2.toFixed(2) ;
 
 
 
@@ -10732,6 +10878,7 @@ document.getElementById("time").value = time;
 
 
 ///// MONTE CARLO  /////////////////////////////////////////////////////////////////////////
+
 
 function monteCarlo() {
 
@@ -11411,9 +11558,13 @@ document.getElementById("S*N(d1)").value = sNd1.toFixed(4);
 document.getElementById("altMCBSCallValue").value = alternateMCBSCallValue.toFixed(4);
 
 
+//document.body.style.cursor = 'pointer';
+
 }
 
-
+///////////////////////////////////////////////////////////////////
+//END OF MONTE CARLO FUNCTION :  RUN SIMULATIONS BUTTON
+///////////////////////////////////////////////////////////////////
 
 //function blackScholesStats() {
 
@@ -11480,6 +11631,8 @@ document.getElementById("altMCBSCallValue").value = alternateMCBSCallValue.toFix
   var sqrtTimeClean = sqrtTime.toFixed(5) * 1;
   var oneStdDev = sqrtTime * vol ;
   var oneStdDevClean = oneStdDev.toFixed(5) * 1;
+
+
 
   var simulationNumber = wSimulationNumber * 1;
 
@@ -11593,7 +11746,7 @@ document.getElementById("altMCBSCallValue").value = alternateMCBSCallValue.toFix
       iter = iter + 1
     }
 
-    var currStockPxForBS = currStockPx - cumlaDivPV;
+    //var currStockPxForBS = currStockPx - cumlaDivPV;
     var currStockPxForBS = x - cumlaDivPV;
 
     return currStockPxForBS
@@ -11603,7 +11756,7 @@ document.getElementById("altMCBSCallValue").value = alternateMCBSCallValue.toFix
   var currStockPxBS = currStockPxBlackScholes (currStockPx);
   currStockPxBS;
 
-
+  var meanOfDistDisplay = currStockPxBS * (e**( (r - (variance/2)) * time ))
   ////////////////////////////
   ///////////////////////////
   //  grabs the currStockPx from above and updates it in the BS Stats box
@@ -12085,6 +12238,10 @@ document.getElementById("altMCBSCallValue").value = alternateMCBSCallValue.toFix
 
   document.getElementById("intStrikePx").value = strike.toFixed(2);
 
+  document.getElementById("intMeanOfDist").value = meanOfDistDisplay.toFixed(2);
+
+
+
 
 function updateIntegration (){
 
@@ -12151,11 +12308,15 @@ function updateIntegration (){
   var oneStdDevClean = oneStdDev.toFixed(5) * 1;
 
 
+
   //document.getElementById("intStockPx").value = currStockPxBS.toFixed(2);
   //document.getElementById("intStrikePx").value = strike.toFixed(2);
 
   var intStockPrice = document.getElementById("intStockPx").value
   var intStikePrice = document.getElementById("intStrikePx").value
+
+  var intMeanOfDistDisplay = intStockPrice * ( e**( (r - (variance / 2)) * time ) ) ;
+  document.getElementById("intMeanOfDist").value = intMeanOfDistDisplay.toFixed(2) ;
 
   ////////////////////////////////////
 

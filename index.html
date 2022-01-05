@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <!-- My CSS Styles -->
-    <link rel="stylesheet" href="firstoptionstyles.css">
+    <link rel="stylesheet" href="css/timestyles.css">
 
 
     <!--js and jquery for drop down menus-->
@@ -106,6 +106,216 @@
             </div>
 
           </div>
+
+
+
+<!--time button -->
+          <button type="button" class="time">Time : exact start and expiration times</button>
+            <div class="content">
+
+              <div class="row">
+
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles">Year Start</label>
+                   <input class="boxes" id="yearStart" type="text" value = "2020" onchange="">
+                  </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles">Year Expir</label>
+                   <input class="boxes" id="yearExpir" type="text" value = "2020" onchange="">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles"> type 4 digits</label>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles">Month Start</label>
+                   <input class="boxes" id="monthStart" type="text" value = "07" onchange="">
+                  </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles">Month Expir</label>
+                   <input class="boxes" id="monthExpir" type="text" value = "12" onchange="">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles"> type 2 digits</label>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles">Day Start</label>
+                   <input class="boxes" id="dayStart" type="text" value = "05" onchange="">
+                  </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles">Day Expir</label>
+                   <input class="boxes" id="dayExpir" type="text" value = "22" onchange="">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles"> type 2 digits</label>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles">Hour Start</label>
+                   <input class="boxes" id="hourStart" type="text" value = "08" onchange="">
+                  </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles">Hour Expir</label>
+                   <input class="boxes" id="hourExpir" type="text" value = "15" onchange="">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles"> type 2 digits : Military</label>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles">Minute Start</label>
+                   <input class="boxes" id="minuteStart" type="text" value = "30" onchange="">
+                  </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles">Minute Expir</label>
+                   <input class="boxes" id="minuteExpir" type="text" value = "00" onchange="">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles"> type 2 digits</label>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles">Second Start</label>
+                   <input class="boxes" id="secondStart" type="text" value = "00" onchange="">
+                  </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles">Second Expir</label>
+                   <input class="boxes" id="secondExpir" type="text" value = "00" onchange="">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles"> type 2 digits</label>
+                </div>
+
+              </div>
+
+              <div>
+                <hr />
+              </div>
+
+              <div>
+                <!--<label class="titles"></label>-->
+                <button id="pushCustomTimeToExpir" type="button" onclick="customTimeToExpir()">Push Custom Time To Expir</button>
+              </div>
+
+              <div>
+                <hr />
+              </div>
+
+              <div class="row">
+
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles">Start Date</label>
+                   <input class="boxes" id="exactStartDate" type="text" value = "N/A" onchange="">
+                  </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                   <label class="titles">Expir Date</label>
+                   <input class="boxes" id="exactExpirDate" type="text" value = "N/A" onchange="">
+                </div>
+
+              </div>
+
+                <div class="row">
+
+                  <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                     <label class="titles">Start Date Milliseconds</label>
+                     <input class="boxes" id="startDateMilli" type="text" value = "N/A" onchange="">
+                    </div>
+                  <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                     <label class="titles">Expir Date Milliseconds</label>
+                     <input class="boxes" id="expirDateMilli" type="text" value = "N/A" onchange="">
+                  </div>
+
+                </div>
+
+                <div class="row">
+
+                  <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                     <label class="titles">Milliseconds To Expir</label>
+                     <input class="boxes" id="milliToExpir" type="text" value = "N/A" onchange="">
+                    </div>
+                  <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                     <label class="titles">Milliseconds Per Day</label>
+                     <input class="boxes" id="millisecondsPerDay" type="text" value = "N/A" onchange="">
+                  </div>
+                  <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                     <label class="titles">Milliseconds Per Trading Day</label>
+                     <input class="boxes" id="millisecondsPerTradingDay" type="text" value = "N/A" onchange="">
+                  </div>
+
+                </div>
+
+                <div class="row">
+
+                  <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                     <label class="titles">Full Days To Expir</label>
+                     <input class="boxes" id="fullDaysToExpir" type="text" value = "N/A" onchange="">
+                  </div>
+                  <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                     <label class="titles">Fractional Days To Expir</label>
+                     <input class="boxes" id="fractionalDaysToExpir" type="text" value = "N/A" onchange="">
+                  </div>
+                  <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                     <label class="titles">Frac. Days To Exp In Milli</label>
+                     <input class="boxes" id="fracDaysToExpInMilli" type="text" value = "N/A" onchange="">
+                  </div>
+
+                </div>
+
+                <div class="row">
+
+                  <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                     <label class="titles">Days To Expir</label>
+                     <input class="boxes" id="dazeToExpir" type="text" value = "N/A" onchange="">
+                  </div>
+                  <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                     <label class="titles">Adj. Fractional Day</label>
+                     <input class="boxes" id="adjFractionalDay" type="text" value = "N/A" onchange="">
+                  </div>
+                  <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                     <label class="titles">Adj. Days To Expir</label>
+                     <input class="boxes" id="adjDaysToExpir" type="text" value = "N/A" onchange="">
+                  </div>
+
+                </div>
+
+                <hr />
+                <p>
+                  Days To Expir is simply the amount of time btw Start Date and Expir Date.<br />
+                  Adj Days To Expir adjusts Fractional Days.  If the Fractional Day is more time<br />
+                  than the time in a Trading Day (6.5 hrs), then the Fractional day is adjusted to <br />
+                  one day. If the time of the Fractional Day is less than the time of a Trading Day,<br />
+                  then the Fractional Day is adjusted to the fraction of a Trading Day rather than<br />
+                  the fraction of a 24 hr day. <br />
+                  Fractional Days To Expir = Fractional Days To Expir in Milliseconds / Milliseconds Per Day <br />
+                  vs.<br />
+                  Ajd. Fractional Day = Fractional Days To Expir in Milliseconds / Milliseconds Per Trading Day  (max value: 1)
+                  <br />
+
+                </p>
+
+
+            </div>
 
 
 <!--dividends button -->
@@ -227,7 +437,7 @@
             </div>
             <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
               <label class="titles"></label>
-              <button id="runSimulations" type="button" onclick="monteCarlo()">Run Simulations</button>
+              <button id="runSimulations" type="button" onclick="monteCarlo();">Run Simulations</button>
             </div>
             <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
               <label class="titles">MC Call Average</label>
@@ -342,11 +552,11 @@
                   Also 50% of the items will fall above the mean and 50% will fall below.<br />
                   You are probably familar with the Bell Curve:<br />
                   <!--<div class="col-lg-12">
-                    <img class="title-image" src="images/Standard_deviation_diagram.svg.png" alt="Bell Curve Diagram">
+                    <img class="title-image" src="/Users/jamesmcnulty/Desktop/Web Development/time/images/Standard_deviation_diagram.svg.png" alt="Bell Curve Diagram">
                     <img class="title-image" src="images/Standard_deviation_diagram.svg.png" alt="Bell Curve Diagram">
                   </div>-->
                   <div class="col-lg-12">
-                    <!--<img class="title-image" src="images/Normal Distribution deviations.png">-->
+                    <!--<img class="title-image" src="/Users/jamesmcnulty/Desktop/Web Development/time/images/Normal Distribution deviations.png">-->
                     <img class="title-image" src="images/Normal Distribution deviations.png" alt="Bell Curve Diagram">
                   </div>
                   This Bell Curve or Normal Distribution depicted here has a mean of zero and a standard deviaton of 1.<br />
@@ -356,8 +566,8 @@
                   You can obtain the y values on the graph by feeding each  x value into the equation below:<br />
                   (this is a graph of the Standard Normal curve, so you need to use a mean of zero and a standard deviation of 1)<br />
                   <div class="col-lg-12">
-                    <!--<img class="title-image" src="images/Standard_deviation_diagram.svg.png" alt="Bell Curve Diagram">-->
-                    <img class="title-image2" src="images/a45cef4ca1e2fcd4d367ecff5806d8a2878d3821.svg" alt="Bell Curve Diagram">
+                    <!--<img class="title-image" src="/Users/jamesmcnulty/Desktop/Web Development/time/images/Standard_deviation_diagram.svg.png" alt="Bell Curve Diagram">-->
+                    <img class="title-image2" src="/Users/jamesmcnulty/Desktop/Web Development/time/images/a45cef4ca1e2fcd4d367ecff5806d8a2878d3821.svg" alt="Bell Curve Diagram">
                   </div>
                   With an x value and y value you can plot the Standard Normal Curve.  <br />
                   A Standard Normal Distribution is a data set that has a mean of zero and a standard deviation of 1 and follows the general<br />
@@ -591,6 +801,21 @@
 
               <div class="row">
                 <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">blank29</label>
+                  <input class="boxes" id="blank29" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">blank30</label>
+                  <input class="boxes" id="blank30" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">Mean of Distrubtion in terms of Stock Px</label>
+                  <input class="boxes" id="meanOfDist" type="text" value = "0">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
                   <label class="titles">Prob Mass: Input StdDev</label>
                   <input class="boxes" id="probMassInput" type="text" onchange="updateProbMass()" value = "0">
                 </div>
@@ -644,8 +869,8 @@
                   <input class="boxes" id="intStrikePx" type="text" value = "0">
                 </div>
                 <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
-                  <label class="titles">blank16</label>
-                  <input class="boxes" id="blank16" type="text" value = "0">
+                  <label class="titles">Mean of Distribution in terms of Stock Px</label>
+                  <input class="boxes" id="intMeanOfDist" type="text" value = "0">
                 </div>
               </div>
 
@@ -760,6 +985,21 @@
                 <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
                   <label class="titles">time</label>
                   <input class="boxes" id="time" type="text" value = "0">
+                </div>
+              </div>
+              <div class="row">
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <label class="titles">(S * Nd1) / Nd2</label>
+                  <input class="boxes" id="currStockPxBSSNd1Nd2" type="text" value = "0">
+                </div>
+                <div class="inputBoxes col-lg-4 col-md-3 col-sm-12">
+                  <!--<label class="titles">blank77</label>
+                  <input class="boxes" id="blank77" type="text" value = "0">-->
+                  <p>
+                    S = currStockPxBS <br />
+                    (S * Nd1) / Nd2 = MC Avg Sim above K <br />
+                    note: approximates, does not necessarily equal
+                  </p>
                 </div>
               </div>
 
