@@ -8,12 +8,27 @@ body {
   width: 100%;
   height: 900px;
   padding-top: 15px;
+  padding-bottom: 15px;
   overflow: auto;
 }
 
+
 #calc {
   margin-bottom: 10px;
+  height: 60px;
+  width: 200px
 }
+
+#calc:hover {
+  background-color: yellow;
+
+}
+#calc:active {
+
+  cursor: wait;
+}
+
+
 
 .boxes{
   background-color: orange;
@@ -49,6 +64,67 @@ body {
   width: 80px;
   margin-left: 50px;
 }
+
+#runSimulations {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 65%;
+  border-style: solid;
+  border-color: blue;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  width: 200px;
+}
+
+#runSimulations:hover {
+  background-color: yellow;
+
+}
+#runSimulations:active {
+
+  cursor: wait;
+}
+
+.time {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 65%;
+  border-style: solid;
+  border-color: purple;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .time:hover {
+  background-color: #555;
+
+}
+
+#exactStartDate{
+
+  background-color: orange;
+  color: black;
+  width: 340px;
+}
+
+#exactExpirDate{
+
+  background-color: orange;
+  color: black;
+  width: 340px;
+}
+
+
 
 .dividends {
   background-color: #eee;
@@ -134,6 +210,18 @@ body {
 
 .active, .monteCarloStats:hover {
   background-color: #555;
+}
+
+#currStockPxBSSNd1Nd2{
+  background-color: purple;
+  color: black;
+  width: 150px;
+}
+
+#simulationsAboveStrikeAvg{
+  background-color: purple;
+  color: black;
+  width: 150px;
 }
 
 .greeks {
